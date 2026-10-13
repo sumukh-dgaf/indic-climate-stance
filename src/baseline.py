@@ -185,13 +185,13 @@ def main():
     errs = [r["macro_f1_std"] for r in grid[:-1]]
     ax.bar(range(len(vals)), vals, yerr=errs, color="#2a9d8f", capsize=4)
     ax.axhline(grid[-1]["macro_f1"], color="#e76f51", ls="--", label=f"majority-class floor ({grid[-1]['macro_f1']:.2f})")
-    for i, v in enumerate(vals):
-        ax.text(i, v + 0.02, f"{v:.2f}", ha="center", fontsize=11)
+    for i, (v, e) in enumerate(zip(vals, errs)):
+        ax.text(i, v + e + 0.015, f"{v:.2f}", ha="center", fontsize=11)
     ax.set_xticks(range(len(vals)), labels, fontsize=10)
     ax.set_ylabel("macro-F1 (5-fold CV)")
     ax.set_ylim(0, 1)
     ax.set_title("English merged (2,408): TF-IDF baselines", loc="left", fontsize=13)
-    ax.legend(frameon=False, loc="lower right")
+    ax.legend(frameon=False, loc="upper right")
     fig.tight_layout()
     fig.savefig(OUT + "fig_baseline_comparison.png", dpi=160)
     plt.close(fig)
