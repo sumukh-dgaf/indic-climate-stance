@@ -49,15 +49,18 @@ and **no in-language training data**.
    is evaluated out of language.
 
 **7. What has already been done?**
-SemEval-2016 Task 6 (the three-label formulation, with a climate target); GWSD (news sentences, target = our claim);
-ClimaConvo (climate tweets, but the repo gives IDs only); CASE@EACL 2024 (RoBERTa + Llama 2 + multi-task; external SemEval
-data helped); MultiClimate (YouTube transcripts, multimodal); Dhoroni (Bangla news, BanglaBERT F1 0.308); Swami et al.
+SemEval-2016 Task 6 (the three-label formulation, with a climate target); GWSD (news sentences about global warming,
+8 annotators each); ClimaConvo (climate tweets, but the repo gives IDs only); CASE@EACL 2024 (a climate-activism shared task;
+the HAMiSoN-Ensemble entry combined RoBERTa + Llama 2 + multi-task learning and found that adding external data did NOT
+help RoBERTa or Llama 2); MultiClimate (YouTube transcripts, multimodal); Dhoroni (Bangla news, BanglaBERT F1 0.308); Swami et al.
 (Romanised Hindi stance, but on demonetisation, 58.7% accuracy); and AISoMe participants (translate-train with MuRIL/XLM-R,
 official macro-F1 0.42-0.53).
 
 **8. What did I discover from the data?**
 * **Against is rare**: 26 of 564 SemEval climate tweets (4.6%), 14.3% of the 2,408-row English set.
-* **202 of 2,047 GWSD sentences (9.9%) have no annotator majority**: genuine ambiguity, dropped and saved separately.
+* **215 of the 2,300 raw GWSD sentences (9.3%) have no annotator majority** (measured by our script on the raw file); 13
+  were removed by deduplication, so 202 survive in our merged file, are dropped from training/evaluation and saved
+  separately. It is a measured indication of annotator disagreement and task difficulty.
 * **No existing resource matches target + language + domain** (gap table in `data/DATASET_INVENTORY.md`).
 * **ClimaConvo is unusable as distributed**: 15,309 rows, tweet IDs only.
 * **Label names lie across targets**: Swami's FAVOR means "favours demonetisation".
@@ -77,8 +80,9 @@ phenomenon, behind a measured TF-IDF baseline and a majority floor.
 
 **11. Why do I believe it may work?**
 IndicXNLI: MuRIL beats XLM-R/mBERT/IndicBERT on Indic languages and English + Indic training works best. The
-`claim [SEP] comment` input lets the model attend to the claim. External English data helped in CASE@EACL 2024.
-I will not promise a number: the peer evidence says test scores can be far below validation.
+`claim [SEP] comment` input lets the model attend to the claim. I do NOT claim that more English data helps: in
+CASE@EACL 2024 HAMiSoN-Ensemble, external data worsened RoBERTa and Llama 2, so the English training mix is an ablation
+in Milestone 2. I will not promise a number: the peer evidence says test scores can be far below validation.
 
 **12. What have I implemented?**
 Loader with validation gate (`data.py`), preprocessing + script ID (`preprocess.py`), EDA (`eda.py`), TF-IDF baselines
@@ -109,9 +113,10 @@ external-data fetcher, a 150-row synthetic pilot corpus, and each module self-ch
 
 **Why MuRIL over XLM-R?**
 IndicXNLI (Aggarwal et al. 2022) reports MuRIL consistently ahead of XLM-R, mBERT and IndicBERT across Indic languages;
-XLM-R wins only on English-centric data. MuRIL spends far more of its vocabulary on Indic scripts, so Hindi/Bengali words
-stay whole, and it was pretrained with translated and transliterated pairs, which helps Romanised text. Caveat I should
-volunteer: that is evidence from another task. I keep XLM-R as a flagged comparison. (A competing team's XLM-R run scored
+XLM-R wins only in the English-evaluation setup. The authors attribute MuRIL's advantage to model size, Indic-specific
+pretraining data, an MLM + TLM objective mix and transliterated pretraining data; the MuRIL paper itself says it uses
+translated and transliterated document pairs and handles Latin-script test data, which is relevant to Romanised text.
+Caveat I should volunteer: that is evidence from an NLI task, not stance. I keep XLM-R as a flagged comparison. (A competing team's XLM-R run scored
 above their MuRIL runs, but their README says the runs differ in split, seed and learning rate, so it is not a controlled
 comparison.)
 
@@ -168,8 +173,14 @@ because the official data was not in hand; numbers on it are labelled developmen
 Yes, and I say so: no document ids (sentences from one article may straddle folds), 21 tweets share one hashtag, and the
 set mixes news and tweets. A competing team's validation was 0.65-0.68 vs official 0.42-0.53.
 
+**Didn't CASE 2024 show that external data helps?**
+No, the opposite for the parts I checked. HAMiSoN-Ensemble added external data (SemEval climate to RoBERTa, all SemEval
+topics to Llama 2, OLID to the multi-task model): performance improved only for the multi-task model and worsened for
+RoBERTa and Llama 2; they concluded it "did not improve the performance". So the extra-English-data question is open, and
+I treat it as an ablation, not an assumption.
+
 **Why drop the 202 tie rows rather than assign them a label?**
-No annotator majority means no defensible gold label. They are kept in a separate file and reported as evidence of
+No annotator majority means no defensible gold label (215 of 2,300 raw GWSD sentences, 9.3%; 202 survive our deduplication). They are kept in a separate file and reported as evidence of
 ambiguity, not as missing data.
 
 **What is the loader gotcha?**
