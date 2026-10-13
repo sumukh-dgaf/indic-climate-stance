@@ -11,6 +11,15 @@ ZERO_WIDTH = dict.fromkeys([0x200B, 0x200C, 0x200D])  # ZWSP, ZWNJ, ZWJ -> delet
 REPEAT = re.compile(r"(\D)\1{2,}")
 
 
+# Word tokens. Python's \w (and sklearn's default token_pattern) does NOT match Indic vowel signs (category Mc/Mn),
+# so "जलवायु" would be cut into ['जलव', 'य']. We add the Devanagari/Bengali blocks explicitly, minus the danda U+0964/5.
+TOKEN = re.compile(r"[\w\u0900-\u0963\u0966-\u09FF]+")
+
+
+def tokenize(text):
+    return TOKEN.findall(text.lower())
+
+
 def clean(text):
     text = unicodedata.normalize("NFC", text)  # FIRST: nukta letters (e.g. क़) have a precomposed and a decomposed encoding
     text = text.translate(ZERO_WIDTH)  # ponytail: also splits emoji ZWJ sequences and some Bengali conjuncts; fine for classification
@@ -53,10 +62,14 @@ if __name__ == "__main__":
     assert clean("soooo goooood") == "soo good"
     assert clean("1000000 log") == "1000000 log"  # digits are not collapsed
     # noise stripping, emoji kept
-    assert clean("see https://t.co/x @user 12:45 ok​") == "see ok"
+    assert clean("see https://t.co/x @user 12:45 ok\u200b") == "see ok"
     assert clean("১২:৪৫ এ যা বলল") == "এ যা বলল"  # Bengali-digit timestamp
     assert clean("Global warming #SemST") == "Global warming"
     assert clean("हाहा 😂😂😂😂") == "हाहा 😂😂"
+    # Indic-specific finding: plain \w+ fragments Hindi words at vowel signs; our TOKEN pattern does not
+    assert len(re.findall(r"\w+", "जलवायु")) > 1
+    assert tokenize("जलवायु परिवर्तन गंभीर है।") == ["जलवायु", "परिवर्तन", "गंभीर", "है"]
+    assert tokenize("Global-warming, REAL!") == ["global", "warming", "real"]
     # script ID
     assert script_id("जलवायु परिवर्तन गंभीर है") == "hi"
     assert script_id("জলবায়ু পরিবর্তন গুরুতর") == "bn"

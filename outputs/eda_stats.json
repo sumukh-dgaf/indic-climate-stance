@@ -1,0 +1,186 @@
+{
+ "english_merged": {
+  "name": "English merged (GWSD+SemEval)",
+  "n": 2408,
+  "classes": {
+   "Favour": 1034,
+   "Against": 345,
+   "None": 1029
+  },
+  "class_pct": {
+   "Favour": 42.9,
+   "Against": 14.3,
+   "None": 42.7
+  },
+  "chars": {
+   "mean": 110.4,
+   "median": 104.0,
+   "p95": 209.0,
+   "max": 347.0
+  },
+  "words": {
+   "mean": 18.3,
+   "median": 17.0,
+   "p95": 35.0,
+   "max": 60.0
+  },
+  "tokens": 44047,
+  "vocab": 6221,
+  "hapax": 3380,
+  "hapax_rate_pct": 54.3,
+  "duplicates_raw": 0,
+  "duplicates_clean": 0,
+  "empty_after_clean": 0,
+  "missing_cells": 563,
+  "majority_floor_macro_f1": 0.2003
+ },
+ "english_highconf": {
+  "name": "English high-confidence",
+  "n": 1686,
+  "classes": {
+   "Favour": 792,
+   "Against": 222,
+   "None": 672
+  },
+  "class_pct": {
+   "Favour": 47.0,
+   "Against": 13.2,
+   "None": 39.9
+  },
+  "chars": {
+   "mean": 107.5,
+   "median": 104.0,
+   "p95": 200.0,
+   "max": 342.0
+  },
+  "words": {
+   "mean": 17.7,
+   "median": 17.0,
+   "p95": 33.0,
+   "max": 58.0
+  },
+  "tokens": 29873,
+  "vocab": 5205,
+  "hapax": 2971,
+  "hapax_rate_pct": 57.1,
+  "duplicates_raw": 0,
+  "duplicates_clean": 0,
+  "empty_after_clean": 0,
+  "missing_cells": 563,
+  "majority_floor_macro_f1": 0.2131
+ },
+ "pilot": {
+  "name": "Pilot hi+bn (dev only)",
+  "n": 150,
+  "classes": {
+   "Favour": 50,
+   "Against": 50,
+   "None": 50
+  },
+  "class_pct": {
+   "Favour": 33.3,
+   "Against": 33.3,
+   "None": 33.3
+  },
+  "chars": {
+   "mean": 52.3,
+   "median": 54.5,
+   "p95": 80.0,
+   "max": 104.0
+  },
+  "words": {
+   "mean": 9.6,
+   "median": 10.0,
+   "p95": 16.0,
+   "max": 19.0
+  },
+  "tokens": 1442,
+  "vocab": 790,
+  "hapax": 540,
+  "hapax_rate_pct": 68.4,
+  "duplicates_raw": 0,
+  "duplicates_clean": 0,
+  "empty_after_clean": 0,
+  "missing_cells": 0,
+  "majority_floor_macro_f1": 0.1667
+ },
+ "extra": {
+  "ties": 202,
+  "ties_4_4": 147,
+  "ties_3_3_2": 55,
+  "gwsd_total_with_ties": 2047,
+  "ties_pct_of_gwsd": 9.9,
+  "favour_against_vocab_overlap_pct": 58.9,
+  "shared_vocab_note_vocab_size": 6221
+ },
+ "external": {
+  "semeval2016_climate_en": {
+   "n": 564,
+   "classes": {
+    "Favour": 335,
+    "Against": 26,
+    "None": 203
+   },
+   "words": {
+    "mean": 15.2,
+    "median": 16.0,
+    "p95": 23.0,
+    "max": 27.0
+   },
+   "duplicates": 1,
+   "target": "Climate Change is a Real Concern",
+   "domain": "tweets"
+  },
+  "dhoroni_bn_news": {
+   "n": 2193,
+   "classes": {
+    "Favour": 1586,
+    "Against": 137,
+    "None": 470
+   },
+   "words": {
+    "mean": 392.2,
+    "median": 331.0,
+    "p95": 905.4000000000001,
+    "max": 3231.0
+   },
+   "duplicates": 0,
+   "target": "climate change (news article stance)",
+   "domain": "news articles (NOT social media)"
+  },
+  "multiclimate_en_video": {
+   "n": 4144,
+   "classes": {
+    "Favour": 1847,
+    "Against": 1176,
+    "None": 1121
+   },
+   "words": {
+    "mean": 19.7,
+    "median": 19.0,
+    "p95": 39.0,
+    "max": 78.0
+   },
+   "duplicates": 1362,
+   "target": "climate change (video stance)",
+   "domain": "YouTube video transcript sentences (NOT comments)"
+  },
+  "swami_hinglish_demonetisation": {
+   "n": 3545,
+   "classes": {
+    "Favour": 964,
+    "Against": 647,
+    "None": 1934
+   },
+   "words": {
+    "mean": 18.4,
+    "median": 19.0,
+    "p95": 27.0,
+    "max": 35.0
+   },
+   "duplicates": 0,
+   "target": "demonetisation (NOT climate)",
+   "domain": "tweets"
+  }
+ }
+}
