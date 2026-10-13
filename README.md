@@ -123,8 +123,14 @@ Every module in `src/` carries `assert`-based self-checks (`python src/<module>.
 
 ## Team and contributors
 
-* Sumukh Gupta (S24CSEU0570): author and repository owner
-* Teammates: add as GitHub Contributors (names/enrolment numbers to be filled in)
+| Name | Enrolment number |
+|---|---|
+| Sumukh Gupta (repository owner) | S24CSEU0570 |
+| Neya Tripathi | S24CSEU0609 |
+| Aditya Goel | S24CSEU0614 |
+| Kushika Mishra | S24CSEU0652 |
+
+B.Tech CSE, Bennett University. Course instructor: Dr. Supriya Chanda.
 
 ## Next steps (Milestone 2)
 
