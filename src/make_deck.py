@@ -188,8 +188,8 @@ cards = [
     ("2  Same words, opposite stance", f"{X['favour_against_vocab_overlap_pct']}% of Against vocabulary also appears in Favour (English set).",
      ex("P010") + "  (Favour)\n" + ex("P027") + "  (Against)", None),
     ("3  Stance is often implicit", "World knowledge needed; no climate word:", ex("P019") + "  (Favour)", None),
-    ("4  None is a junk drawer", f"Neutral + off-topic + ambiguous. {X['ties']} of {X['gwsd_total_with_ties']:,} annotated sentences "
-     f"({pct(X['ties_pct_of_gwsd'])}) had no annotator majority.", ex("P051") + "  (None)", None),
+    ("4  None is a junk drawer", f"Neutral + off-topic + ambiguous. {X['raw_ties']} of {X['raw_total']:,} annotated sentences "
+     f"({pct(X['raw_ties_pct'])}) had no annotator majority.", ex("P051") + "  (None)", None),
 ]
 for k, (h, body, exm, _) in enumerate(cards):
     x, y = 0.55 + (k % 2) * 6.15, 1.55 + (k // 2) * 2.7
@@ -215,14 +215,15 @@ text(s, 0.55, 6.62, 12.2, 0.4, ["Squad4: a competing team; only their reported s
 
 # ------------------------------------------------------------------ 5 research gap
 s = new_slide(5, "2 | Research gap", "No resource matches target, language and domain",
-              "The gap table is in data/DATASET_INVENTORY.md. The shared-task property: English train, Hindi/Bengali test.")
-text(s, 0.55, 1.55, 3.6, 1.0, ["English labelled data"], size=22, bold=True, color=WHITE, fill=TEAL, align=PP_ALIGN.CENTER,
+              "Headline measured result: English-trained TF-IDF on the Indic pilot gives macro-F1 0.341 and predicts None for 131/150. "
+              "Gap table: data/DATASET_INVENTORY.md. Pilot is synthetic, development only.")
+text(s, 0.55, 1.55, 3.6, 0.9, ["English labelled data"], size=22, bold=True, color=WHITE, fill=TEAL, align=PP_ALIGN.CENTER,
      anchor=MSO_ANCHOR.MIDDLE)
-text(s, 0.55, 2.7, 3.6, 0.9, ["GWSD news + SemEval tweets"], size=17, color=MUTED, align=PP_ALIGN.CENTER)
-text(s, 1.75, 3.55, 1.2, 0.75, ["↓"], size=34, color=NAVY, bold=True, align=PP_ALIGN.CENTER)
-text(s, 0.55, 4.3, 3.6, 1.0, ["Hindi / Bengali comments"], size=22, bold=True, color=WHITE, fill=CORAL, align=PP_ALIGN.CENTER,
+text(s, 0.55, 2.5, 3.6, 0.6, ["GWSD news + SemEval tweets"], size=16, color=MUTED, align=PP_ALIGN.CENTER)
+text(s, 1.75, 3.05, 1.2, 0.75, ["↓"], size=34, color=NAVY, bold=True, align=PP_ALIGN.CENTER)
+text(s, 0.55, 3.85, 3.6, 0.9, ["Hindi / Bengali comments"], size=22, bold=True, color=WHITE, fill=CORAL, align=PP_ALIGN.CENTER,
      anchor=MSO_ANCHOR.MIDDLE)
-text(s, 0.55, 5.4, 3.6, 1.2, ["hidden test set: code-mixing, spelling variation, negation, implicit stance"], size=15, color=MUTED,
+text(s, 0.55, 4.8, 3.6, 0.9, ["hidden test: code-mixing, spelling variation, negation, implicit stance"], size=14, color=MUTED,
      align=PP_ALIGN.CENTER)
 rows = [["Resource", "Our claim", "Hindi / Bengali", "Comments"],
         ["SemEval-2016 climate", "Yes", "No", "Yes"],
@@ -232,9 +233,14 @@ rows = [["Resource", "Our claim", "Hindi / Bengali", "Comments"],
         ["Dhoroni", "Close", "Bengali", "No (news)"],
         ["Swami 2018", "No (demonetisation)", "Romanised Hindi", "Yes"],
         ["AISoMe test (hidden)", "Yes", "Yes", "Yes"]]
-table(s, 4.6, 1.55, 8.15, [2.6, 2.2, 2.0, 2.2], rows, size=16, row_h=0.55)
-text(s, 4.6, 6.2, 8.15, 0.7, ["Cross-lingual transfer problem: target-correct labels are English, evaluation is Indic."], size=17,
-     bold=True, color=NAVY, pad=0)
+table(s, 4.6, 1.55, 8.15, [2.6, 2.2, 2.0, 2.2], rows, size=15, row_h=0.5)
+text(s, 0.55, 5.85, 12.2, 1.1, [[("Measured, not assumed: ", {"bold": True, "color": CORAL}),
+     (f"English-trained TF-IDF on the Indic pilot reaches macro-F1 {D['macro_f1']:.3f} (floor 0.167) and predicts None for "
+      f"{D['predicted_class_counts']['None']} of 150: cross-lingual transfer collapses to majority-class prediction, so "
+      f"in-language data and Indic-specific models are needed. {X['favour_against_vocab_overlap_pct']}% of Against vocabulary "
+      "also appears in Favour: not simple text classification. ", {}),
+     ("(Pilot: synthetic, development only.)", {"italic": True, "color": MUTED})]],
+     size=15, fill=RGBColor(0xFD, 0xEC, 0xE8), line=CORAL, pad=0.15, anchor=MSO_ANCHOR.MIDDLE)
 
 # ------------------------------------------------------------------ 6 dataset exploration
 s = new_slide(6, "3 | Dataset exploration and statistics", "What data we actually have",
@@ -247,7 +253,8 @@ text(s, 7.7, 2.25, 5.1, 4.6, [
     [("Against is rare: ", {"bold": True}), (f"{eng['class_pct']['Against']}% (SemEval: 26 of 564)", {})],
     [("Hapax rate: ", {"bold": True}), (f"{eng['hapax_rate_pct']}% English, {pil['hapax_rate_pct']}% pilot", {})],
     [("Majority floor: ", {"bold": True}), (f"macro-F1 {eng['majority_floor_macro_f1']:.3f}", {})],
-    [("Ties dropped: ", {"bold": True}), (f"{X['ties']} ({pct(X['ties_pct_of_gwsd'])} of GWSD)", {})],
+    [("No annotator majority: ", {"bold": True}), (f"{X['raw_ties']} of {X['raw_total']:,} GWSD ({pct(X['raw_ties_pct'])}); "
+                                                f"{X['ties']} remain after dedup, dropped", {})],
     [("Median length: ", {"bold": True}), (f"{eng['words']['median']:.0f} words (pilot {pil['words']['median']:.0f})", {})],
     [("Hindi/Bengali: ", {"bold": True, "color": CORAL}), ("150 team-authored synthetic comments, development only", {})],
 ], size=18, space=7)
@@ -282,7 +289,7 @@ s = new_slide(8, "4 | Relevance of the techniques", "Why each choice, with evide
 cards = [("Char n-grams (2-5)", f"Hapax rate {eng['hapax_rate_pct']}% English, {pil['hapax_rate_pct']}% pilot: most words seen once. "
           "Sub-strings are shared across spellings and Romanised text."),
          ("MuRIL encoder", "IndicXNLI: MuRIL beats XLM-R, mBERT and IndicBERT on Indic languages; English + Indic training is best. "
-          "Indic words stay whole."),
+          "Pretrained with transliterated text."),
          ("claim [SEP] comment", "Stance is defined relative to the claim, so the model must see both, not just the topic words."),
          ("Macro-F1 + class weights", f"Floor {floor['macro_f1']:.2f}. Weights: macro-F1 {abl['none']['macro_f1']:.2f} to "
           f"{abl['balanced']['macro_f1']:.2f}, Against recall {abl['none']['against_recall']:.2f} to {abl['balanced']['against_recall']:.2f}.")]
@@ -293,20 +300,24 @@ for k, (h, body) in enumerate(cards):
 
 # ------------------------------------------------------------------ 9 results
 s = new_slide(9, "Initial implementation and preliminary results", "What runs today",
-              "English CV numbers are optimistic (no document ids, one hashtag cluster). Pilot numbers are development only.")
-image(s, OUT + "fig_baseline_comparison.png", 0.45, 1.5, w=6.7)
-image(s, OUT + "fig_confusion_english_cv.png", 7.55, 1.5, w=3.75)
+              "Headline: English-to-Indic zero-shot collapses to majority-class prediction (pilot: synthetic, dev only). "
+              "English CV numbers are optimistic (no document ids, one hashtag cluster).")
+image(s, OUT + "fig_baseline_comparison.png", 0.45, 1.45, w=5.9)
+image(s, OUT + "fig_confusion_english_cv.png", 6.5, 1.45, w=3.2)
 le = B["A_best"]["largest_error"]
-text(s, 11.35, 1.55, 1.6, 3.2, [f"Best: word+char LogReg", f"macro-F1 {best['macro_f1']:.3f}", f"floor {floor['macro_f1']:.3f}"],
-     size=15, color=NAVY, bold=True, pad=0.05)
-text(s, 0.55, 5.05, 12.2, 1.9, [
-    [("Runs today: ", {"bold": True}), ("loader + validation gate, preprocessing, EDA, TF-IDF baselines, self-checks", {})],
+text(s, 9.9, 1.6, 3.0, 2.4, ["Best (English CV):", "word+char LogReg", f"macro-F1 {best['macro_f1']:.3f}", f"floor {floor['macro_f1']:.3f}"],
+     size=17, color=NAVY, bold=True, pad=0.05)
+text(s, 0.55, 4.8, 12.2, 1.3, [[("Headline finding: ", {"bold": True, "color": CORAL}),
+     (f"English to Indic zero-shot collapses: macro-F1 {D['macro_f1']:.3f} vs floor 0.167, predicting None for "
+      f"{D['predicted_class_counts']['None']} of 150 comments. With {X['favour_against_vocab_overlap_pct']}% of Against vocabulary "
+      "also in Favour, this is not simple text classification. ", {}),
+     ("(Pilot: synthetic, dev only; not comparable to official results.)", {"italic": True, "color": MUTED})]],
+     size=17, fill=RGBColor(0xFD, 0xEC, 0xE8), line=CORAL, pad=0.15, anchor=MSO_ANCHOR.MIDDLE)
+text(s, 0.55, 6.2, 12.2, 0.8, [
+    [("Runs today: ", {"bold": True}), ("loader + validation gate, preprocessing, EDA, TF-IDF baselines, self-checks.", {})],
     [("Error analysis: ", {"bold": True}), (f"largest confusion is true {le['true']} predicted {le['pred']} ({le['n']}): factual "
                                            "sentences with no opinion marker. Against recall "
-                                           f"{B['A_best']['against_recall']:.2f}.", {})],
-    [("English to Indic pilot (dev only, synthetic): ", {"bold": True, "color": CORAL}),
-     (f"macro-F1 {D['macro_f1']:.3f}, predicts None for {D['predicted_class_counts']['None']} of 150; floor 0.167. "
-      "Not comparable to official results.", {})]], size=16, space=5)
+                                           f"{B['A_best']['against_recall']:.2f}.", {})]], size=14, space=2)
 
 # ------------------------------------------------------------------ 10 feasibility
 s = new_slide(10, "2 | Feasibility, risks and next steps", "Feasible, with known risks",
