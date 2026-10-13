@@ -110,6 +110,11 @@ def main():
     pilot = validate(load("data/pilot_indic_stance.csv", default_source="team-authored pilot (synthetic, dev only)"),
                      "pilot_indic_stance.csv")
     ties = pd.read_csv("data/gwstance_ambiguous_ties.csv", dtype=str, keep_default_na=False)
+    raw_ties = raw_total = None  # raw 2,300-row GWSD.tsv is fetched by src/build_english_merged.py into data/raw/
+    if os.path.exists("data/raw/GWSD.tsv"):
+        from build_english_merged import gwsd
+        raw = gwsd()
+        raw_total, raw_ties = len(raw), int((raw.stance == "").sum())
 
     S, T, C = {}, {}, {}
     for key, df, name in [("english_merged", eng, "English merged (GWSD+SemEval)"),
@@ -143,6 +148,9 @@ def main():
     ag_v = set(chain.from_iterable(T["english_merged"][eng.stance == "Against"]))
     extra = {"ties": len(ties), "ties_4_4": tie_half, "ties_3_3_2": tie_38, "gwsd_total_with_ties": n_gw_total,
              "ties_pct_of_gwsd": round(100 * len(ties) / n_gw_total, 1),
+             "raw_ties": raw_ties, "raw_total": raw_total,
+             "raw_ties_pct": round(100 * raw_ties / raw_total, 1) if raw_total else None,
+             "ties_removed_by_dedup": (raw_ties - len(ties)) if raw_ties is not None else None,
              "favour_against_vocab_overlap_pct": round(100 * len(fav_v & ag_v) / len(ag_v), 1),
              "shared_vocab_note_vocab_size": len(shared)}
     S["extra"], S["external"] = extra, ext_stats
@@ -240,13 +248,17 @@ def main():
          "Romanised Hindi/Bengali and English are both `latin` by script, so script ID alone cannot separate them.", "",
          "### Pilot: phenomenon x class", "", pilot_phen.to_markdown(), "",
          "## 4. Annotator disagreement (GWStance)", "",
-         f"* {extra['ties']} of {extra['gwsd_total_with_ties']} GWSD sentences in the supplied file "
-         f"({extra['ties_pct_of_gwsd']}%) have **no annotator majority** ({extra['ties_4_4']} are 4-4 splits, "
-         f"{extra['ties_3_3_2']} are 3-3-2). They are dropped from training/evaluation and kept in "
-         "`data/gwstance_ambiguous_ties.csv`.",
-         f"* Among the {len(gw)} GWSD rows that kept a label, agreement is a median of "
+         (f"* **Raw GWSD.tsv: {extra['raw_ties']} of {extra['raw_total']:,} sentences ({extra['raw_ties_pct']}%) have no unique "
+          f"majority label among their 8 annotators.** Deduplicating on comment text removed {extra['ties_removed_by_dedup']} of "
+          f"them, so {extra['ties']} survive in the merged file ({extra['ties_4_4']} are 4-4 splits, {extra['ties_3_3_2']} are 3-3-2)."
+          if extra["raw_ties"] is not None else
+          f"* {extra['ties']} of {extra['gwsd_total_with_ties']} GWSD sentences in the merged file have no annotator majority "
+          f"({extra['ties_4_4']} are 4-4 splits, {extra['ties_3_3_2']} are 3-3-2); raw file not present, run "
+          "`python src/build_english_merged.py --check` to measure the raw rate."),
+         "* The tie rows are dropped from training and evaluation and kept in `data/gwstance_ambiguous_ties.csv`.",
+         f"* Among the {len(gw)} GWSD rows that kept a label, agreement has a median of "
          f"{gw.agreement.median():.3f} (min {gw.agreement.min():.3f}). "
-         "Genuine human disagreement bounds how crisp this task can be; it is not a formal ceiling on macro-F1.",
+         "The tie rate is a measured indication of annotator disagreement and task difficulty.",
          f"* SemEval rows ({int((eng.label_source == 'published_gold').sum())}) carry one published gold label and no agreement score.", "",
          "## 5. Text length", "", "![length](fig_length_distribution.png)", "",
          "## 6. Vocabulary and hapax rate", "",

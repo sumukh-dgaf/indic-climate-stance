@@ -110,6 +110,10 @@
   "ties_3_3_2": 55,
   "gwsd_total_with_ties": 2047,
   "ties_pct_of_gwsd": 9.9,
+  "raw_ties": 215,
+  "raw_total": 2300,
+  "raw_ties_pct": 9.3,
+  "ties_removed_by_dedup": 13,
   "favour_against_vocab_overlap_pct": 58.9,
   "shared_vocab_note_vocab_size": 6221
  },

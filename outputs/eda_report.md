@@ -68,8 +68,9 @@ Romanised Hindi/Bengali and English are both `latin` by script, so script ID alo
 
 ## 4. Annotator disagreement (GWStance)
 
-* 202 of 2047 GWSD sentences in the supplied file (9.9%) have **no annotator majority** (147 are 4-4 splits, 55 are 3-3-2). They are dropped from training/evaluation and kept in `data/gwstance_ambiguous_ties.csv`.
-* Among the 1845 GWSD rows that kept a label, agreement is a median of 0.750 (min 0.500). Genuine human disagreement bounds how crisp this task can be; it is not a formal ceiling on macro-F1.
+* **Raw GWSD.tsv: 215 of 2,300 sentences (9.3%) have no unique majority label among their 8 annotators.** Deduplicating on comment text removed 13 of them, so 202 survive in the merged file (147 are 4-4 splits, 55 are 3-3-2).
+* The tie rows are dropped from training and evaluation and kept in `data/gwstance_ambiguous_ties.csv`.
+* Among the 1845 GWSD rows that kept a label, agreement has a median of 0.750 (min 0.500). The tie rate is a measured indication of annotator disagreement and task difficulty.
 * SemEval rows (563) carry one published gold label and no agreement score.
 
 ## 5. Text length

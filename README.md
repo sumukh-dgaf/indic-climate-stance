@@ -27,7 +27,8 @@ transfer** problem, not plain text classification. See [`docs/LITERATURE_REVIEW.
 **Usable dataset found: PARTIALLY.**
 
 * **Real, English, target-correct:** 2,408 labelled sentences from GWStance/GWSD (news) and SemEval-2016 Task 6 climate
-  (tweets). Supplied as `data/english_stance_merged.csv`; 202 annotator-tie rows are removed by the loader.
+  (tweets). Supplied as `data/english_stance_merged.csv`; 202 annotator-tie rows (215 of 2,300 = 9.3% in the raw GWSD
+  file; 13 removed by deduplication) are removed by the loader.
 * **No Hindi/Bengali stance comments on this claim were obtainable.** The official AISoMe data was not in hand.
 * **`data/pilot_indic_stance.csv` is a team-authored pilot corpus: 150 synthetic Hindi/Bengali comments written
   because the official dataset was not available. It is not scraped, not real user data and not the official dataset.**
@@ -37,8 +38,9 @@ transfer** problem, not plain text classification. See [`docs/LITERATURE_REVIEW.
   code-mixed Hindi corpus is about **demonetisation**, not climate, and is kept separate.
 * Provenance, label mappings and the Milestone 2 translate-train plan: [`docs/DATASET_PLAN.md`](docs/DATASET_PLAN.md).
 
-Third-party data is git-ignored (licences). `data/english_stance_*.csv` and `data/gwstance_ambiguous_ties.csv` are not
-committed; place them in `data/` to reproduce.
+Third-party data is git-ignored. The GWStance repository has **no LICENSE file**, so `data/english_stance_*.csv` and
+`data/gwstance_ambiguous_ties.csv` are not committed; `python src/build_english_merged.py` rebuilds them from source and its
+`--check` mode verified a field-by-field match with the team's files. Exact rules: [`data/README.md`](data/README.md).
 
 ## Results so far (all measured by code in this repo)
 
@@ -72,6 +74,7 @@ Python 3.10. The transformer script additionally needs `torch`, `transformers`, 
 ```bash
 python src/preprocess.py            # self-check: NFC, repeat collapse, script ID
 python src/data.py                  # self-check: loader, "None" label gotcha, validation gate
+python src/build_english_merged.py  # rebuilds data/english_stance_*.csv from GWSD + SemEval (needs internet)
 python src/fetch_external.py        # downloads + normalises external sources into data/external/ (needs internet)
 python src/eda.py                   # outputs/eda_report.md, eda_stats.json, fig_*.png
 python src/baseline.py              # outputs/baseline_results.md/.json, confusion matrices
@@ -94,6 +97,7 @@ requirements.txt
 data/
   pilot_indic_stance.csv        team-authored synthetic pilot (development only)
   DATASET_INVENTORY.md          every source examined, status, gap table
+  README.md                     how the git-ignored English files are rebuilt, and why they are not committed
   english_stance_*.csv          supplied English files (git-ignored)
   external/, raw/               fetched third-party data (git-ignored)
 docs/
@@ -102,7 +106,7 @@ docs/
   VIVA_PREP.md                  answers to the instructor's questions + follow-ups
 src/
   preprocess.py  data.py  eda.py  baseline.py
-  train_transformer.py  predict.py  fetch_external.py  make_deck.py
+  train_transformer.py  predict.py  fetch_external.py  build_english_merged.py  make_deck.py
 outputs/
   eda_report.md  baseline_results.md  *.json  fig_*.png  Milestone1_*.pptx
 ```

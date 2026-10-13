@@ -16,7 +16,7 @@ This file records provenance, how files were normalised, what is deliberately **
 
 | File | Origin | Licence / terms | Mapping |
 |---|---|---|---|
-| `data/english_stance_merged.csv` | team-supplied merge of GWStance/GWSD (Luo et al. 2020) and SemEval-2016 climate | not re-checked by us; **not committed to git** | majority vote of 8 annotators (GWSD); published gold (SemEval) |
+| `data/english_stance_merged.csv` | team-supplied merge of GWStance/GWSD (Luo et al. 2020) and SemEval-2016 climate; **rebuilt and verified field-by-field by `src/build_english_merged.py --check`** | the GWStance repository has **no LICENSE file**, so **not committed**; see `data/README.md` | majority vote of 8 annotators (GWSD); published gold (SemEval) |
 | `data/english_stance_highconf.csv` | subset: GWSD agreement >= 0.75 plus all SemEval | as above; not committed | as above |
 | `data/gwstance_ambiguous_ties.csv` | the 202 GWSD rows with no annotator majority (written by `src/data.py`) | as above; not committed | no label |
 | `data/external/semeval2016_climate_en.csv` | `cardiffnlp/tweet_eval` `stance_climate` (SemEval-2016 Task 6) | check the dataset card; research use | favor/against/none |
@@ -54,13 +54,13 @@ per-source class distribution. The loader also keeps the literal label `"None"` 
 `pd.read_csv` turns it into NaN and deletes a class), splits the legacy `agreement` column into `label_source`
 (`majority_vote_8` | `published_gold`) and a numeric `agreement`, and raises on any unmapped label.
 
-### The 202 tie rows
+### The annotator-tie rows
 
-202 of the 2,047 GWSD sentences (9.9%) have no annotator majority (147 split 4-4, 55 split 3-3-2). They are dropped
-from training and evaluation and written to `data/gwstance_ambiguous_ties.csv`. We report them as evidence of genuine task
-difficulty: even eight crowd annotators cannot settle a tenth of the sentences. The supplied file may have had further
-tie rows removed before it reached us (earlier note: 215); we cannot verify that, so we quote 9.9% as a share of the rows we
-can see and treat it as indicative, not as a formal ceiling on macro-F1.
+Measured by `src/build_english_merged.py` on the raw `GWSD.tsv`: **215 of 2,300 sentences (9.3%) have no unique majority
+label among their 8 annotators.** The team's merge deduplicated on comment text, which removed 13 of those ties, so **202
+survive in the merged file** (147 split 4-4, 55 split 3-3-2). They are dropped from training and evaluation and written to
+`data/gwstance_ambiguous_ties.csv`. We report the tie rate as a measured indication of annotator disagreement and task
+difficulty: even eight crowd annotators cannot settle about a tenth of the sentences.
 
 ## 4. The pilot corpus (team-authored, development only)
 
