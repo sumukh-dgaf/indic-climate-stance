@@ -1,0 +1,222 @@
+{
+ "A_english_cv": [
+  {
+   "features": "word",
+   "model": "LogReg",
+   "macro_f1": 0.5880964771581499,
+   "macro_f1_std": 0.01776450985349707,
+   "accuracy": 0.6063086067235446,
+   "pooled_macro_f1": 0.5885231270833832
+  },
+  {
+   "features": "word",
+   "model": "LinearSVC",
+   "macro_f1": 0.5816598328569398,
+   "macro_f1_std": 0.031287755158062217,
+   "accuracy": 0.6121272245753574,
+   "pooled_macro_f1": 0.582788374860677
+  },
+  {
+   "features": "char",
+   "model": "LogReg",
+   "macro_f1": 0.6054915800265075,
+   "macro_f1_std": 0.023021194329169926,
+   "accuracy": 0.6308037370278035,
+   "pooled_macro_f1": 0.6054177617063815
+  },
+  {
+   "features": "char",
+   "model": "LinearSVC",
+   "macro_f1": 0.5803248824242628,
+   "macro_f1_std": 0.02700074170849655,
+   "accuracy": 0.6162740141993254,
+   "pooled_macro_f1": 0.5808831596160425
+  },
+  {
+   "features": "word+char",
+   "model": "LogReg",
+   "macro_f1": 0.6127180390148521,
+   "macro_f1_std": 0.025217531375168276,
+   "accuracy": 0.6362056918073515,
+   "pooled_macro_f1": 0.6129766510696978
+  },
+  {
+   "features": "word+char",
+   "model": "LinearSVC",
+   "macro_f1": 0.5895787276943101,
+   "macro_f1_std": 0.04209287704502423,
+   "accuracy": 0.6266517714650495,
+   "pooled_macro_f1": 0.590810882833022
+  },
+  {
+   "features": "-",
+   "model": "Dummy(majority)",
+   "macro_f1": 0.2002710364726092,
+   "macro_f1_std": 0.00021583029098342418,
+   "accuracy": 0.4294019202732896,
+   "pooled_macro_f1": 0.200271160178191
+  }
+ ],
+ "A_best": {
+  "config": "word+char + LogReg",
+  "report": "              precision    recall  f1-score   support\n\n      Favour      0.647     0.667     0.657      1034\n     Against      0.522     0.539     0.531       345\n        None      0.665     0.638     0.651      1029\n\n    accuracy                          0.636      2408\n   macro avg      0.612     0.615     0.613      2408\nweighted avg      0.637     0.636     0.636      2408\n",
+  "confusion": [
+   [
+    690,
+    83,
+    261
+   ],
+   [
+    90,
+    186,
+    69
+   ],
+   [
+    286,
+    87,
+    656
+   ]
+  ],
+  "macro_f1_by_source": {
+   "GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators": 0.6104603233858329,
+   "SemEval-2016 Task 6 (via TweetEval)": 0.6015622355485857
+  },
+  "largest_error": {
+   "true": "None",
+   "pred": "Favour",
+   "n": 286,
+   "examples": [
+    "Alarming levels of sea level rise are predicted to threaten Florida over the next decades.",
+    "The Intergovernmental Panel on Climate Change should be clearer on how it draws conclusions from the body of research it assesses when gauging the impacts of global warming.",
+    "Fighting global warming, the stated purpose of AB32, is a loser with California voters."
+   ]
+  },
+  "against_recall": 0.5391304347826087,
+  "against_to_none": 69
+ },
+ "A_class_weight_ablation": {
+  "balanced": {
+   "macro_f1": 0.6127180390148521,
+   "macro_f1_std": 0.025217531375168276,
+   "accuracy": 0.6362056918073515,
+   "pooled_macro_f1": 0.6129766510696978,
+   "against_recall": 0.5391304347826087
+  },
+  "none": {
+   "macro_f1": 0.5582727674861776,
+   "macro_f1_std": 0.03754796767565799,
+   "accuracy": 0.6283175610976441,
+   "pooled_macro_f1": 0.5587844677812869,
+   "against_recall": 0.25217391304347825
+  }
+ },
+ "B_highconf_cv": {
+  "config": "word+char + LogReg",
+  "macro_f1": 0.658432527476011,
+  "macro_f1_std": 0.03513064104008422,
+  "accuracy": 0.6785437114813969,
+  "pooled_macro_f1": 0.6584707941340415,
+  "dummy_macro_f1": 0.2130746387743207
+ },
+ "C_pilot_cv": [
+  {
+   "features": "word",
+   "model": "LogReg",
+   "macro_f1": 0.5358548124176069,
+   "macro_f1_std": 0.049004116947649175,
+   "accuracy": 0.54,
+   "pooled_macro_f1": 0.5412405581093943
+  },
+  {
+   "features": "word",
+   "model": "LinearSVC",
+   "macro_f1": 0.5216187794181691,
+   "macro_f1_std": 0.05918235203335408,
+   "accuracy": 0.5266666666666666,
+   "pooled_macro_f1": 0.5280658476286306
+  },
+  {
+   "features": "char",
+   "model": "LogReg",
+   "macro_f1": 0.5490344161056236,
+   "macro_f1_std": 0.022759353135931963,
+   "accuracy": 0.5466666666666666,
+   "pooled_macro_f1": 0.5537621009613775
+  },
+  {
+   "features": "char",
+   "model": "LinearSVC",
+   "macro_f1": 0.5387212882672119,
+   "macro_f1_std": 0.04899500953803176,
+   "accuracy": 0.5399999999999999,
+   "pooled_macro_f1": 0.5463244399414612
+  },
+  {
+   "features": "word+char",
+   "model": "LogReg",
+   "macro_f1": 0.569532474176437,
+   "macro_f1_std": 0.0711426548638933,
+   "accuracy": 0.5666666666666667,
+   "pooled_macro_f1": 0.5728548497343361
+  },
+  {
+   "features": "word+char",
+   "model": "LinearSVC",
+   "macro_f1": 0.5831326434525608,
+   "macro_f1_std": 0.04213658947663118,
+   "accuracy": 0.5866666666666667,
+   "pooled_macro_f1": 0.5893187191059531
+  },
+  {
+   "features": "-",
+   "model": "Dummy(majority)",
+   "macro_f1": 0.16666666666666666,
+   "macro_f1_std": 0.0,
+   "accuracy": 0.3333333333333333,
+   "pooled_macro_f1": 0.16666666666666666
+  }
+ ],
+ "D_transfer_to_pilot": {
+  "config": "word+char + LogReg",
+  "macro_f1": 0.3405592738455517,
+  "accuracy": 0.4266666666666667,
+  "macro_f1_by_language": {
+   "bn": 0.3410045892804514,
+   "hi": 0.3401722078029086
+  },
+  "accuracy_by_script": {
+   "bn": 0.3584905660377358,
+   "hi": 0.3584905660377358,
+   "latin": 0.5,
+   "mixed": 0.7
+  },
+  "n_by_script": {
+   "hi": 53,
+   "bn": 53,
+   "latin": 24,
+   "mixed": 20
+  },
+  "predicted_class_counts": {
+   "Favour": 11,
+   "Against": 8,
+   "None": 131
+  },
+  "confusion": [
+   [
+    8,
+    2,
+    40
+   ],
+   [
+    3,
+    6,
+    41
+   ],
+   [
+    0,
+    0,
+    50
+   ]
+  ]
+ }
+}
