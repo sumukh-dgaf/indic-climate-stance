@@ -1,0 +1,16 @@
+# third-party / re-fetchable data (licences, size): run src/fetch_external.py
+data/raw/
+data/external/
+data/english_stance_*.csv
+data/gwstance_ambiguous_ties.csv
+
+# model checkpoints and caches
+outputs/models/
+outputs/*.pt
+outputs/*.bin
+outputs/*.safetensors
+__pycache__/
+*.pyc
+.cache/
+.ipynb_checkpoints/
+.venv/
