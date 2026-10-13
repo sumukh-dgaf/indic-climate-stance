@@ -16,7 +16,6 @@ import random
 import sys
 
 import numpy as np
-import pandas as pd
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from data import CLAIM, LABELS, load, load_english, validate  # noqa: E402
