@@ -50,6 +50,7 @@ SPLIT_N = {"test": 100, "val": 50}  # per (language, label); train gets the rest
 
 LANG = {"hi": "Hindi", "bn": "Bengali"}
 SCRIPT = {"hi": "Devanagari", "bn": "Bengali"}
+CODEMIX_EXAMPLE = {"hi": "'ये heatwave बिल्कुल normal नहीं है'", "bn": "'এই heatwave একদম normal না'"}  # style only, not stance
 LABEL_DEF = {
     "Favour": "agrees that climate change / global warming is a serious concern (worry, urgency, blaming pollution, "
               "asking for action, praising climate action)",
@@ -60,7 +61,10 @@ LABEL_DEF = {
 }
 PHEN_DEF = {
     "plain": "written fully in {script} script",
-    "codemix": "{script} script mixed with English words typed in Latin letters, as in real Indian YouTube comments",
+    # v2 (used from top-up batch index 5 on): v1 read "{script} script mixed with English words typed in Latin letters";
+    # with it 593 of 600 comments came back fully Romanised and failed the script check
+    "codemix": "the {lang} words MUST be written in {script} script, with a few English words typed in Latin letters mixed in "
+               "(never Romanise the {lang} words), in the style of {codemix_example} (do not reuse that sentence)",
     "roman": "{lang} typed entirely in Latin letters (Romanised, phone-keyboard style), NOT English",
     "negation": "in {script} script; the stance is carried by a negation ('it is not true that...', 'nobody can deny...')",
     "sarcasm": "in {script} script; sarcastic or ironic, the literal words say the opposite of what is meant",
@@ -149,7 +153,7 @@ def append_jsonl(path, obj):
 def gen_prompt(batch_key, n=BATCH):
     lang, label, phen, _ = batch_key.split("|")
     rng = random.Random(batch_key)  # topics/tones vary per batch but are reproducible
-    style = PHEN_DEF[phen].format(script=SCRIPT[lang], lang=LANG[lang])
+    style = PHEN_DEF[phen].format(script=SCRIPT[lang], lang=LANG[lang], codemix_example=CODEMIX_EXAMPLE[lang])
     return (f"You are helping build a research dataset for stance detection on Indian social media.\n"
             f"Write {n} different, realistic YouTube comments in {LANG[lang]}, posted under videos about weather and climate.\n"
             f'Claim: "{CLAIM}"\n'
@@ -172,11 +176,13 @@ def generate(batches, key):
     todo = [b for b in batches if b not in done]
     print(f"[generate] {len(done)} batches on disk, {len(todo)} to call ({GEN_MODEL})")
     for k, b in enumerate(todo, 1):
-        items = call(GEN_MODEL, gen_prompt(b), key, temperature=1.0)
+        prompt = gen_prompt(b)
+        items = call(GEN_MODEL, prompt, key, temperature=1.0)
         if items is None:
             print(f"  {b}: unusable answer, will retry on next run")
             continue
-        append_jsonl(path, {"batch": b, "model": GEN_MODEL, "items": items, "time": time.strftime("%Y-%m-%d %H:%M:%S")})
+        append_jsonl(path, {"batch": b, "model": GEN_MODEL, "items": items, "time": time.strftime("%Y-%m-%d %H:%M:%S"),
+                            "prompt": prompt})  # exact prompt kept for provenance (added after the codemix prompt change)
         if k % 10 == 0:
             print(f"  {k}/{len(todo)} batches")
 
@@ -290,13 +296,15 @@ def apply_filters(df):
     jd = df[df.judge != ""]
     n["judged"] = len(jd)
     n["removed_judge_disagrees"] = int((jd.judge != jd.stance).sum())
-    rate = lambda g: {k: round(float(v), 3) for k, v in g.apply(lambda x: (x.judge == x.stance).mean()).items()}  # noqa: E731
-    n["judge_agreement_overall"] = round(float((jd.judge == jd.stance).mean()), 3) if len(jd) else None
+    agree = jd.judge == jd.stance
+    rate = lambda col: {k: round(float(v), 3) for k, v in agree.groupby(jd[col]).mean().items()}  # noqa: E731
+    n["judge_agreement_overall"] = round(float(agree.mean()), 3) if len(jd) else None
     if len(jd):
-        n["judge_agreement_by_label"] = rate(jd.groupby("stance"))
-        n["judge_agreement_by_phenomenon"] = rate(jd.groupby("phenomenon"))
-        n["judge_agreement_by_language"] = rate(jd.groupby("language"))
-        n["judge_confusion_intended_vs_judge"] = pd.crosstab(jd.stance, jd.judge).to_dict()
+        n["judge_agreement_by_label"] = rate("stance")
+        n["judge_agreement_by_phenomenon"] = rate("phenomenon")
+        n["judge_agreement_by_language"] = rate("language")
+        # {intended label: {judge label: count}}
+        n["judge_confusion_intended_vs_judge"] = pd.crosstab(jd.stance, jd.judge).T.to_dict()
     return jd[jd.judge == jd.stance].drop(columns="judge"), n
 
 

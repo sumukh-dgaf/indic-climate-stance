@@ -1,0 +1,88 @@
+{
+ "generated": 5180,
+ "removed_format_or_length": 3,
+ "removed_script": 878,
+ "removed_exact_duplicate": 2,
+ "removed_near_duplicate": 19,
+ "awaiting_judge": 0,
+ "judged": 4278,
+ "removed_judge_disagrees": 721,
+ "judge_agreement_overall": 0.831,
+ "judge_agreement_by_label": {
+  "Against": 0.966,
+  "Favour": 0.753,
+  "None": 0.791
+ },
+ "judge_agreement_by_phenomenon": {
+  "codemix": 0.871,
+  "emoji": 0.901,
+  "implicit": 0.903,
+  "negation": 0.991,
+  "neutral_fact": 0.903,
+  "offtopic": 0.937,
+  "plain": 0.892,
+  "question": 0.818,
+  "roman": 0.925,
+  "sarcasm": 0.369
+ },
+ "judge_agreement_by_language": {
+  "bn": 0.824,
+  "hi": 0.839
+ },
+ "judge_confusion_intended_vs_judge": {
+  "Against": {
+   "Against": 1292,
+   "Favour": 325,
+   "None": 100
+  },
+  "Favour": {
+   "Against": 21,
+   "Favour": 1205,
+   "None": 180
+  },
+  "None": {
+   "Against": 24,
+   "Favour": 71,
+   "None": 1060
+  }
+ },
+ "missing_planned_batches": 0,
+ "complete": true,
+ "passed_all_filters": 3557,
+ "kept_after_quota": 2901,
+ "removed_train_leak_vs_eval": 14,
+ "shortfall_by_cell": {
+  "hi|Favour|sarcasm": 27,
+  "hi|None|codemix": 9,
+  "bn|Favour|sarcasm": 25,
+  "bn|None|codemix": 24
+ },
+ "split_sizes": {
+  "train": 2001,
+  "test": 600,
+  "val": 300
+ },
+ "by_language_label": {
+  "bn|Against": 500,
+  "bn|Favour": 475,
+  "bn|None": 470,
+  "hi|Against": 499,
+  "hi|Favour": 473,
+  "hi|None": 484
+ },
+ "by_phenomenon": {
+  "plain": 748,
+  "roman": 449,
+  "codemix": 417,
+  "emoji": 257,
+  "implicit": 240,
+  "negation": 239,
+  "sarcasm": 188,
+  "offtopic": 137,
+  "neutral_fact": 119,
+  "question": 107
+ },
+ "generator_model": "gemini-3.5-flash-lite",
+ "judge_model": "gemini-3.1-flash-lite",
+ "note": "synthetic (LLM-generated) comments; test labels not yet human-verified until apply_review.py runs"
+}
