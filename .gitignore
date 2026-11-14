@@ -14,3 +14,12 @@ __pycache__/
 .cache/
 .ipynb_checkpoints/
 .venv/
+
+# Round 2
+.env
+data/splits/
+data/translated/
+models/
+outputs/smoke/
+colab_bundle.zip
+colab_results.zip
