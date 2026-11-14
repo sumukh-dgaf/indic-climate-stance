@@ -445,6 +445,7 @@ def round2_deck():
                   "Be explicit: synthetic test is optimistic for C; A and B are the fairer transfer measure.")
     items = ["No official or real Hindi/Bengali data: Indic test sets are translated, synthetic or the pilot",
              "Synthetic test shares a generator with C's training data: C's score there is optimistic",
+             "The judge filter keeps only clear-cut comments, so the synthetic test is easier than real comments",
              "GWStance has no licence: English/translated text rebuilt by script, never committed",
              "IndicTrans2 gated: NLLB-200 used; Gemini HTTP 503 overload: resumable generation",
              "Single seed; English test has few Against rows"]
@@ -463,7 +464,7 @@ def round2_deck():
     text(s, 0.55, 1.6, 12.2, 5.2, ["Finish the blind human review of the 600 synthetic test rows and the translation check",
                                    "Annotate a small set of real public Hindi/Bengali comments as a genuine test set",
                                    "Several seeds per run; differences checked against bootstrap intervals",
-                                   "Target weak phenomena (sarcasm, implicit, Romanised) with more varied data",
+                                   f"Target the weakest phenomena of the best run ({F['weak']}) with more varied data",
                                    "Zero-shot LLM baseline; IndicTrans2 with an approved token"], size=20, space=14, pad=0)
     assert len(prs.slides) <= 10
     prs.save(OUT + "Round2_Deck.pptx")

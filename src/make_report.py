@@ -49,6 +49,9 @@ def facts(R):
     F["tr_model"] = (R.get("translation") or {}).get("hi_train", {}).get("model", "not yet measured")
     F["pilot"] = ds["pilot"]["total"]
     F["tr_sizes"] = ds.get("translated", {})
+    e = runs.get(F["best"], {}).get("eval", {}) if F["best"] else {}
+    ph = e.get("synthetic_test", e.get("pilot", {})).get("accuracy_by_phenomenon", {})
+    F["weak"] = ", ".join(k.replace("_", " ") for k in sorted(ph, key=lambda k: ph[k]["accuracy"])[:3]) or "not yet measured"
     return F
 
 
@@ -210,8 +213,9 @@ def build(R, size):
          "the repository and is rebuilt by script. IndicTrans2 is gated, so NLLB-200 was used. The Gemini API returned "
          "frequent HTTP 503 (overload) responses, so generation was made resumable with back-off. "
          + (f"Stance itself is ambiguous: the judge model disagreed with the intended label for {100 * (1 - F['gen']['judge_agreement_overall']):.1f}% of "
-            "filtered synthetic comments, most often for sarcasm and implicit stance. " if F["gen"] else "")
-         + "pandas silently converts the label \"None\" to a missing value unless read with keep_default_na=False, which would "
+            f"filtered synthetic comments, most often for {low2(F['gen'])}. " if F["gen"] else "")
+         + "The judge filter also removes the most ambiguous synthetic comments, so the synthetic test set is easier than "
+         "real comments would be. pandas silently converts the label \"None\" to a missing value unless read with keep_default_na=False, which would "
          "delete a class; every loader guards against it. All results come from a single seed.")
 
     # ---------------- 5. Future work
@@ -220,7 +224,7 @@ def build(R, size):
          "human-vs-intended agreement and re-score with verified labels. (2) Collect and annotate a small set of real public "
          "Hindi/Bengali comments as a genuine test set. (3) Repeat the main runs over several seeds to measure variance, and "
          "test whether differences exceed the bootstrap intervals. (4) Use the per-phenomenon error analysis to target "
-         "weak cases (sarcasm, implicit stance, Romanised text) with more varied synthetic data. (5) Add a zero-shot "
+         f"the best run's weakest phenomena ({F['weak']}) with more varied data. (5) Add a zero-shot "
          "LLM baseline and try IndicTrans2 translation with an approved Hugging Face token.")
     return doc
 
@@ -251,6 +255,17 @@ def analysis(R, F):
                         f"{lab} {get(other, s) - get(base, s):+.3f}" for s, lab in SETS
                         if get(other, s) is not None and get(base, s) is not None))
             out.append(f"What each data family adds for {MODEL[m]} (macro-F1 change): " + "; ".join(parts) + ".")
+            if b in runs and c in runs:
+                same = [lab for s, lab in SETS[1:3] if overlap(runs[b]["eval"][s]["ci95"], runs[c]["eval"][s]["ci95"])]
+                if same:
+                    out.append(f"On the {' and '.join(same)} test sets the 95% intervals of B and C overlap, so synthetic data "
+                               f"shows no clear gain there; C's large gains are on the synthetic test set (same generator, "
+                               f"optimistic) and the pilot, which is also synthetic comment-style text.")
+            a_pc = runs.get(a, {}).get("eval", {}).get("synthetic_test", {}).get("predicted_counts")
+            if a_pc:
+                out.append(f"Trained on English only, {MODEL[m]} predicts Favour for {a_pc['Favour']} of "
+                           f"{sum(a_pc.values())} synthetic comments, i.e. it reads almost any climate mention as agreement; "
+                           "in-language data (B, C) removes most of this bias.")
             break
     a = "indicbert_A_english"
     if a in runs and mean_fair(a) is not None:
@@ -272,6 +287,16 @@ def analysis(R, F):
                        f"({weak[lo]['accuracy']:.2f}, n={weak[lo]['n']}) and highest for '{hi}' ({weak[hi]['accuracy']:.2f}); "
                        f"Against recall on translated Hindi is {e['translated_hi_test']['per_class']['Against']['recall']:.2f}.")
     return [o for o in out if o]
+
+
+def low2(gen):
+    """The two phenomena with the lowest judge agreement, read from the stats (never typed by hand)."""
+    ph = gen["judge_agreement_by_phenomenon"]
+    return " and ".join(f"{k.replace('_', ' ')} ({100 * ph[k]:.1f}% agreement)" for k in sorted(ph, key=ph.get)[:2])
+
+
+def overlap(a, b):
+    return a[0] <= b[1] and b[0] <= a[1]
 
 
 def word_pages(path):
