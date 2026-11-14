@@ -32,6 +32,7 @@ JUDGE_MODEL = "gemini-3.1-flash-lite"  # a different model, so the judge is not 
 API = "https://generativelanguage.googleapis.com/v1beta/models/{}:generateContent"
 RAW = "data/synthetic/raw"
 OUT = "data/synthetic/indic_synthetic_v1.csv"
+PARTIAL = "data/synthetic/indic_synthetic_v1.partial.csv"  # an interrupted generation; never used for training
 STATS = "data/synthetic/generation_stats.json"
 REVIEW = "data/review/synthetic_test_review.csv"
 SOURCE = "synthetic (LLM-generated)"
@@ -327,12 +328,16 @@ def select_and_split(df, quota=QUOTA, split_n=SPLIT_N):
     return df, short, int(leak.sum())
 
 
-def build(quota=QUOTA):
+def build(quota=QUOTA, stopped=False):
+    """Writes OUT (+ review file) only for a COMPLETE generation; otherwise a .partial.csv that nothing trains on."""
     raw = raw_rows()
     if raw.empty:
         print("no generated batches on disk yet")
         return None
     kept, n = apply_filters(raw)
+    done = {r["batch"] for r in read_jsonl(f"{RAW}/generate.jsonl")}
+    n["missing_planned_batches"] = len(set(planned_batches(quota)) - done)
+    n["complete"] = not stopped and n["awaiting_judge"] == 0 and n["missing_planned_batches"] == 0
     final, short, n_leak = select_and_split(kept, quota)
     n.update({"passed_all_filters": len(kept), "kept_after_quota": len(final), "removed_train_leak_vs_eval": n_leak,
               "shortfall_by_cell": short, "split_sizes": final.split.value_counts().to_dict(),
@@ -342,11 +347,18 @@ def build(quota=QUOTA):
               "note": "synthetic (LLM-generated) comments; test labels not yet human-verified until apply_review.py runs"})
     cols = ["id", "comment", "stance", "language", "phenomenon", "split", "source", "generator_model", "human_verified"]
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    final[cols].to_csv(OUT, index=False)
+    target = OUT if n["complete"] else PARTIAL
+    final[cols].to_csv(target, index=False)
     json.dump(n, open(STATS, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
-    write_review(final)
     print(json.dumps({k: v for k, v in n.items() if not k.startswith("judge_confusion")}, indent=1, ensure_ascii=False))
-    print(f"wrote {OUT} ({len(final)} rows), {STATS}, {REVIEW}")
+    if n["complete"]:
+        write_review(final)
+        print(f"wrote {OUT} ({len(final)} rows), {STATS}, {REVIEW}")
+    else:
+        if os.path.exists(OUT):
+            os.remove(OUT)  # a stale full-looking file must not outlive an incomplete rebuild (it is rebuilt from raw/)
+        print(f"INCOMPLETE generation (stopped={stopped}, awaiting judge={n['awaiting_judge']}, "
+              f"missing batches={n['missing_planned_batches']}): wrote {target} only; configuration C will not use it")
     return n
 
 
@@ -375,6 +387,7 @@ def run(topup_rounds=2):
     if not key:
         sys.exit("GEMINI_API_KEY is not set (environment or .env). Get a free key at https://aistudio.google.com/apikey, "
                  "then: echo GEMINI_API_KEY=... > .env   (.env is git-ignored)")
+    stopped = False
     try:
         batches = planned_batches(QUOTA)
         for rnd in range(topup_rounds + 1):
@@ -395,8 +408,9 @@ def run(topup_rounds=2):
             print(f"[top-up round {rnd + 1}] {sum(need.values())} rows short in {len(need)} cells -> {len(extra)} batches")
             batches += extra
     except QuotaExhausted as e:
-        print(f"STOPPED: {e}. Re-run later to resume; building the dataset from what exists now.")
-    return build()
+        print(f"STOPPED: {e}. Re-run later to resume; building a PARTIAL dataset from what exists now.")
+        stopped = True
+    return build(stopped=stopped)
 
 
 def selfcheck():

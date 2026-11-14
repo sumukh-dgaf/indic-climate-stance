@@ -21,7 +21,7 @@ import time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from data import CLAIM, CONFIGS, LABELS, SYNTHETIC, config_data, eval_sets, write_preds  # noqa: E402
+from data import CLAIM, CONFIGS, LABELS, config_data, eval_sets, synthetic_verified, write_preds  # noqa: E402
 from predict import predict_probs  # noqa: E402
 from preprocess import clean  # noqa: E402
 
@@ -56,14 +56,6 @@ def encode(tok, comments, max_len):
 def macro_f1(gold, probs):
     from sklearn.metrics import f1_score
     return float(f1_score(gold, [LABELS[i] for i in probs.argmax(1)], average="macro", labels=LABELS, zero_division=0))
-
-
-def synthetic_verified():
-    import pandas as pd
-    if not os.path.exists(SYNTHETIC):
-        return "no synthetic data"
-    s = pd.read_csv(SYNTHETIC, dtype=str, keep_default_na=False)
-    return "yes" if (s[s.split == "test"].human_verified == "yes").all() else "labels not yet human-verified"
 
 
 def main():

@@ -114,11 +114,25 @@ def load_english(path="data/english_stance_merged.csv", ties_out="data/gwstance_
 ENG = "data/splits/english_{}.csv"             # make_splits.py (git-ignored)
 TRANSLATED = "data/translated/{}_{}.csv"       # translate.py: (hi|bn, split) (git-ignored)
 SYNTHETIC = "data/synthetic/indic_synthetic_v1.csv"
+SYN_STATS = "data/synthetic/generation_stats.json"
 PILOT = "data/pilot_indic_stance.csv"
 CONFIGS = {"A_english": ["english"], "B_translated": ["english", "translated"],
            "C_full": ["english", "translated", "synthetic"]}
 EVAL_SETS = ["english_test", "translated_hi_test", "translated_bn_test", "synthetic_test", "pilot"]
 STD_COLS = ["id", "comment", "stance", "language", "phenomenon", "source"]
+
+
+def synthetic_complete():
+    """True only when generate_synthetic.py finished generation, judging, filtering and splitting (stats flag)."""
+    import json
+    return os.path.exists(SYNTHETIC) and os.path.exists(SYN_STATS) and json.load(open(SYN_STATS, encoding="utf-8")).get("complete") is True
+
+
+def synthetic_verified():
+    if not synthetic_complete():
+        return "no complete synthetic data"
+    s = pd.read_csv(SYNTHETIC, dtype=str, keep_default_na=False)
+    return "yes" if (s[s.split == "test"].human_verified == "yes").all() else "labels not yet human-verified"
 
 
 def _std(df, name, **fill):
@@ -142,7 +156,7 @@ def load_part(kind, split):
     elif kind == "translated":
         paths = [(TRANSLATED.format(lang, split), {"language": lang}) for lang in ("hi", "bn")]
     elif kind == "synthetic":
-        if not os.path.exists(SYNTHETIC):
+        if not synthetic_complete():  # never train or evaluate on a partial generation
             return None
         df = pd.read_csv(SYNTHETIC, dtype=str, keep_default_na=False)
         return _std(df[df.split == split], SYNTHETIC)
@@ -245,4 +259,12 @@ if __name__ == "__main__":
     back = pd.read_csv(pp, dtype=str, keep_default_na=False)
     assert back.pred.tolist() == ["None", "Favour"] and back.gold.tolist() == ["None", "Favour"]
     assert set(CONFIGS["C_full"]) >= set(CONFIGS["B_translated"]) >= set(CONFIGS["A_english"])
+    # partial synthetic data must be invisible to training and evaluation; complete data loads
+    import json
+    SYNTHETIC, SYN_STATS = os.path.join(d, "syn.csv"), os.path.join(d, "syn_stats.json")  # module globals, test paths
+    toy.assign(comment=["x", "y"], split="test").to_csv(SYNTHETIC, index=False)
+    json.dump({"complete": False}, open(SYN_STATS, "w"))
+    assert load_part("synthetic", "test") is None and synthetic_verified() == "no complete synthetic data"
+    json.dump({"complete": True}, open(SYN_STATS, "w"))
+    assert len(load_part("synthetic", "test")) == 2
     print("data.py self-check passed")
