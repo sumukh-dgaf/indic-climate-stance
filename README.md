@@ -81,13 +81,29 @@ python src/baseline.py              # outputs/baseline_results.md/.json, confusi
 python src/make_deck.py             # outputs/Milestone1_Sumukh_S24CSEU0570.pptx (reads the JSON above)
 ```
 
-Milestone 2 (not run in Milestone 1):
+Round 2 (transformers; **in progress, no Round 2 results measured yet**):
 
 ```bash
-python src/train_transformer.py --smoke                 # CPU smoke test
-python src/train_transformer.py --model muril --epochs 4   # Colab GPU; also: indic-bert, xlm-r
-python src/predict.py --model-dir outputs/models/muril --input test.csv --output outputs/submission.csv
+python src/make_splits.py                  # data/splits/english_{train,val,test}.csv = 1,750 / 309 / 349 (git-ignored)
+python src/generate_synthetic.py --run     # Gemini: synthetic (LLM-generated) hi/bn comments; needs GEMINI_API_KEY in .env
+python src/translate.py                    # English splits -> hi/bn (IndicTrans2 if HF_TOKEN, else NLLB-200); GPU
+python src/train_transformer.py --smoke    # whole training path on CPU with a few rows (~75 s)
+python -u src/run_all.py                   # translation + all 8 scheduled runs, resumable (Colab: notebooks/round2_colab.ipynb)
+python src/apply_review.py                 # after the team fills data/review/synthetic_test_review.csv
+python src/demo.py --examples              # live demo; falls back to TF-IDF (and says so) if no transformer is present
 ```
+
+| Config | Training data | Validation used for model selection |
+|---|---|---|
+| `A_english` | English (human-labelled) | English val |
+| `B_translated` | + machine-translated Hindi/Bengali | English + translated val |
+| `C_full` | + synthetic (LLM-generated) Hindi/Bengali | English + translated + synthetic val |
+
+Models: `ai4bharat/IndicBERTv2-MLM-only` (main), `google/muril-base-cased` (comparison), TF-IDF + LogReg (baseline),
+all on identical data. Input = (English claim, comment), max length 128. Every run writes per-example predictions to
+`outputs/preds/<model>_<config>_<evalset>.csv` and settings/timing/validation scores to `outputs/runs/<model>_<config>.json`.
+The synthetic test set comes from the same generator as the synthetic training data, so C's score on it is optimistic;
+no result in this repository is a score on real Hindi/Bengali comments.
 
 ## Repository structure
 

@@ -11,6 +11,16 @@
 |---|---|
 | `english_stance_merged.csv`, `english_stance_highconf.csv`, `gwstance_ambiguous_ties.csv` | They contain GWSD text. **The GWStance repository (github.com/yiweiluo/GWStance) has no LICENSE file** (every common license filename returns 404 and its README states no terms), so no redistribution right can be assumed. The files also contain SemEval-2016 tweets. |
 | `external/`, `raw/` | Third-party downloads (Dhoroni, MultiClimate, Swami et al., TweetEval, GWSD.tsv); re-fetchable. |
+| `splits/english_{train,val,test}.csv` | Derived from the GWSD/SemEval file above (`python src/make_splits.py`). |
+| `translated/{hi,bn}_{train,val,test}.csv` | Machine translations of GWSD/SemEval text (`python src/translate.py`). |
+
+## Round 2 data we create ourselves (committed)
+* `synthetic/indic_synthetic_v1.csv`: **synthetic (LLM-generated)** Hindi/Bengali comments from `src/generate_synthetic.py`
+  (Gemini; generator model recorded in every row). Not real YouTube comments. Test labels count as human-verified only
+  after `src/apply_review.py` has applied the team's review (`human_verified=yes`).
+* `synthetic/raw/*.jsonl`: every raw API response (generation and judge), so filtering and splitting are reproducible
+  without the API (`python src/generate_synthetic.py --no-api`).
+* `review/`: files the team fills in by hand (blind label review of the synthetic test set, translation check).
 
 Path taken: **keep ignored and make the files exactly reproducible from source**, rather than redistribute data we have no
 licence to redistribute.
