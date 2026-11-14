@@ -1,0 +1,106 @@
+{
+ "name": "muril_A_english",
+ "model": "muril",
+ "base_model": "google/muril-base-cased",
+ "config": "A_english",
+ "smoke": false,
+ "train_families": [
+  "english"
+ ],
+ "n_train": 1750,
+ "n_train_by_language": {
+  "en": 1750
+ },
+ "n_val": 309,
+ "train_class_counts": {
+  "None": 776,
+  "Favour": 714,
+  "Against": 260
+ },
+ "class_weights": {
+  "Favour": 0.817,
+  "Against": 2.2436,
+  "None": 0.7517
+ },
+ "settings": {
+  "lr": 2e-05,
+  "batch": 32,
+  "epochs": 5,
+  "warmup": 0.1,
+  "weight_decay": 0.01,
+  "max_len": 128,
+  "seed": 42,
+  "mixed_precision": true,
+  "loss": "class-weighted cross-entropy"
+ },
+ "best_epoch": 5,
+ "best_val_macro_f1": 0.6301,
+ "epochs_log": [
+  {
+   "epoch": 1,
+   "val_macro_f1": 0.2037,
+   "val_macro_f1_by_language": {
+    "en": 0.2037
+   },
+   "last_batch_loss": 1.1002,
+   "minutes": 0.19
+  },
+  {
+   "epoch": 2,
+   "val_macro_f1": 0.5203,
+   "val_macro_f1_by_language": {
+    "en": 0.5203
+   },
+   "last_batch_loss": 1.055,
+   "minutes": 0.38
+  },
+  {
+   "epoch": 3,
+   "val_macro_f1": 0.5849,
+   "val_macro_f1_by_language": {
+    "en": 0.5849
+   },
+   "last_batch_loss": 0.9913,
+   "minutes": 0.58
+  },
+  {
+   "epoch": 4,
+   "val_macro_f1": 0.611,
+   "val_macro_f1_by_language": {
+    "en": 0.611
+   },
+   "last_batch_loss": 0.9972,
+   "minutes": 0.78
+  },
+  {
+   "epoch": 5,
+   "val_macro_f1": 0.6301,
+   "val_macro_f1_by_language": {
+    "en": 0.6301
+   },
+   "last_batch_loss": 0.8755,
+   "minutes": 0.97
+  }
+ ],
+ "training_minutes": 0.98,
+ "device": "cuda",
+ "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+ "versions": {
+  "torch": "2.11.0+cu128",
+  "transformers": "5.20.2"
+ },
+ "eval_sets": {
+  "english_test": 349,
+  "translated_hi_test": 349,
+  "translated_bn_test": 349,
+  "pilot": 150
+ },
+ "eval_macro_f1_quick": {
+  "english_test": 0.6461,
+  "translated_hi_test": 0.5859,
+  "translated_bn_test": 0.5519,
+  "pilot": 0.6474
+ },
+ "synthetic_test_labels": "no complete synthetic data",
+ "finished": "2026-11-14 17:28:20"
+}

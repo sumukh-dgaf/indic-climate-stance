@@ -32,17 +32,17 @@
  "judge_confusion_intended_vs_judge": {
   "Against": {
    "Against": 1292,
-   "Favour": 325,
-   "None": 100
+   "Favour": 21,
+   "None": 24
   },
   "Favour": {
-   "Against": 21,
+   "Against": 325,
    "Favour": 1205,
-   "None": 180
+   "None": 71
   },
   "None": {
-   "Against": 24,
-   "Favour": 71,
+   "Against": 100,
+   "Favour": 180,
    "None": 1060
   }
  },

@@ -1,0 +1,122 @@
+{
+ "name": "indicbert_C_full",
+ "model": "indicbert",
+ "base_model": "ai4bharat/IndicBERTv2-MLM-only",
+ "config": "C_full",
+ "smoke": false,
+ "train_families": [
+  "english",
+  "translated",
+  "synthetic"
+ ],
+ "n_train": 7251,
+ "n_train_by_language": {
+  "hi": 2756,
+  "bn": 2745,
+  "en": 1750
+ },
+ "n_val": 1227,
+ "train_class_counts": {
+  "None": 2982,
+  "Favour": 2790,
+  "Against": 1479
+ },
+ "class_weights": {
+  "Favour": 0.8663,
+  "Against": 1.6342,
+  "None": 0.8105
+ },
+ "settings": {
+  "lr": 2e-05,
+  "batch": 32,
+  "epochs": 5,
+  "warmup": 0.1,
+  "weight_decay": 0.01,
+  "max_len": 128,
+  "seed": 42,
+  "mixed_precision": true,
+  "loss": "class-weighted cross-entropy"
+ },
+ "best_epoch": 3,
+ "best_val_macro_f1": 0.7533,
+ "epochs_log": [
+  {
+   "epoch": 1,
+   "val_macro_f1": 0.6769,
+   "val_macro_f1_by_language": {
+    "bn": 0.7105,
+    "en": 0.5691,
+    "hi": 0.6989
+   },
+   "last_batch_loss": 0.7894,
+   "minutes": 0.82
+  },
+  {
+   "epoch": 2,
+   "val_macro_f1": 0.7366,
+   "val_macro_f1_by_language": {
+    "bn": 0.7398,
+    "en": 0.6874,
+    "hi": 0.7594
+   },
+   "last_batch_loss": 0.442,
+   "minutes": 1.63
+  },
+  {
+   "epoch": 3,
+   "val_macro_f1": 0.7533,
+   "val_macro_f1_by_language": {
+    "bn": 0.7724,
+    "en": 0.6722,
+    "hi": 0.7792
+   },
+   "last_batch_loss": 0.4787,
+   "minutes": 2.43
+  },
+  {
+   "epoch": 4,
+   "val_macro_f1": 0.7437,
+   "val_macro_f1_by_language": {
+    "bn": 0.7645,
+    "en": 0.6758,
+    "hi": 0.7598
+   },
+   "last_batch_loss": 0.2501,
+   "minutes": 3.3
+  },
+  {
+   "epoch": 5,
+   "val_macro_f1": 0.7436,
+   "val_macro_f1_by_language": {
+    "bn": 0.7629,
+    "en": 0.6675,
+    "hi": 0.7646
+   },
+   "last_batch_loss": 0.0207,
+   "minutes": 4.12
+  }
+ ],
+ "training_minutes": 4.12,
+ "device": "cuda",
+ "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+ "versions": {
+  "torch": "2.11.0+cu128",
+  "transformers": "5.20.2"
+ },
+ "eval_sets": {
+  "english_test": 349,
+  "translated_hi_test": 349,
+  "translated_bn_test": 349,
+  "synthetic_test": 600,
+  "pilot": 150
+ },
+ "eval_macro_f1_quick": {
+  "english_test": 0.7053,
+  "translated_hi_test": 0.7026,
+  "translated_bn_test": 0.6929,
+  "synthetic_test": 0.8754,
+  "pilot": 0.858
+ },
+ "synthetic_test_labels": "labels not yet human-verified",
+ "finished": "2026-11-14 18:32:41"
+}

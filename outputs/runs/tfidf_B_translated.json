@@ -1,0 +1,33 @@
+{
+ "name": "tfidf_B_translated",
+ "model": "tfidf",
+ "base_model": "TF-IDF word 1-2 + char_wb 2-5, LogisticRegression",
+ "config": "B_translated",
+ "n_train": 5250,
+ "n_train_by_language": {
+  "en": 1750,
+  "hi": 1750,
+  "bn": 1750
+ },
+ "n_val": 927,
+ "settings": {
+  "class_weight": "balanced",
+  "seed": 42
+ },
+ "best_val_macro_f1": 0.6062,
+ "training_minutes": 0.07,
+ "eval_sets": {
+  "english_test": 349,
+  "translated_hi_test": 349,
+  "translated_bn_test": 349,
+  "synthetic_test": 600,
+  "pilot": 150
+ },
+ "eval_macro_f1_quick": {
+  "english_test": 0.5922,
+  "translated_hi_test": 0.5797,
+  "translated_bn_test": 0.6001,
+  "synthetic_test": 0.4353,
+  "pilot": 0.5373
+ }
+}

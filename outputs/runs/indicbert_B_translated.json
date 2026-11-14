@@ -1,0 +1,119 @@
+{
+ "name": "indicbert_B_translated",
+ "model": "indicbert",
+ "base_model": "ai4bharat/IndicBERTv2-MLM-only",
+ "config": "B_translated",
+ "smoke": false,
+ "train_families": [
+  "english",
+  "translated"
+ ],
+ "n_train": 5250,
+ "n_train_by_language": {
+  "en": 1750,
+  "hi": 1750,
+  "bn": 1750
+ },
+ "n_val": 927,
+ "train_class_counts": {
+  "None": 2328,
+  "Favour": 2142,
+  "Against": 780
+ },
+ "class_weights": {
+  "Favour": 0.817,
+  "Against": 2.2436,
+  "None": 0.7517
+ },
+ "settings": {
+  "lr": 2e-05,
+  "batch": 32,
+  "epochs": 5,
+  "warmup": 0.1,
+  "weight_decay": 0.01,
+  "max_len": 128,
+  "seed": 42,
+  "mixed_precision": true,
+  "loss": "class-weighted cross-entropy"
+ },
+ "best_epoch": 4,
+ "best_val_macro_f1": 0.674,
+ "epochs_log": [
+  {
+   "epoch": 1,
+   "val_macro_f1": 0.5429,
+   "val_macro_f1_by_language": {
+    "bn": 0.5163,
+    "en": 0.5474,
+    "hi": 0.5648
+   },
+   "last_batch_loss": 1.0393,
+   "minutes": 0.61
+  },
+  {
+   "epoch": 2,
+   "val_macro_f1": 0.6516,
+   "val_macro_f1_by_language": {
+    "bn": 0.6342,
+    "en": 0.6674,
+    "hi": 0.6532
+   },
+   "last_batch_loss": 0.3562,
+   "minutes": 1.22
+  },
+  {
+   "epoch": 3,
+   "val_macro_f1": 0.6585,
+   "val_macro_f1_by_language": {
+    "bn": 0.6426,
+    "en": 0.6884,
+    "hi": 0.645
+   },
+   "last_batch_loss": 0.0803,
+   "minutes": 1.81
+  },
+  {
+   "epoch": 4,
+   "val_macro_f1": 0.674,
+   "val_macro_f1_by_language": {
+    "bn": 0.6602,
+    "en": 0.7061,
+    "hi": 0.6545
+   },
+   "last_batch_loss": 0.0078,
+   "minutes": 2.42
+  },
+  {
+   "epoch": 5,
+   "val_macro_f1": 0.6655,
+   "val_macro_f1_by_language": {
+    "bn": 0.6567,
+    "en": 0.6959,
+    "hi": 0.6428
+   },
+   "last_batch_loss": 0.0345,
+   "minutes": 3.03
+  }
+ ],
+ "training_minutes": 3.03,
+ "device": "cuda",
+ "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+ "versions": {
+  "torch": "2.11.0+cu128",
+  "transformers": "5.20.2"
+ },
+ "eval_sets": {
+  "english_test": 349,
+  "translated_hi_test": 349,
+  "translated_bn_test": 349,
+  "pilot": 150
+ },
+ "eval_macro_f1_quick": {
+  "english_test": 0.7322,
+  "translated_hi_test": 0.7003,
+  "translated_bn_test": 0.6777,
+  "pilot": 0.7148
+ },
+ "synthetic_test_labels": "no complete synthetic data",
+ "finished": "2026-11-14 17:26:55"
+}

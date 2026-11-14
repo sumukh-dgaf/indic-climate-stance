@@ -1,0 +1,350 @@
+id,gold,pred,p_favour,p_against,p_none,language,phenomenon,source
+gwstance_1_0_t13,Against,None,0.33081,0.26198,0.4072,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_0_t21,None,Against,0.26296,0.43909,0.29794,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_0_t24,Favour,Favour,0.42204,0.25884,0.31912,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_0_t27,Against,Against,0.26444,0.46797,0.26759,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_0_t6,Favour,Favour,0.41701,0.25317,0.32982,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_0_t7,Against,Against,0.27708,0.44958,0.27335,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_1_t14,Against,Against,0.26357,0.46844,0.26799,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_1_t19,Against,Against,0.25998,0.44516,0.29486,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_1_t29,None,None,0.32243,0.2643,0.41327,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_2_t3,Favour,Favour,0.40906,0.24765,0.34329,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_3_t0,Favour,Favour,0.4176,0.23661,0.34578,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_3_t10,Favour,Against,0.27495,0.46147,0.26358,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_3_t28,Favour,None,0.35175,0.24015,0.40811,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_3_t7,Favour,None,0.30792,0.28799,0.4041,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_4_t16,None,None,0.32678,0.25958,0.41364,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_4_t2,None,None,0.31555,0.27251,0.41194,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_5_t18,None,None,0.31805,0.27157,0.41037,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_6_t21,Against,Against,0.25665,0.46592,0.27743,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_6_t25,Favour,Favour,0.42029,0.24165,0.33806,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_6_t29,Favour,Favour,0.41967,0.26947,0.31086,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_6_t7,None,None,0.29872,0.29779,0.40349,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_7_t1,None,Favour,0.42107,0.24198,0.33696,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_7_t24,Against,Against,0.26068,0.46806,0.27126,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_7_t5,None,None,0.32513,0.26333,0.41155,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_9_t1,Against,Against,0.26686,0.46778,0.26536,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_1_9_t12,Favour,Favour,0.40855,0.29786,0.29359,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_0_t4,None,None,0.34585,0.24274,0.41141,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_1_t10,Favour,Favour,0.39442,0.23001,0.37558,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_1_t23,None,Against,0.26008,0.4683,0.27163,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_1_t28,Against,Against,0.25694,0.46646,0.2766,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_1_t9,None,None,0.37395,0.23078,0.39526,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_2_t1,Favour,None,0.34862,0.2416,0.40978,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_2_t17,None,None,0.34618,0.24333,0.41049,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_2_t35,Favour,None,0.36156,0.23504,0.4034,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_2_t8,None,Against,0.25775,0.43877,0.30347,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_3_t10,None,None,0.33371,0.25266,0.41363,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_3_t36,None,None,0.32023,0.26654,0.41323,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_3_t4,Favour,None,0.30088,0.29678,0.40234,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_4_t33,None,None,0.2997,0.29408,0.40622,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_4_t35,Favour,Favour,0.4185,0.2633,0.31821,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_4_t5,None,None,0.3266,0.25955,0.41385,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_4_t7,None,None,0.32312,0.26307,0.41381,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_4_t9,None,Against,0.27062,0.46435,0.26503,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_5_t12,Favour,Favour,0.42194,0.24384,0.33422,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_5_t29,None,None,0.2739,0.35039,0.37571,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_5_t39,Favour,None,0.33549,0.25094,0.41357,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_6_t35,None,Favour,0.39841,0.22809,0.3735,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_6_t8,Favour,Favour,0.40852,0.2311,0.36038,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_7_t10,None,None,0.37646,0.23409,0.38945,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_7_t16,None,None,0.30651,0.28488,0.40862,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_7_t28,None,None,0.36063,0.23477,0.4046,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_7_t32,Against,Favour,0.39732,0.30559,0.29709,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_8_t10,Favour,Favour,0.41721,0.27368,0.30911,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_8_t36,Against,Favour,0.42222,0.25646,0.32132,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_9_t18,None,Favour,0.41661,0.23883,0.34456,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_2_9_t6,Favour,Favour,0.4139,0.23286,0.35325,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_0_t11,Favour,Favour,0.41401,0.23497,0.35102,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_0_t2,Against,Favour,0.40758,0.27944,0.31299,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_0_t37,None,None,0.33952,0.24824,0.41224,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_1_t20,Against,Against,0.25715,0.45291,0.28994,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_1_t31,None,Favour,0.39384,0.23343,0.37274,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_1_t32,Against,Against,0.26175,0.4681,0.27015,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_1_t38,Favour,Against,0.25827,0.42942,0.31231,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_2_t11,None,None,0.32862,0.25724,0.41414,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_2_t15,Against,Favour,0.42047,0.24057,0.33896,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_3_t13,None,Favour,0.41482,0.2374,0.34778,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_3_t28,Favour,None,0.35893,0.2564,0.38467,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_4_t16,None,None,0.37984,0.22803,0.39213,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_4_t2,None,None,0.32387,0.26281,0.41331,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_5_t1,None,None,0.3338,0.25876,0.40744,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_5_t16,Favour,Favour,0.418,0.2735,0.30851,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_5_t18,None,Against,0.25292,0.44753,0.29954,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_5_t25,None,Favour,0.42294,0.25255,0.3245,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_5_t28,Favour,Favour,0.39423,0.23201,0.37375,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_5_t38,None,None,0.29025,0.31591,0.39383,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_5_t4,None,None,0.31016,0.27838,0.41146,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_6_t18,Against,Against,0.27633,0.44548,0.27819,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_7_t17,None,Against,0.25756,0.46672,0.27572,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_7_t24,Against,Against,0.26243,0.46806,0.26951,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_7_t29,None,None,0.34565,0.24257,0.41178,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_7_t39,None,None,0.33254,0.25322,0.41424,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_7_t8,None,None,0.36797,0.23236,0.39967,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_8_t0,Against,Against,0.25884,0.46795,0.27322,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_8_t10,None,Against,0.26059,0.39736,0.34205,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_8_t21,Favour,Favour,0.42006,0.26544,0.3145,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_8_t23,Favour,Favour,0.41323,0.24239,0.34437,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_8_t31,Favour,Favour,0.40479,0.2296,0.36561,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_9_t1,None,None,0.33978,0.24705,0.41318,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_9_t12,None,None,0.33181,0.25548,0.41271,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_3_9_t33,None,Against,0.26214,0.41458,0.32327,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_0_t12,Favour,Favour,0.39726,0.27656,0.32618,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_0_t13,Favour,Favour,0.42174,0.25844,0.31982,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_0_t19,Favour,Favour,0.42295,0.25133,0.32572,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_0_t28,Favour,Favour,0.42213,0.26442,0.31345,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_0_t42,Favour,None,0.38227,0.22787,0.38986,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_1_t0,None,None,0.341,0.2477,0.4113,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_1_t22,None,None,0.3292,0.26053,0.41027,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_1_t36,Against,Against,0.26025,0.46804,0.27171,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_1_t39,None,None,0.2947,0.3034,0.4019,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_1_t44,None,None,0.3493,0.24354,0.40716,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_2_t12,Against,Against,0.26319,0.46862,0.26819,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_2_t2,Favour,None,0.3787,0.23034,0.39096,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_2_t4,None,None,0.33731,0.25332,0.40937,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_2_t9,None,None,0.32847,0.25772,0.41381,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_3_t25,Against,Against,0.25925,0.4675,0.27325,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_3_t26,Favour,Against,0.27074,0.42996,0.2993,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_3_t27,None,Favour,0.39798,0.22746,0.37456,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_3_t37,Against,Against,0.25894,0.46706,0.274,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_4_t1,None,None,0.3362,0.25025,0.41355,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_4_t16,Favour,Favour,0.41551,0.24124,0.34325,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_4_t21,None,Against,0.26256,0.46607,0.27136,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_4_t31,Favour,None,0.3845,0.22968,0.38582,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_4_t43,None,None,0.33534,0.25138,0.41329,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_5_t13,Against,Against,0.33868,0.35585,0.30547,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_5_t14,None,None,0.34758,0.24227,0.41015,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_5_t19,Against,Against,0.30162,0.42592,0.27246,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_5_t24,None,Against,0.25525,0.44438,0.30037,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_5_t27,Favour,Favour,0.41632,0.23617,0.34751,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_5_t32,None,Against,0.25842,0.45979,0.28179,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_5_t34,None,None,0.34865,0.24414,0.40721,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_6_t28,Favour,Favour,0.42103,0.25208,0.32689,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_6_t32,Favour,Favour,0.41937,0.23784,0.34279,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_6_t34,None,None,0.31826,0.27135,0.41039,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_6_t40,None,None,0.38211,0.2317,0.38619,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_7_t17,None,Against,0.26128,0.40095,0.33777,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_7_t23,None,None,0.34746,0.24298,0.40956,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_7_t3,None,Favour,0.38422,0.32087,0.2949,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_8_t0,Favour,Favour,0.38276,0.32068,0.29657,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_8_t11,None,None,0.33586,0.25101,0.41313,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_8_t27,Favour,None,0.38221,0.22943,0.38837,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_8_t29,None,None,0.35194,0.24109,0.40697,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_8_t3,Favour,Favour,0.41483,0.23484,0.35033,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_8_t30,Favour,Favour,0.39958,0.23347,0.36695,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_8_t39,Favour,Favour,0.38611,0.23064,0.38325,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_9_t1,Against,Against,0.25807,0.46668,0.27525,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_9_t17,Favour,None,0.31775,0.27417,0.40808,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_4_9_t30,None,None,0.32024,0.26776,0.41199,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_0_t19,Favour,None,0.36766,0.24064,0.3917,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_0_t22,Favour,Against,0.25625,0.42502,0.31873,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_0_t35,Against,Against,0.26437,0.46825,0.26739,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_0_t39,Favour,Favour,0.41994,0.2618,0.31826,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_0_t49,Against,None,0.36421,0.23973,0.39607,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_1_t3,Favour,Favour,0.41935,0.23835,0.3423,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_1_t39,None,None,0.34437,0.24552,0.41011,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_1_t7,None,Against,0.28574,0.44146,0.2728,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_2_t11,None,Favour,0.41726,0.26487,0.31787,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_3_t21,None,Favour,0.39119,0.2298,0.37901,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_3_t22,Favour,Favour,0.41733,0.24396,0.33871,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_3_t8,None,None,0.36769,0.2323,0.40001,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_4_t16,Favour,Against,0.27252,0.46488,0.2626,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_4_t18,None,None,0.33177,0.25417,0.41407,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_4_t27,Favour,Favour,0.41414,0.26534,0.32053,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_4_t40,Favour,None,0.36853,0.23178,0.39969,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_4_t44,Favour,Favour,0.40264,0.22936,0.368,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_5_t17,Favour,Favour,0.42109,0.24388,0.33503,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_5_t27,None,None,0.33302,0.25636,0.41062,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_5_t3,Favour,Favour,0.41429,0.23551,0.35021,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_5_t30,Favour,None,0.36252,0.25016,0.38732,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_5_t43,Against,Against,0.26022,0.46822,0.27155,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_6_t23,Favour,Favour,0.42144,0.26567,0.31289,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_6_t27,None,None,0.33746,0.24962,0.41291,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_6_t29,None,None,0.36432,0.2383,0.39738,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_7_t1,Favour,None,0.34567,0.24346,0.41087,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_7_t18,None,Against,0.25852,0.45123,0.29025,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_7_t2,Favour,None,0.35257,0.2493,0.39813,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_7_t21,Favour,Against,0.25551,0.42245,0.32204,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_7_t31,None,Against,0.25878,0.46699,0.27423,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_7_t38,Favour,Favour,0.42303,0.26037,0.3166,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_7_t49,Favour,Favour,0.35135,0.33035,0.3183,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_7_t5,Favour,Favour,0.41205,0.24333,0.34462,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_8_t23,None,None,0.29815,0.30137,0.40049,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_8_t25,Favour,Against,0.282,0.41282,0.30518,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_8_t27,None,Against,0.25325,0.45634,0.29042,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_8_t44,Favour,None,0.30848,0.29153,0.39999,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_8_t9,Favour,None,0.31997,0.26599,0.41404,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_9_t10,Favour,Favour,0.40145,0.22908,0.36947,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_9_t13,Favour,Favour,0.41221,0.23473,0.35306,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_9_t35,Favour,Favour,0.40403,0.22945,0.36652,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_9_t47,None,None,0.36457,0.23556,0.39987,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+gwstance_5_9_t49,None,None,0.3493,0.24287,0.40783,en,,"GWStance/GWSD (Luo et al. 2020), majority vote of 8 annotators"
+climate_test_0,None,None,0.34322,0.24437,0.41241,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_1,Favour,None,0.36958,0.25308,0.37733,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_2,Favour,None,0.38536,0.22721,0.38743,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_3,None,None,0.35392,0.23837,0.40771,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_4,Favour,None,0.3804,0.23887,0.38073,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_5,Favour,Favour,0.42135,0.24184,0.3368,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_6,Favour,None,0.37909,0.22758,0.39333,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_7,Favour,None,0.33436,0.25406,0.41158,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_8,None,None,0.32126,0.26835,0.41039,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_9,Favour,None,0.38042,0.22741,0.39216,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_10,Favour,None,0.38258,0.22839,0.38903,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_11,None,None,0.36349,0.23325,0.40326,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_12,Favour,None,0.38063,0.23095,0.38842,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_13,Favour,Favour,0.4109,0.2312,0.35789,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_14,None,Favour,0.38981,0.22815,0.38204,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_15,Favour,Favour,0.3894,0.22658,0.38402,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_16,Favour,Favour,0.41818,0.23856,0.34325,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_17,Favour,Favour,0.42199,0.24494,0.33307,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_18,Favour,Favour,0.4004,0.22703,0.37257,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_19,None,Favour,0.38751,0.23173,0.38076,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_20,Favour,Favour,0.39669,0.23153,0.37179,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_21,Favour,None,0.3788,0.22813,0.39307,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_22,Favour,Favour,0.39521,0.22676,0.37803,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_23,Favour,None,0.36776,0.23459,0.39765,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_24,Favour,Favour,0.4219,0.2437,0.3344,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_25,Favour,None,0.37969,0.22775,0.39256,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_26,Favour,Favour,0.41887,0.23646,0.34467,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_27,Favour,None,0.36695,0.23628,0.39677,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_28,Favour,None,0.35109,0.24067,0.40824,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_29,None,None,0.38557,0.22697,0.38746,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_30,Favour,Favour,0.40365,0.23811,0.35825,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_31,None,None,0.34004,0.24793,0.41203,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_32,Favour,None,0.38647,0.22636,0.38717,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_33,Favour,None,0.38288,0.22812,0.389,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_34,Favour,Favour,0.41209,0.23575,0.35216,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_35,Favour,None,0.35614,0.23718,0.40668,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_36,Favour,None,0.36222,0.23341,0.40438,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_37,Favour,Favour,0.39929,0.22721,0.3735,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_38,None,None,0.35595,0.23671,0.40735,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_39,Favour,Favour,0.42075,0.24115,0.3381,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_40,Favour,None,0.37212,0.23026,0.39762,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_41,Favour,Favour,0.40668,0.23563,0.35769,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_42,None,None,0.37917,0.22791,0.39293,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_43,Favour,None,0.37165,0.2306,0.39775,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_44,Favour,Favour,0.42193,0.24533,0.33274,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_45,Favour,Favour,0.42002,0.24345,0.33653,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_46,None,None,0.36464,0.236,0.39936,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_47,Favour,Favour,0.42019,0.24378,0.33602,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_48,Favour,None,0.36326,0.23342,0.40332,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_49,None,None,0.35287,0.23852,0.40861,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_50,None,None,0.37351,0.23006,0.39644,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_51,Favour,None,0.37325,0.23006,0.39669,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_52,Favour,Favour,0.42262,0.24549,0.33189,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_53,Favour,Favour,0.42158,0.24717,0.33125,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_54,Favour,Favour,0.42083,0.24072,0.33845,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_55,None,None,0.3574,0.2357,0.4069,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_56,Favour,Favour,0.39375,0.22897,0.37728,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_57,Favour,Favour,0.39036,0.22734,0.3823,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_58,None,None,0.33999,0.24746,0.41255,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_59,Favour,None,0.35542,0.2374,0.40719,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_60,Favour,Favour,0.3956,0.22853,0.37587,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_61,Favour,None,0.37301,0.23745,0.38953,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_62,Favour,None,0.37458,0.23018,0.39525,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_63,Favour,Favour,0.38604,0.2304,0.38355,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_64,Favour,Favour,0.40266,0.22848,0.36887,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_65,Favour,Favour,0.39593,0.22562,0.37845,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_66,Favour,None,0.38251,0.22735,0.39015,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_67,Favour,Favour,0.40863,0.23119,0.36018,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_68,Favour,None,0.35959,0.23459,0.40583,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_69,Favour,Favour,0.3949,0.22746,0.37764,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_70,None,None,0.37488,0.22947,0.39566,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_71,Favour,Favour,0.41186,0.23148,0.35665,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_72,Favour,None,0.34213,0.24542,0.41245,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_73,Favour,None,0.33832,0.2482,0.41348,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_74,Favour,None,0.35049,0.2398,0.40971,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_75,Favour,Favour,0.39718,0.22609,0.37673,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_76,Favour,None,0.37819,0.23028,0.39153,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_77,Favour,Favour,0.37732,0.25756,0.36511,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_78,Favour,Favour,0.41942,0.23904,0.34154,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_79,None,None,0.33387,0.25438,0.41175,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_80,Favour,Favour,0.41171,0.23185,0.35644,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_81,Favour,Favour,0.39209,0.22701,0.38091,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_82,Favour,Favour,0.41501,0.23328,0.3517,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_83,Favour,None,0.33591,0.25154,0.41255,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_84,Favour,None,0.3555,0.23927,0.40523,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_85,Favour,Favour,0.41235,0.23164,0.35601,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_86,None,None,0.34239,0.24584,0.41176,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_87,Favour,None,0.35276,0.23961,0.40764,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_88,Favour,Favour,0.41775,0.23984,0.34241,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_89,Favour,Favour,0.38645,0.22796,0.3856,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_90,Favour,Favour,0.41855,0.23686,0.34459,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_91,Favour,Favour,0.41894,0.23708,0.34397,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_92,None,None,0.34524,0.24398,0.41078,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_93,Favour,Favour,0.39702,0.22668,0.3763,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_94,Favour,None,0.32503,0.26066,0.41431,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_95,Favour,Favour,0.3753,0.269,0.3557,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_96,Favour,None,0.36472,0.23294,0.40234,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_97,Favour,Favour,0.42413,0.25363,0.32224,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_98,None,None,0.35765,0.23723,0.40512,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_99,Against,None,0.34545,0.24601,0.40854,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_100,Favour,Against,0.25796,0.45668,0.28536,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_101,Favour,None,0.37084,0.23015,0.39902,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_102,None,None,0.35826,0.23509,0.40665,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_103,Favour,Favour,0.42174,0.24136,0.3369,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_104,Favour,Favour,0.40659,0.22866,0.36475,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_105,Favour,Favour,0.393,0.23007,0.37693,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_106,Favour,None,0.35576,0.23703,0.40721,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_107,Favour,Favour,0.42025,0.23962,0.34013,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_108,Favour,Favour,0.41903,0.23963,0.34134,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_109,Against,Favour,0.42054,0.23921,0.34025,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_110,None,None,0.33895,0.24826,0.41278,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_111,None,None,0.3539,0.23818,0.40793,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_112,Favour,None,0.31669,0.27781,0.4055,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_113,None,None,0.3833,0.22693,0.38977,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_114,None,Favour,0.39407,0.22607,0.37985,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_115,Favour,Favour,0.42224,0.26205,0.31571,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_116,Favour,Favour,0.40506,0.25271,0.34222,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_117,None,None,0.35348,0.23853,0.40799,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_118,None,None,0.32845,0.25825,0.41329,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_119,Favour,Against,0.26175,0.46828,0.26996,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_120,Against,Against,0.28238,0.44484,0.27279,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_121,Favour,Favour,0.42014,0.24292,0.33694,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_122,None,None,0.38239,0.22744,0.39017,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_123,Favour,Favour,0.42001,0.23745,0.34254,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_124,Favour,Favour,0.39838,0.22829,0.37333,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_125,Favour,None,0.3809,0.22811,0.39098,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_126,Favour,Favour,0.42363,0.25575,0.32062,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_127,Against,None,0.27272,0.35493,0.37235,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_128,Favour,None,0.37794,0.22845,0.39362,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_129,Favour,Favour,0.42011,0.23891,0.34098,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_130,Favour,Favour,0.39455,0.23594,0.36951,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_131,Favour,Favour,0.41863,0.24005,0.34132,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_132,None,None,0.3559,0.23731,0.40679,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_133,Favour,Favour,0.41599,0.23397,0.35004,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_134,Favour,Favour,0.42186,0.26073,0.31741,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_135,None,None,0.37617,0.2283,0.39553,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_136,Against,Against,0.27435,0.45815,0.2675,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_137,Favour,Favour,0.41682,0.23427,0.34891,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_138,Favour,Favour,0.4189,0.23851,0.34259,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_139,Favour,Favour,0.41591,0.23629,0.3478,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_140,Favour,Favour,0.40941,0.23013,0.36046,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_141,Favour,Favour,0.40075,0.22681,0.37244,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_142,Favour,Favour,0.41713,0.23739,0.34548,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_143,Favour,None,0.35034,0.25674,0.39292,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_144,Favour,None,0.37643,0.23152,0.39205,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_145,Against,Against,0.25904,0.46666,0.2743,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_146,Against,Favour,0.41637,0.23695,0.34668,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_147,Against,Favour,0.42134,0.24433,0.33433,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_148,Favour,Favour,0.41375,0.23351,0.35274,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_149,Against,Favour,0.40296,0.23208,0.36496,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_150,Favour,Favour,0.41016,0.2341,0.35574,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_151,Against,Against,0.35069,0.37281,0.27651,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_152,Favour,None,0.35291,0.2385,0.40859,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_153,Favour,Against,0.2864,0.39146,0.32214,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_154,Favour,Favour,0.40024,0.22875,0.37102,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_155,None,None,0.37771,0.22909,0.39319,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_156,Favour,Favour,0.41941,0.23775,0.34284,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_157,Against,Against,0.27636,0.44869,0.27495,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_158,Favour,Favour,0.40961,0.23005,0.36034,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_159,Favour,None,0.37611,0.22887,0.39502,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_160,Favour,None,0.33667,0.2495,0.41383,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_161,None,None,0.34675,0.2431,0.41015,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_162,None,None,0.35404,0.23946,0.4065,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_163,None,Favour,0.40245,0.25129,0.34626,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_164,None,None,0.37446,0.22926,0.39628,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_165,Favour,Favour,0.40668,0.2311,0.36222,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_166,Favour,Favour,0.39329,0.22682,0.37989,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_167,Favour,Favour,0.39022,0.22725,0.38253,en,,SemEval-2016 Task 6 (via TweetEval)
+climate_test_168,Favour,Favour,0.41137,0.24074,0.34789,en,,SemEval-2016 Task 6 (via TweetEval)

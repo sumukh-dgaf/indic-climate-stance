@@ -1,0 +1,106 @@
+{
+ "name": "indicbert_A_english",
+ "model": "indicbert",
+ "base_model": "ai4bharat/IndicBERTv2-MLM-only",
+ "config": "A_english",
+ "smoke": false,
+ "train_families": [
+  "english"
+ ],
+ "n_train": 1750,
+ "n_train_by_language": {
+  "en": 1750
+ },
+ "n_val": 309,
+ "train_class_counts": {
+  "None": 776,
+  "Favour": 714,
+  "Against": 260
+ },
+ "class_weights": {
+  "Favour": 0.817,
+  "Against": 2.2436,
+  "None": 0.7517
+ },
+ "settings": {
+  "lr": 2e-05,
+  "batch": 32,
+  "epochs": 5,
+  "warmup": 0.1,
+  "weight_decay": 0.01,
+  "max_len": 128,
+  "seed": 42,
+  "mixed_precision": true,
+  "loss": "class-weighted cross-entropy"
+ },
+ "best_epoch": 5,
+ "best_val_macro_f1": 0.6621,
+ "epochs_log": [
+  {
+   "epoch": 1,
+   "val_macro_f1": 0.4878,
+   "val_macro_f1_by_language": {
+    "en": 0.4878
+   },
+   "last_batch_loss": 1.0827,
+   "minutes": 0.21
+  },
+  {
+   "epoch": 2,
+   "val_macro_f1": 0.6085,
+   "val_macro_f1_by_language": {
+    "en": 0.6085
+   },
+   "last_batch_loss": 0.733,
+   "minutes": 0.41
+  },
+  {
+   "epoch": 3,
+   "val_macro_f1": 0.6527,
+   "val_macro_f1_by_language": {
+    "en": 0.6527
+   },
+   "last_batch_loss": 0.7918,
+   "minutes": 0.62
+  },
+  {
+   "epoch": 4,
+   "val_macro_f1": 0.6384,
+   "val_macro_f1_by_language": {
+    "en": 0.6384
+   },
+   "last_batch_loss": 0.6801,
+   "minutes": 0.82
+  },
+  {
+   "epoch": 5,
+   "val_macro_f1": 0.6621,
+   "val_macro_f1_by_language": {
+    "en": 0.6621
+   },
+   "last_batch_loss": 0.53,
+   "minutes": 1.02
+  }
+ ],
+ "training_minutes": 1.02,
+ "device": "cuda",
+ "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+ "versions": {
+  "torch": "2.11.0+cu128",
+  "transformers": "5.20.2"
+ },
+ "eval_sets": {
+  "english_test": 349,
+  "translated_hi_test": 349,
+  "translated_bn_test": 349,
+  "pilot": 150
+ },
+ "eval_macro_f1_quick": {
+  "english_test": 0.717,
+  "translated_hi_test": 0.581,
+  "translated_bn_test": 0.5659,
+  "pilot": 0.6429
+ },
+ "synthetic_test_labels": "no complete synthetic data",
+ "finished": "2026-11-14 17:23:39"
+}

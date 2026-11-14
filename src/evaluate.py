@@ -112,7 +112,7 @@ def bars(R, path):
     import matplotlib.pyplot as plt
     names = ordered(R, R)
     sets = [s for s in EVAL_SETS if any(s in R[n]["eval"] for n in names)]
-    fig, ax = plt.subplots(figsize=(11, 4.4))
+    fig, ax = plt.subplots(figsize=(11, 5.0))
     w = 0.8 / max(len(names), 1)
     colors = plt.cm.tab20(np.linspace(0, 1, max(len(names), 2)))
     for k, n in enumerate(names):
@@ -132,7 +132,7 @@ def bars(R, path):
     ax.set_ylabel("macro-F1 (95% bootstrap CI)")
     ax.set_ylim(0, 1)
     ax.set_title("Macro-F1 by model, configuration and test set (dashed: majority-class floor)", loc="left", fontsize=11)
-    ax.legend(fontsize=7, ncol=3, frameon=False, loc="upper right")
+    ax.legend(fontsize=8, ncol=4, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.09))
     fig.tight_layout()
     fig.savefig(path, dpi=150)
     plt.close(fig)
@@ -218,7 +218,11 @@ def main():
                "No result here is a score on real Hindi/Bengali social-media comments: Indic test sets are machine-translated "
                "English (GWSD news sentences and SemEval tweets), synthetic (LLM-generated) comments, or the 150-row synthetic pilot.",
                "Translated test labels are the English labels carried over; translation can change stance (team review pending).",
-               "The English test set has few Against rows, so per-class Against scores on it are noisy."]}
+               "The English test set has few Against rows, so per-class Against scores on it are noisy.",
+               "The judge filter keeps only synthetic comments that a second LLM labels as intended, removing the most "
+               "ambiguous ones (most of all sarcasm), so the synthetic test set is easier than real comments would be.",
+               "The 150-row pilot is also synthetic comment-style text (team-authored), so it partly favours configuration C too.",
+               "Single training seed; differences inside overlapping confidence intervals are not established."]}
     if res.get("synthetic_test_labels") != "yes":
         res["limitations"].append("Synthetic test labels are not yet human-verified (data/review/synthetic_test_review.csv).")
     os.makedirs(OUT, exist_ok=True)

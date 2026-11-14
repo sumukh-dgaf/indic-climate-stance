@@ -1,0 +1,3237 @@
+{
+ "runs": {
+  "indicbert_A_english": {
+   "model": "indicbert",
+   "config": "A_english",
+   "eval": {
+    "english_test": {
+     "n": 349,
+     "macro_f1": 0.717,
+     "ci95": [
+      0.6585,
+      0.7713
+     ],
+     "accuracy": 0.745,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8268,
+       "recall": 0.7629,
+       "f1": 0.7936,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.65,
+       "recall": 0.6667,
+       "f1": 0.6582,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.6615,
+       "recall": 0.7414,
+       "f1": 0.6992,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       148,
+       7,
+       39
+      ],
+      [
+       8,
+       26,
+       5
+      ],
+      [
+       23,
+       7,
+       86
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 179,
+      "Against": 40,
+      "None": 130
+     }
+    },
+    "pilot": {
+     "n": 150,
+     "macro_f1": 0.6429,
+     "ci95": [
+      0.5635,
+      0.7126
+     ],
+     "accuracy": 0.6467,
+     "per_class": {
+      "Favour": {
+       "precision": 0.5263,
+       "recall": 0.8,
+       "f1": 0.6349,
+       "support": 50
+      },
+      "Against": {
+       "precision": 0.7586,
+       "recall": 0.44,
+       "f1": 0.557,
+       "support": 50
+      },
+      "None": {
+       "precision": 0.7778,
+       "recall": 0.7,
+       "f1": 0.7368,
+       "support": 50
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       40,
+       6,
+       4
+      ],
+      [
+       22,
+       22,
+       6
+      ],
+      [
+       14,
+       1,
+       35
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 76,
+      "Against": 29,
+      "None": 45
+     },
+     "macro_f1_by_language": {
+      "bn": 0.6498,
+      "hi": 0.6359
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.7273,
+       "n": 22
+      },
+      "emoji": {
+       "accuracy": 0.6667,
+       "n": 12
+      },
+      "implicit": {
+       "accuracy": 0.7143,
+       "n": 14
+      },
+      "negation": {
+       "accuracy": 0.75,
+       "n": 12
+      },
+      "offtopic": {
+       "accuracy": 0.6875,
+       "n": 16
+      },
+      "plain": {
+       "accuracy": 0.8214,
+       "n": 28
+      },
+      "question": {
+       "accuracy": 0.5625,
+       "n": 16
+      },
+      "roman": {
+       "accuracy": 0.4545,
+       "n": 22
+      },
+      "sarcasm": {
+       "accuracy": 0.125,
+       "n": 8
+      }
+     }
+    },
+    "synthetic_test": {
+     "n": 600,
+     "macro_f1": 0.4141,
+     "ci95": [
+      0.3745,
+      0.4523
+     ],
+     "accuracy": 0.4583,
+     "per_class": {
+      "Favour": {
+       "precision": 0.3861,
+       "recall": 0.89,
+       "f1": 0.5386,
+       "support": 200
+      },
+      "Against": {
+       "precision": 0.6458,
+       "recall": 0.155,
+       "f1": 0.25,
+       "support": 200
+      },
+      "None": {
+       "precision": 0.7253,
+       "recall": 0.33,
+       "f1": 0.4536,
+       "support": 200
+      }
+     },
+     "majority_class": "Against",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       178,
+       14,
+       8
+      ],
+      [
+       152,
+       31,
+       17
+      ],
+      [
+       131,
+       3,
+       66
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 461,
+      "Against": 48,
+      "None": 91
+     },
+     "macro_f1_by_language": {
+      "bn": 0.4168,
+      "hi": 0.4111
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.5862,
+       "n": 87
+      },
+      "emoji": {
+       "accuracy": 0.4038,
+       "n": 52
+      },
+      "implicit": {
+       "accuracy": 0.52,
+       "n": 50
+      },
+      "negation": {
+       "accuracy": 0.54,
+       "n": 50
+      },
+      "neutral_fact": {
+       "accuracy": 0.08,
+       "n": 25
+      },
+      "offtopic": {
+       "accuracy": 0.4138,
+       "n": 29
+      },
+      "plain": {
+       "accuracy": 0.4545,
+       "n": 154
+      },
+      "question": {
+       "accuracy": 0.0909,
+       "n": 22
+      },
+      "roman": {
+       "accuracy": 0.5161,
+       "n": 93
+      },
+      "sarcasm": {
+       "accuracy": 0.4211,
+       "n": 38
+      }
+     }
+    },
+    "translated_bn_test": {
+     "n": 349,
+     "macro_f1": 0.5659,
+     "ci95": [
+      0.5018,
+      0.6296
+     ],
+     "accuracy": 0.6734,
+     "per_class": {
+      "Favour": {
+       "precision": 0.6806,
+       "recall": 0.9227,
+       "f1": 0.7834,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.4359,
+       "recall": 0.4359,
+       "f1": 0.4359,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.8298,
+       "recall": 0.3362,
+       "f1": 0.4785,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       179,
+       11,
+       4
+      ],
+      [
+       18,
+       17,
+       4
+      ],
+      [
+       66,
+       11,
+       39
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 263,
+      "Against": 39,
+      "None": 47
+     }
+    },
+    "translated_hi_test": {
+     "n": 349,
+     "macro_f1": 0.581,
+     "ci95": [
+      0.5157,
+      0.6428
+     ],
+     "accuracy": 0.6791,
+     "per_class": {
+      "Favour": {
+       "precision": 0.6842,
+       "recall": 0.9381,
+       "f1": 0.7913,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.5,
+       "recall": 0.5385,
+       "f1": 0.5185,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.8293,
+       "recall": 0.2931,
+       "f1": 0.4331,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       182,
+       5,
+       7
+      ],
+      [
+       18,
+       21,
+       0
+      ],
+      [
+       66,
+       16,
+       34
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 266,
+      "Against": 42,
+      "None": 41
+     }
+    }
+   },
+   "run": {
+    "n_train": 1750,
+    "n_train_by_language": {
+     "en": 1750
+    },
+    "best_val_macro_f1": 0.6621,
+    "best_epoch": 5,
+    "training_minutes": 1.02,
+    "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+    "device": "cuda"
+   }
+  },
+  "indicbert_B_translated": {
+   "model": "indicbert",
+   "config": "B_translated",
+   "eval": {
+    "english_test": {
+     "n": 349,
+     "macro_f1": 0.7322,
+     "ci95": [
+      0.6731,
+      0.7852
+     ],
+     "accuracy": 0.765,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8483,
+       "recall": 0.7784,
+       "f1": 0.8118,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.7059,
+       "recall": 0.6154,
+       "f1": 0.6575,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.6715,
+       "recall": 0.7931,
+       "f1": 0.7273,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       151,
+       5,
+       38
+      ],
+      [
+       8,
+       24,
+       7
+      ],
+      [
+       19,
+       5,
+       92
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 178,
+      "Against": 34,
+      "None": 137
+     }
+    },
+    "pilot": {
+     "n": 150,
+     "macro_f1": 0.7148,
+     "ci95": [
+      0.6399,
+      0.7848
+     ],
+     "accuracy": 0.7333,
+     "per_class": {
+      "Favour": {
+       "precision": 0.76,
+       "recall": 0.76,
+       "f1": 0.76,
+       "support": 50
+      },
+      "Against": {
+       "precision": 0.8148,
+       "recall": 0.44,
+       "f1": 0.5714,
+       "support": 50
+      },
+      "None": {
+       "precision": 0.6849,
+       "recall": 1.0,
+       "f1": 0.813,
+       "support": 50
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       38,
+       5,
+       7
+      ],
+      [
+       12,
+       22,
+       16
+      ],
+      [
+       0,
+       0,
+       50
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 50,
+      "Against": 27,
+      "None": 73
+     },
+     "macro_f1_by_language": {
+      "bn": 0.7336,
+      "hi": 0.6968
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.8636,
+       "n": 22
+      },
+      "emoji": {
+       "accuracy": 0.8333,
+       "n": 12
+      },
+      "implicit": {
+       "accuracy": 0.5714,
+       "n": 14
+      },
+      "negation": {
+       "accuracy": 0.5833,
+       "n": 12
+      },
+      "offtopic": {
+       "accuracy": 1.0,
+       "n": 16
+      },
+      "plain": {
+       "accuracy": 0.8571,
+       "n": 28
+      },
+      "question": {
+       "accuracy": 0.75,
+       "n": 16
+      },
+      "roman": {
+       "accuracy": 0.5,
+       "n": 22
+      },
+      "sarcasm": {
+       "accuracy": 0.375,
+       "n": 8
+      }
+     }
+    },
+    "synthetic_test": {
+     "n": 600,
+     "macro_f1": 0.5772,
+     "ci95": [
+      0.5382,
+      0.6154
+     ],
+     "accuracy": 0.6133,
+     "per_class": {
+      "Favour": {
+       "precision": 0.547,
+       "recall": 0.815,
+       "f1": 0.6546,
+       "support": 200
+      },
+      "Against": {
+       "precision": 0.7581,
+       "recall": 0.235,
+       "f1": 0.3588,
+       "support": 200
+      },
+      "None": {
+       "precision": 0.6583,
+       "recall": 0.79,
+       "f1": 0.7182,
+       "support": 200
+      }
+     },
+     "majority_class": "Against",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       163,
+       13,
+       24
+      ],
+      [
+       95,
+       47,
+       58
+      ],
+      [
+       40,
+       2,
+       158
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 298,
+      "Against": 62,
+      "None": 240
+     },
+     "macro_f1_by_language": {
+      "bn": 0.5519,
+      "hi": 0.6026
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.6437,
+       "n": 87
+      },
+      "emoji": {
+       "accuracy": 0.6731,
+       "n": 52
+      },
+      "implicit": {
+       "accuracy": 0.54,
+       "n": 50
+      },
+      "negation": {
+       "accuracy": 0.54,
+       "n": 50
+      },
+      "neutral_fact": {
+       "accuracy": 0.84,
+       "n": 25
+      },
+      "offtopic": {
+       "accuracy": 0.931,
+       "n": 29
+      },
+      "plain": {
+       "accuracy": 0.6299,
+       "n": 154
+      },
+      "question": {
+       "accuracy": 0.6818,
+       "n": 22
+      },
+      "roman": {
+       "accuracy": 0.5161,
+       "n": 93
+      },
+      "sarcasm": {
+       "accuracy": 0.3947,
+       "n": 38
+      }
+     }
+    },
+    "translated_bn_test": {
+     "n": 349,
+     "macro_f1": 0.6777,
+     "ci95": [
+      0.6156,
+      0.7337
+     ],
+     "accuracy": 0.7249,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8412,
+       "recall": 0.7371,
+       "f1": 0.7857,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.5833,
+       "recall": 0.5385,
+       "f1": 0.56,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.6224,
+       "recall": 0.7672,
+       "f1": 0.6873,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       143,
+       6,
+       45
+      ],
+      [
+       9,
+       21,
+       9
+      ],
+      [
+       18,
+       9,
+       89
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 170,
+      "Against": 36,
+      "None": 143
+     }
+    },
+    "translated_hi_test": {
+     "n": 349,
+     "macro_f1": 0.7003,
+     "ci95": [
+      0.6334,
+      0.7549
+     ],
+     "accuracy": 0.7564,
+     "per_class": {
+      "Favour": {
+       "precision": 0.85,
+       "recall": 0.7887,
+       "f1": 0.8182,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.625,
+       "recall": 0.5128,
+       "f1": 0.5634,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.6642,
+       "recall": 0.7845,
+       "f1": 0.7194,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       153,
+       4,
+       37
+      ],
+      [
+       10,
+       20,
+       9
+      ],
+      [
+       17,
+       8,
+       91
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 180,
+      "Against": 32,
+      "None": 137
+     }
+    }
+   },
+   "run": {
+    "n_train": 5250,
+    "n_train_by_language": {
+     "en": 1750,
+     "hi": 1750,
+     "bn": 1750
+    },
+    "best_val_macro_f1": 0.674,
+    "best_epoch": 4,
+    "training_minutes": 3.03,
+    "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+    "device": "cuda"
+   }
+  },
+  "indicbert_C_full": {
+   "model": "indicbert",
+   "config": "C_full",
+   "eval": {
+    "english_test": {
+     "n": 349,
+     "macro_f1": 0.7053,
+     "ci95": [
+      0.6448,
+      0.7592
+     ],
+     "accuracy": 0.7421,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8623,
+       "recall": 0.7423,
+       "f1": 0.7978,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.6154,
+       "recall": 0.6154,
+       "f1": 0.6154,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.6364,
+       "recall": 0.7845,
+       "f1": 0.7027,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       144,
+       6,
+       44
+      ],
+      [
+       7,
+       24,
+       8
+      ],
+      [
+       16,
+       9,
+       91
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 167,
+      "Against": 39,
+      "None": 143
+     }
+    },
+    "pilot": {
+     "n": 150,
+     "macro_f1": 0.858,
+     "ci95": [
+      0.8005,
+      0.9127
+     ],
+     "accuracy": 0.86,
+     "per_class": {
+      "Favour": {
+       "precision": 0.9302,
+       "recall": 0.8,
+       "f1": 0.8602,
+       "support": 50
+      },
+      "Against": {
+       "precision": 0.8667,
+       "recall": 0.78,
+       "f1": 0.8211,
+       "support": 50
+      },
+      "None": {
+       "precision": 0.8065,
+       "recall": 1.0,
+       "f1": 0.8929,
+       "support": 50
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       40,
+       6,
+       4
+      ],
+      [
+       3,
+       39,
+       8
+      ],
+      [
+       0,
+       0,
+       50
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 43,
+      "Against": 45,
+      "None": 62
+     },
+     "macro_f1_by_language": {
+      "bn": 0.8373,
+      "hi": 0.8787
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 1.0,
+       "n": 22
+      },
+      "emoji": {
+       "accuracy": 0.8333,
+       "n": 12
+      },
+      "implicit": {
+       "accuracy": 0.5714,
+       "n": 14
+      },
+      "negation": {
+       "accuracy": 1.0,
+       "n": 12
+      },
+      "offtopic": {
+       "accuracy": 1.0,
+       "n": 16
+      },
+      "plain": {
+       "accuracy": 0.9643,
+       "n": 28
+      },
+      "question": {
+       "accuracy": 0.875,
+       "n": 16
+      },
+      "roman": {
+       "accuracy": 0.7273,
+       "n": 22
+      },
+      "sarcasm": {
+       "accuracy": 0.5,
+       "n": 8
+      }
+     }
+    },
+    "synthetic_test": {
+     "n": 600,
+     "macro_f1": 0.8754,
+     "ci95": [
+      0.8479,
+      0.8993
+     ],
+     "accuracy": 0.875,
+     "per_class": {
+      "Favour": {
+       "precision": 0.823,
+       "recall": 0.86,
+       "f1": 0.8411,
+       "support": 200
+      },
+      "Against": {
+       "precision": 0.8883,
+       "recall": 0.875,
+       "f1": 0.8816,
+       "support": 200
+      },
+      "None": {
+       "precision": 0.9175,
+       "recall": 0.89,
+       "f1": 0.9036,
+       "support": 200
+      }
+     },
+     "majority_class": "Against",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       172,
+       18,
+       10
+      ],
+      [
+       19,
+       175,
+       6
+      ],
+      [
+       18,
+       4,
+       178
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 209,
+      "Against": 197,
+      "None": 194
+     },
+     "macro_f1_by_language": {
+      "bn": 0.8575,
+      "hi": 0.8934
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.8736,
+       "n": 87
+      },
+      "emoji": {
+       "accuracy": 0.9038,
+       "n": 52
+      },
+      "implicit": {
+       "accuracy": 0.9,
+       "n": 50
+      },
+      "negation": {
+       "accuracy": 0.84,
+       "n": 50
+      },
+      "neutral_fact": {
+       "accuracy": 0.96,
+       "n": 25
+      },
+      "offtopic": {
+       "accuracy": 0.9655,
+       "n": 29
+      },
+      "plain": {
+       "accuracy": 0.8896,
+       "n": 154
+      },
+      "question": {
+       "accuracy": 0.9545,
+       "n": 22
+      },
+      "roman": {
+       "accuracy": 0.7957,
+       "n": 93
+      },
+      "sarcasm": {
+       "accuracy": 0.8158,
+       "n": 38
+      }
+     }
+    },
+    "translated_bn_test": {
+     "n": 349,
+     "macro_f1": 0.6929,
+     "ci95": [
+      0.6304,
+      0.7447
+     ],
+     "accuracy": 0.7278,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8476,
+       "recall": 0.7165,
+       "f1": 0.7765,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.6216,
+       "recall": 0.5897,
+       "f1": 0.6053,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.6216,
+       "recall": 0.7931,
+       "f1": 0.697,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       139,
+       6,
+       49
+      ],
+      [
+       9,
+       23,
+       7
+      ],
+      [
+       16,
+       8,
+       92
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 164,
+      "Against": 37,
+      "None": 148
+     }
+    },
+    "translated_hi_test": {
+     "n": 349,
+     "macro_f1": 0.7026,
+     "ci95": [
+      0.6442,
+      0.7593
+     ],
+     "accuracy": 0.7421,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8765,
+       "recall": 0.732,
+       "f1": 0.7978,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.5854,
+       "recall": 0.6154,
+       "f1": 0.6,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.637,
+       "recall": 0.8017,
+       "f1": 0.7099,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       142,
+       6,
+       46
+      ],
+      [
+       8,
+       24,
+       7
+      ],
+      [
+       12,
+       11,
+       93
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 162,
+      "Against": 41,
+      "None": 146
+     }
+    }
+   },
+   "run": {
+    "n_train": 7251,
+    "n_train_by_language": {
+     "hi": 2756,
+     "bn": 2745,
+     "en": 1750
+    },
+    "best_val_macro_f1": 0.7533,
+    "best_epoch": 3,
+    "training_minutes": 4.12,
+    "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+    "device": "cuda"
+   }
+  },
+  "muril_A_english": {
+   "model": "muril",
+   "config": "A_english",
+   "eval": {
+    "english_test": {
+     "n": 349,
+     "macro_f1": 0.6461,
+     "ci95": [
+      0.5891,
+      0.6979
+     ],
+     "accuracy": 0.6676,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8451,
+       "recall": 0.6186,
+       "f1": 0.7143,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.5094,
+       "recall": 0.6923,
+       "f1": 0.587,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.5584,
+       "recall": 0.7414,
+       "f1": 0.637,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       120,
+       10,
+       64
+      ],
+      [
+       8,
+       27,
+       4
+      ],
+      [
+       14,
+       16,
+       86
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 142,
+      "Against": 53,
+      "None": 154
+     }
+    },
+    "pilot": {
+     "n": 150,
+     "macro_f1": 0.6474,
+     "ci95": [
+      0.5676,
+      0.7147
+     ],
+     "accuracy": 0.6667,
+     "per_class": {
+      "Favour": {
+       "precision": 0.7188,
+       "recall": 0.46,
+       "f1": 0.561,
+       "support": 50
+      },
+      "Against": {
+       "precision": 0.675,
+       "recall": 0.54,
+       "f1": 0.6,
+       "support": 50
+      },
+      "None": {
+       "precision": 0.641,
+       "recall": 1.0,
+       "f1": 0.7812,
+       "support": 50
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       23,
+       13,
+       14
+      ],
+      [
+       9,
+       27,
+       14
+      ],
+      [
+       0,
+       0,
+       50
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 32,
+      "Against": 40,
+      "None": 78
+     },
+     "macro_f1_by_language": {
+      "bn": 0.6157,
+      "hi": 0.6783
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.8636,
+       "n": 22
+      },
+      "emoji": {
+       "accuracy": 0.5833,
+       "n": 12
+      },
+      "implicit": {
+       "accuracy": 0.1429,
+       "n": 14
+      },
+      "negation": {
+       "accuracy": 0.4167,
+       "n": 12
+      },
+      "offtopic": {
+       "accuracy": 1.0,
+       "n": 16
+      },
+      "plain": {
+       "accuracy": 0.8929,
+       "n": 28
+      },
+      "question": {
+       "accuracy": 0.8125,
+       "n": 16
+      },
+      "roman": {
+       "accuracy": 0.5909,
+       "n": 22
+      },
+      "sarcasm": {
+       "accuracy": 0.0,
+       "n": 8
+      }
+     }
+    },
+    "synthetic_test": {
+     "n": 600,
+     "macro_f1": 0.592,
+     "ci95": [
+      0.5496,
+      0.6301
+     ],
+     "accuracy": 0.61,
+     "per_class": {
+      "Favour": {
+       "precision": 0.6875,
+       "recall": 0.44,
+       "f1": 0.5366,
+       "support": 200
+      },
+      "Against": {
+       "precision": 0.5924,
+       "recall": 0.465,
+       "f1": 0.521,
+       "support": 200
+      },
+      "None": {
+       "precision": 0.5873,
+       "recall": 0.925,
+       "f1": 0.7184,
+       "support": 200
+      }
+     },
+     "majority_class": "Against",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       88,
+       55,
+       57
+      ],
+      [
+       34,
+       93,
+       73
+      ],
+      [
+       6,
+       9,
+       185
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 128,
+      "Against": 157,
+      "None": 315
+     },
+     "macro_f1_by_language": {
+      "bn": 0.5722,
+      "hi": 0.6118
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.6897,
+       "n": 87
+      },
+      "emoji": {
+       "accuracy": 0.5769,
+       "n": 52
+      },
+      "implicit": {
+       "accuracy": 0.22,
+       "n": 50
+      },
+      "negation": {
+       "accuracy": 0.44,
+       "n": 50
+      },
+      "neutral_fact": {
+       "accuracy": 0.92,
+       "n": 25
+      },
+      "offtopic": {
+       "accuracy": 0.9655,
+       "n": 29
+      },
+      "plain": {
+       "accuracy": 0.6818,
+       "n": 154
+      },
+      "question": {
+       "accuracy": 0.8182,
+       "n": 22
+      },
+      "roman": {
+       "accuracy": 0.6129,
+       "n": 93
+      },
+      "sarcasm": {
+       "accuracy": 0.3158,
+       "n": 38
+      }
+     }
+    },
+    "translated_bn_test": {
+     "n": 349,
+     "macro_f1": 0.5519,
+     "ci95": [
+      0.4915,
+      0.611
+     ],
+     "accuracy": 0.5702,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8224,
+       "recall": 0.4536,
+       "f1": 0.5847,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.4565,
+       "recall": 0.5385,
+       "f1": 0.4941,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.4592,
+       "recall": 0.7759,
+       "f1": 0.5769,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       88,
+       9,
+       97
+      ],
+      [
+       9,
+       21,
+       9
+      ],
+      [
+       10,
+       16,
+       90
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 107,
+      "Against": 46,
+      "None": 196
+     }
+    },
+    "translated_hi_test": {
+     "n": 349,
+     "macro_f1": 0.5859,
+     "ci95": [
+      0.5271,
+      0.6406
+     ],
+     "accuracy": 0.6132,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8644,
+       "recall": 0.5258,
+       "f1": 0.6538,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.4138,
+       "recall": 0.6154,
+       "f1": 0.4948,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.5087,
+       "recall": 0.7586,
+       "f1": 0.609,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       102,
+       15,
+       77
+      ],
+      [
+       7,
+       24,
+       8
+      ],
+      [
+       9,
+       19,
+       88
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 118,
+      "Against": 58,
+      "None": 173
+     }
+    }
+   },
+   "run": {
+    "n_train": 1750,
+    "n_train_by_language": {
+     "en": 1750
+    },
+    "best_val_macro_f1": 0.6301,
+    "best_epoch": 5,
+    "training_minutes": 0.98,
+    "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+    "device": "cuda"
+   }
+  },
+  "muril_C_full": {
+   "model": "muril",
+   "config": "C_full",
+   "eval": {
+    "english_test": {
+     "n": 349,
+     "macro_f1": 0.7036,
+     "ci95": [
+      0.6462,
+      0.7596
+     ],
+     "accuracy": 0.7364,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8734,
+       "recall": 0.7113,
+       "f1": 0.7841,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.5952,
+       "recall": 0.641,
+       "f1": 0.6173,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.6309,
+       "recall": 0.8103,
+       "f1": 0.7094,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       138,
+       7,
+       49
+      ],
+      [
+       8,
+       25,
+       6
+      ],
+      [
+       12,
+       10,
+       94
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 158,
+      "Against": 42,
+      "None": 149
+     }
+    },
+    "pilot": {
+     "n": 150,
+     "macro_f1": 0.8235,
+     "ci95": [
+      0.7581,
+      0.8785
+     ],
+     "accuracy": 0.8267,
+     "per_class": {
+      "Favour": {
+       "precision": 0.9,
+       "recall": 0.72,
+       "f1": 0.8,
+       "support": 50
+      },
+      "Against": {
+       "precision": 0.8636,
+       "recall": 0.76,
+       "f1": 0.8085,
+       "support": 50
+      },
+      "None": {
+       "precision": 0.7576,
+       "recall": 1.0,
+       "f1": 0.8621,
+       "support": 50
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       36,
+       6,
+       8
+      ],
+      [
+       4,
+       38,
+       8
+      ],
+      [
+       0,
+       0,
+       50
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 40,
+      "Against": 44,
+      "None": 66
+     },
+     "macro_f1_by_language": {
+      "bn": 0.81,
+      "hi": 0.8368
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 1.0,
+       "n": 22
+      },
+      "emoji": {
+       "accuracy": 0.75,
+       "n": 12
+      },
+      "implicit": {
+       "accuracy": 0.4286,
+       "n": 14
+      },
+      "negation": {
+       "accuracy": 0.75,
+       "n": 12
+      },
+      "offtopic": {
+       "accuracy": 1.0,
+       "n": 16
+      },
+      "plain": {
+       "accuracy": 0.9286,
+       "n": 28
+      },
+      "question": {
+       "accuracy": 0.9375,
+       "n": 16
+      },
+      "roman": {
+       "accuracy": 0.7727,
+       "n": 22
+      },
+      "sarcasm": {
+       "accuracy": 0.5,
+       "n": 8
+      }
+     }
+    },
+    "synthetic_test": {
+     "n": 600,
+     "macro_f1": 0.8644,
+     "ci95": [
+      0.8357,
+      0.8911
+     ],
+     "accuracy": 0.865,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8736,
+       "recall": 0.795,
+       "f1": 0.8325,
+       "support": 200
+      },
+      "Against": {
+       "precision": 0.8889,
+       "recall": 0.88,
+       "f1": 0.8844,
+       "support": 200
+      },
+      "None": {
+       "precision": 0.8364,
+       "recall": 0.92,
+       "f1": 0.8762,
+       "support": 200
+      }
+     },
+     "majority_class": "Against",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       159,
+       15,
+       26
+      ],
+      [
+       14,
+       176,
+       10
+      ],
+      [
+       9,
+       7,
+       184
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 182,
+      "Against": 198,
+      "None": 220
+     },
+     "macro_f1_by_language": {
+      "bn": 0.8426,
+      "hi": 0.8868
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.8966,
+       "n": 87
+      },
+      "emoji": {
+       "accuracy": 0.8077,
+       "n": 52
+      },
+      "implicit": {
+       "accuracy": 0.76,
+       "n": 50
+      },
+      "negation": {
+       "accuracy": 0.9,
+       "n": 50
+      },
+      "neutral_fact": {
+       "accuracy": 1.0,
+       "n": 25
+      },
+      "offtopic": {
+       "accuracy": 0.9655,
+       "n": 29
+      },
+      "plain": {
+       "accuracy": 0.8831,
+       "n": 154
+      },
+      "question": {
+       "accuracy": 0.8636,
+       "n": 22
+      },
+      "roman": {
+       "accuracy": 0.8387,
+       "n": 93
+      },
+      "sarcasm": {
+       "accuracy": 0.7895,
+       "n": 38
+      }
+     }
+    },
+    "translated_bn_test": {
+     "n": 349,
+     "macro_f1": 0.6414,
+     "ci95": [
+      0.579,
+      0.6976
+     ],
+     "accuracy": 0.6819,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8344,
+       "recall": 0.6753,
+       "f1": 0.7464,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.5714,
+       "recall": 0.5128,
+       "f1": 0.5405,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.5541,
+       "recall": 0.75,
+       "f1": 0.6374,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       131,
+       2,
+       61
+      ],
+      [
+       10,
+       20,
+       9
+      ],
+      [
+       16,
+       13,
+       87
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 157,
+      "Against": 35,
+      "None": 157
+     }
+    },
+    "translated_hi_test": {
+     "n": 349,
+     "macro_f1": 0.6546,
+     "ci95": [
+      0.5957,
+      0.7133
+     ],
+     "accuracy": 0.6905,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8667,
+       "recall": 0.6701,
+       "f1": 0.7558,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.5349,
+       "recall": 0.5897,
+       "f1": 0.561,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.5641,
+       "recall": 0.7586,
+       "f1": 0.6471,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       130,
+       5,
+       59
+      ],
+      [
+       7,
+       23,
+       9
+      ],
+      [
+       13,
+       15,
+       88
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 150,
+      "Against": 43,
+      "None": 156
+     }
+    }
+   },
+   "run": {
+    "n_train": 7251,
+    "n_train_by_language": {
+     "hi": 2756,
+     "bn": 2745,
+     "en": 1750
+    },
+    "best_val_macro_f1": 0.7564,
+    "best_epoch": 3,
+    "training_minutes": 3.78,
+    "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+    "device": "cuda"
+   }
+  },
+  "tfidf_A_english": {
+   "model": "tfidf",
+   "config": "A_english",
+   "eval": {
+    "english_test": {
+     "n": 349,
+     "macro_f1": 0.6018,
+     "ci95": [
+      0.5386,
+      0.6577
+     ],
+     "accuracy": 0.6246,
+     "per_class": {
+      "Favour": {
+       "precision": 0.7232,
+       "recall": 0.6598,
+       "f1": 0.69,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.5789,
+       "recall": 0.5641,
+       "f1": 0.5714,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.5075,
+       "recall": 0.5862,
+       "f1": 0.544,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       128,
+       6,
+       60
+      ],
+      [
+       11,
+       22,
+       6
+      ],
+      [
+       38,
+       10,
+       68
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 177,
+      "Against": 38,
+      "None": 134
+     }
+    },
+    "pilot": {
+     "n": 150,
+     "macro_f1": 0.3406,
+     "ci95": [
+      0.2564,
+      0.4146
+     ],
+     "accuracy": 0.4267,
+     "per_class": {
+      "Favour": {
+       "precision": 0.7273,
+       "recall": 0.16,
+       "f1": 0.2623,
+       "support": 50
+      },
+      "Against": {
+       "precision": 0.75,
+       "recall": 0.12,
+       "f1": 0.2069,
+       "support": 50
+      },
+      "None": {
+       "precision": 0.3817,
+       "recall": 1.0,
+       "f1": 0.5525,
+       "support": 50
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       8,
+       2,
+       40
+      ],
+      [
+       3,
+       6,
+       41
+      ],
+      [
+       0,
+       0,
+       50
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 11,
+      "Against": 8,
+      "None": 131
+     },
+     "macro_f1_by_language": {
+      "bn": 0.341,
+      "hi": 0.3402
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.7273,
+       "n": 22
+      },
+      "emoji": {
+       "accuracy": 0.3333,
+       "n": 12
+      },
+      "implicit": {
+       "accuracy": 0.0,
+       "n": 14
+      },
+      "negation": {
+       "accuracy": 0.0,
+       "n": 12
+      },
+      "offtopic": {
+       "accuracy": 1.0,
+       "n": 16
+      },
+      "plain": {
+       "accuracy": 0.2857,
+       "n": 28
+      },
+      "question": {
+       "accuracy": 0.625,
+       "n": 16
+      },
+      "roman": {
+       "accuracy": 0.4545,
+       "n": 22
+      },
+      "sarcasm": {
+       "accuracy": 0.0,
+       "n": 8
+      }
+     }
+    },
+    "synthetic_test": {
+     "n": 600,
+     "macro_f1": 0.2847,
+     "ci95": [
+      0.2511,
+      0.3194
+     ],
+     "accuracy": 0.3917,
+     "per_class": {
+      "Favour": {
+       "precision": 0.6304,
+       "recall": 0.145,
+       "f1": 0.2358,
+       "support": 200
+      },
+      "Against": {
+       "precision": 0.4737,
+       "recall": 0.045,
+       "f1": 0.0822,
+       "support": 200
+      },
+      "None": {
+       "precision": 0.3682,
+       "recall": 0.985,
+       "f1": 0.5361,
+       "support": 200
+      }
+     },
+     "majority_class": "Against",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       29,
+       10,
+       161
+      ],
+      [
+       14,
+       9,
+       177
+      ],
+      [
+       3,
+       0,
+       197
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 46,
+      "Against": 19,
+      "None": 535
+     },
+     "macro_f1_by_language": {
+      "bn": 0.2896,
+      "hi": 0.2786
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.5057,
+       "n": 87
+      },
+      "emoji": {
+       "accuracy": 0.3077,
+       "n": 52
+      },
+      "implicit": {
+       "accuracy": 0.0,
+       "n": 50
+      },
+      "negation": {
+       "accuracy": 0.0,
+       "n": 50
+      },
+      "neutral_fact": {
+       "accuracy": 1.0,
+       "n": 25
+      },
+      "offtopic": {
+       "accuracy": 1.0,
+       "n": 29
+      },
+      "plain": {
+       "accuracy": 0.3377,
+       "n": 154
+      },
+      "question": {
+       "accuracy": 1.0,
+       "n": 22
+      },
+      "roman": {
+       "accuracy": 0.5054,
+       "n": 93
+      },
+      "sarcasm": {
+       "accuracy": 0.0,
+       "n": 38
+      }
+     }
+    },
+    "translated_bn_test": {
+     "n": 349,
+     "macro_f1": 0.3407,
+     "ci95": [
+      0.2969,
+      0.3911
+     ],
+     "accuracy": 0.4756,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8983,
+       "recall": 0.2732,
+       "f1": 0.419,
+       "support": 194
+      },
+      "Against": {
+       "precision": 1.0,
+       "recall": 0.0256,
+       "f1": 0.05,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.3875,
+       "recall": 0.9655,
+       "f1": 0.5531,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       53,
+       0,
+       141
+      ],
+      [
+       2,
+       1,
+       36
+      ],
+      [
+       4,
+       0,
+       112
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 59,
+      "Against": 1,
+      "None": 289
+     }
+    },
+    "translated_hi_test": {
+     "n": 349,
+     "macro_f1": 0.3347,
+     "ci95": [
+      0.2918,
+      0.3848
+     ],
+     "accuracy": 0.4699,
+     "per_class": {
+      "Favour": {
+       "precision": 0.9091,
+       "recall": 0.2577,
+       "f1": 0.4016,
+       "support": 194
+      },
+      "Against": {
+       "precision": 1.0,
+       "recall": 0.0256,
+       "f1": 0.05,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.3857,
+       "recall": 0.9741,
+       "f1": 0.5526,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       50,
+       0,
+       144
+      ],
+      [
+       2,
+       1,
+       36
+      ],
+      [
+       3,
+       0,
+       113
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 55,
+      "Against": 1,
+      "None": 293
+     }
+    }
+   },
+   "run": {
+    "n_train": 1750,
+    "n_train_by_language": {
+     "en": 1750
+    },
+    "best_val_macro_f1": 0.6303,
+    "best_epoch": null,
+    "training_minutes": 0.02,
+    "gpu": null,
+    "device": null
+   }
+  },
+  "tfidf_B_translated": {
+   "model": "tfidf",
+   "config": "B_translated",
+   "eval": {
+    "english_test": {
+     "n": 349,
+     "macro_f1": 0.5922,
+     "ci95": [
+      0.5277,
+      0.6476
+     ],
+     "accuracy": 0.6246,
+     "per_class": {
+      "Favour": {
+       "precision": 0.7314,
+       "recall": 0.6598,
+       "f1": 0.6938,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.5,
+       "recall": 0.5641,
+       "f1": 0.5301,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.5231,
+       "recall": 0.5862,
+       "f1": 0.5528,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       128,
+       9,
+       57
+      ],
+      [
+       12,
+       22,
+       5
+      ],
+      [
+       35,
+       13,
+       68
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 175,
+      "Against": 44,
+      "None": 130
+     }
+    },
+    "pilot": {
+     "n": 150,
+     "macro_f1": 0.5373,
+     "ci95": [
+      0.4569,
+      0.6127
+     ],
+     "accuracy": 0.5867,
+     "per_class": {
+      "Favour": {
+       "precision": 0.6087,
+       "recall": 0.56,
+       "f1": 0.5833,
+       "support": 50
+      },
+      "Against": {
+       "precision": 0.5882,
+       "recall": 0.2,
+       "f1": 0.2985,
+       "support": 50
+      },
+      "None": {
+       "precision": 0.5747,
+       "recall": 1.0,
+       "f1": 0.7299,
+       "support": 50
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       28,
+       7,
+       15
+      ],
+      [
+       18,
+       10,
+       22
+      ],
+      [
+       0,
+       0,
+       50
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 46,
+      "Against": 17,
+      "None": 87
+     },
+     "macro_f1_by_language": {
+      "bn": 0.5367,
+      "hi": 0.5384
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.6818,
+       "n": 22
+      },
+      "emoji": {
+       "accuracy": 0.6667,
+       "n": 12
+      },
+      "implicit": {
+       "accuracy": 0.0714,
+       "n": 14
+      },
+      "negation": {
+       "accuracy": 0.5,
+       "n": 12
+      },
+      "offtopic": {
+       "accuracy": 1.0,
+       "n": 16
+      },
+      "plain": {
+       "accuracy": 0.5714,
+       "n": 28
+      },
+      "question": {
+       "accuracy": 0.75,
+       "n": 16
+      },
+      "roman": {
+       "accuracy": 0.4545,
+       "n": 22
+      },
+      "sarcasm": {
+       "accuracy": 0.5,
+       "n": 8
+      }
+     }
+    },
+    "synthetic_test": {
+     "n": 600,
+     "macro_f1": 0.4353,
+     "ci95": [
+      0.3956,
+      0.4754
+     ],
+     "accuracy": 0.4867,
+     "per_class": {
+      "Favour": {
+       "precision": 0.517,
+       "recall": 0.455,
+       "f1": 0.484,
+       "support": 200
+      },
+      "Against": {
+       "precision": 0.5625,
+       "recall": 0.135,
+       "f1": 0.2177,
+       "support": 200
+      },
+      "None": {
+       "precision": 0.4628,
+       "recall": 0.87,
+       "f1": 0.6042,
+       "support": 200
+      }
+     },
+     "majority_class": "Against",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       91,
+       19,
+       90
+      ],
+      [
+       61,
+       27,
+       112
+      ],
+      [
+       24,
+       2,
+       174
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 176,
+      "Against": 48,
+      "None": 376
+     },
+     "macro_f1_by_language": {
+      "bn": 0.4463,
+      "hi": 0.4236
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.5172,
+       "n": 87
+      },
+      "emoji": {
+       "accuracy": 0.4231,
+       "n": 52
+      },
+      "implicit": {
+       "accuracy": 0.16,
+       "n": 50
+      },
+      "negation": {
+       "accuracy": 0.34,
+       "n": 50
+      },
+      "neutral_fact": {
+       "accuracy": 0.8,
+       "n": 25
+      },
+      "offtopic": {
+       "accuracy": 0.9655,
+       "n": 29
+      },
+      "plain": {
+       "accuracy": 0.5195,
+       "n": 154
+      },
+      "question": {
+       "accuracy": 0.8636,
+       "n": 22
+      },
+      "roman": {
+       "accuracy": 0.5054,
+       "n": 93
+      },
+      "sarcasm": {
+       "accuracy": 0.1579,
+       "n": 38
+      }
+     }
+    },
+    "translated_bn_test": {
+     "n": 349,
+     "macro_f1": 0.6001,
+     "ci95": [
+      0.5355,
+      0.6567
+     ],
+     "accuracy": 0.6447,
+     "per_class": {
+      "Favour": {
+       "precision": 0.7764,
+       "recall": 0.6443,
+       "f1": 0.7042,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.5143,
+       "recall": 0.4615,
+       "f1": 0.4865,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.5359,
+       "recall": 0.7069,
+       "f1": 0.6097,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       125,
+       8,
+       61
+      ],
+      [
+       11,
+       18,
+       10
+      ],
+      [
+       25,
+       9,
+       82
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 161,
+      "Against": 35,
+      "None": 153
+     }
+    },
+    "translated_hi_test": {
+     "n": 349,
+     "macro_f1": 0.5797,
+     "ci95": [
+      0.5173,
+      0.6408
+     ],
+     "accuracy": 0.6246,
+     "per_class": {
+      "Favour": {
+       "precision": 0.7712,
+       "recall": 0.6082,
+       "f1": 0.6801,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.4222,
+       "recall": 0.4872,
+       "f1": 0.4524,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.5364,
+       "recall": 0.6983,
+       "f1": 0.6067,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       118,
+       15,
+       61
+      ],
+      [
+       11,
+       19,
+       9
+      ],
+      [
+       24,
+       11,
+       81
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 153,
+      "Against": 45,
+      "None": 151
+     }
+    }
+   },
+   "run": {
+    "n_train": 5250,
+    "n_train_by_language": {
+     "en": 1750,
+     "hi": 1750,
+     "bn": 1750
+    },
+    "best_val_macro_f1": 0.6062,
+    "best_epoch": null,
+    "training_minutes": 0.07,
+    "gpu": null,
+    "device": null
+   }
+  },
+  "tfidf_C_full": {
+   "model": "tfidf",
+   "config": "C_full",
+   "eval": {
+    "english_test": {
+     "n": 349,
+     "macro_f1": 0.6314,
+     "ci95": [
+      0.5689,
+      0.6859
+     ],
+     "accuracy": 0.6562,
+     "per_class": {
+      "Favour": {
+       "precision": 0.7572,
+       "recall": 0.6753,
+       "f1": 0.7139,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.6111,
+       "recall": 0.5641,
+       "f1": 0.5867,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.5429,
+       "recall": 0.6552,
+       "f1": 0.5938,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       131,
+       5,
+       58
+      ],
+      [
+       11,
+       22,
+       6
+      ],
+      [
+       31,
+       9,
+       76
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 173,
+      "Against": 36,
+      "None": 140
+     }
+    },
+    "pilot": {
+     "n": 150,
+     "macro_f1": 0.7814,
+     "ci95": [
+      0.7155,
+      0.8409
+     ],
+     "accuracy": 0.7867,
+     "per_class": {
+      "Favour": {
+       "precision": 0.75,
+       "recall": 0.66,
+       "f1": 0.7021,
+       "support": 50
+      },
+      "Against": {
+       "precision": 0.75,
+       "recall": 0.72,
+       "f1": 0.7347,
+       "support": 50
+      },
+      "None": {
+       "precision": 0.8448,
+       "recall": 0.98,
+       "f1": 0.9074,
+       "support": 50
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       33,
+       11,
+       6
+      ],
+      [
+       11,
+       36,
+       3
+      ],
+      [
+       0,
+       1,
+       49
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 44,
+      "Against": 48,
+      "None": 58
+     },
+     "macro_f1_by_language": {
+      "bn": 0.78,
+      "hi": 0.783
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.8636,
+       "n": 22
+      },
+      "emoji": {
+       "accuracy": 0.75,
+       "n": 12
+      },
+      "implicit": {
+       "accuracy": 0.2857,
+       "n": 14
+      },
+      "negation": {
+       "accuracy": 0.6667,
+       "n": 12
+      },
+      "offtopic": {
+       "accuracy": 1.0,
+       "n": 16
+      },
+      "plain": {
+       "accuracy": 0.8571,
+       "n": 28
+      },
+      "question": {
+       "accuracy": 0.875,
+       "n": 16
+      },
+      "roman": {
+       "accuracy": 0.8182,
+       "n": 22
+      },
+      "sarcasm": {
+       "accuracy": 0.75,
+       "n": 8
+      }
+     }
+    },
+    "synthetic_test": {
+     "n": 600,
+     "macro_f1": 0.8322,
+     "ci95": [
+      0.7999,
+      0.8607
+     ],
+     "accuracy": 0.8317,
+     "per_class": {
+      "Favour": {
+       "precision": 0.8378,
+       "recall": 0.775,
+       "f1": 0.8052,
+       "support": 200
+      },
+      "Against": {
+       "precision": 0.7595,
+       "recall": 0.9,
+       "f1": 0.8238,
+       "support": 200
+      },
+      "None": {
+       "precision": 0.9213,
+       "recall": 0.82,
+       "f1": 0.8677,
+       "support": 200
+      }
+     },
+     "majority_class": "Against",
+     "floor_macro_f1": 0.1667,
+     "confusion": [
+      [
+       155,
+       38,
+       7
+      ],
+      [
+       13,
+       180,
+       7
+      ],
+      [
+       17,
+       19,
+       164
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 185,
+      "Against": 237,
+      "None": 178
+     },
+     "macro_f1_by_language": {
+      "bn": 0.8267,
+      "hi": 0.8377
+     },
+     "accuracy_by_phenomenon": {
+      "codemix": {
+       "accuracy": 0.8046,
+       "n": 87
+      },
+      "emoji": {
+       "accuracy": 0.8462,
+       "n": 52
+      },
+      "implicit": {
+       "accuracy": 0.84,
+       "n": 50
+      },
+      "negation": {
+       "accuracy": 0.86,
+       "n": 50
+      },
+      "neutral_fact": {
+       "accuracy": 0.96,
+       "n": 25
+      },
+      "offtopic": {
+       "accuracy": 0.9655,
+       "n": 29
+      },
+      "plain": {
+       "accuracy": 0.8247,
+       "n": 154
+      },
+      "question": {
+       "accuracy": 0.7727,
+       "n": 22
+      },
+      "roman": {
+       "accuracy": 0.7742,
+       "n": 93
+      },
+      "sarcasm": {
+       "accuracy": 0.8421,
+       "n": 38
+      }
+     }
+    },
+    "translated_bn_test": {
+     "n": 349,
+     "macro_f1": 0.6002,
+     "ci95": [
+      0.5393,
+      0.6584
+     ],
+     "accuracy": 0.6504,
+     "per_class": {
+      "Favour": {
+       "precision": 0.7818,
+       "recall": 0.6649,
+       "f1": 0.7187,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.4865,
+       "recall": 0.4615,
+       "f1": 0.4737,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.5442,
+       "recall": 0.6897,
+       "f1": 0.6084,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       129,
+       9,
+       56
+      ],
+      [
+       10,
+       18,
+       11
+      ],
+      [
+       26,
+       10,
+       80
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 165,
+      "Against": 37,
+      "None": 147
+     }
+    },
+    "translated_hi_test": {
+     "n": 349,
+     "macro_f1": 0.5996,
+     "ci95": [
+      0.5371,
+      0.6537
+     ],
+     "accuracy": 0.6361,
+     "per_class": {
+      "Favour": {
+       "precision": 0.7727,
+       "recall": 0.6134,
+       "f1": 0.6839,
+       "support": 194
+      },
+      "Against": {
+       "precision": 0.4878,
+       "recall": 0.5128,
+       "f1": 0.5,
+       "support": 39
+      },
+      "None": {
+       "precision": 0.539,
+       "recall": 0.7155,
+       "f1": 0.6148,
+       "support": 116
+      }
+     },
+     "majority_class": "Favour",
+     "floor_macro_f1": 0.2382,
+     "confusion": [
+      [
+       119,
+       11,
+       64
+      ],
+      [
+       12,
+       20,
+       7
+      ],
+      [
+       23,
+       10,
+       83
+      ]
+     ],
+     "predicted_counts": {
+      "Favour": 154,
+      "Against": 41,
+      "None": 154
+     }
+    }
+   },
+   "run": {
+    "n_train": 7251,
+    "n_train_by_language": {
+     "hi": 2756,
+     "bn": 2745,
+     "en": 1750
+    },
+    "best_val_macro_f1": 0.6827,
+    "best_epoch": null,
+    "training_minutes": 0.08,
+    "gpu": null,
+    "device": null
+   }
+  }
+ },
+ "best_run": "indicbert_C_full",
+ "dataset": {
+  "english": {
+   "train": {
+    "Favour": 714,
+    "Against": 260,
+    "None": 776,
+    "total": 1750
+   },
+   "val": {
+    "Favour": 126,
+    "Against": 46,
+    "None": 137,
+    "total": 309
+   },
+   "test": {
+    "Favour": 194,
+    "Against": 39,
+    "None": 116,
+    "total": 349
+   }
+  },
+  "translated": {
+   "hi_train": {
+    "Favour": 714,
+    "Against": 260,
+    "None": 776,
+    "total": 1750
+   },
+   "hi_val": {
+    "Favour": 126,
+    "Against": 46,
+    "None": 137,
+    "total": 309
+   },
+   "hi_test": {
+    "Favour": 194,
+    "Against": 39,
+    "None": 116,
+    "total": 349
+   },
+   "bn_train": {
+    "Favour": 714,
+    "Against": 260,
+    "None": 776,
+    "total": 1750
+   },
+   "bn_val": {
+    "Favour": 126,
+    "Against": 46,
+    "None": 137,
+    "total": 309
+   },
+   "bn_test": {
+    "Favour": 194,
+    "Against": 39,
+    "None": 116,
+    "total": 349
+   }
+  },
+  "pilot": {
+   "Favour": 50,
+   "Against": 50,
+   "None": 50,
+   "total": 150
+  },
+  "synthetic": {
+   "train": {
+    "Favour": 648,
+    "Against": 699,
+    "None": 654,
+    "total": 2001
+   },
+   "val": {
+    "Favour": 100,
+    "Against": 100,
+    "None": 100,
+    "total": 300
+   },
+   "test": {
+    "Favour": 200,
+    "Against": 200,
+    "None": 200,
+    "total": 600
+   }
+  },
+  "synthetic_by_language": {
+   "bn": {
+    "Favour": 475,
+    "Against": 500,
+    "None": 470,
+    "total": 1445
+   },
+   "hi": {
+    "Favour": 473,
+    "Against": 499,
+    "None": 484,
+    "total": 1456
+   }
+  },
+  "synthetic_by_phenomenon": {
+   "plain": 748,
+   "roman": 449,
+   "codemix": 417,
+   "emoji": 257,
+   "implicit": 240,
+   "negation": 239,
+   "sarcasm": 188,
+   "offtopic": 137,
+   "neutral_fact": 119,
+   "question": 107
+  },
+  "synthetic_generation": {
+   "generated": 5180,
+   "removed_format_or_length": 3,
+   "removed_script": 878,
+   "removed_exact_duplicate": 2,
+   "removed_near_duplicate": 19,
+   "awaiting_judge": 0,
+   "judged": 4278,
+   "removed_judge_disagrees": 721,
+   "judge_agreement_overall": 0.831,
+   "judge_agreement_by_label": {
+    "Against": 0.966,
+    "Favour": 0.753,
+    "None": 0.791
+   },
+   "judge_agreement_by_phenomenon": {
+    "codemix": 0.871,
+    "emoji": 0.901,
+    "implicit": 0.903,
+    "negation": 0.991,
+    "neutral_fact": 0.903,
+    "offtopic": 0.937,
+    "plain": 0.892,
+    "question": 0.818,
+    "roman": 0.925,
+    "sarcasm": 0.369
+   },
+   "judge_agreement_by_language": {
+    "bn": 0.824,
+    "hi": 0.839
+   },
+   "judge_confusion_intended_vs_judge": {
+    "Against": {
+     "Against": 1292,
+     "Favour": 21,
+     "None": 24
+    },
+    "Favour": {
+     "Against": 325,
+     "Favour": 1205,
+     "None": 71
+    },
+    "None": {
+     "Against": 100,
+     "Favour": 180,
+     "None": 1060
+    }
+   },
+   "missing_planned_batches": 0,
+   "complete": true,
+   "passed_all_filters": 3557,
+   "kept_after_quota": 2901,
+   "removed_train_leak_vs_eval": 14,
+   "shortfall_by_cell": {
+    "hi|Favour|sarcasm": 27,
+    "hi|None|codemix": 9,
+    "bn|Favour|sarcasm": 25,
+    "bn|None|codemix": 24
+   },
+   "split_sizes": {
+    "train": 2001,
+    "test": 600,
+    "val": 300
+   },
+   "by_language_label": {
+    "bn|Against": 500,
+    "bn|Favour": 475,
+    "bn|None": 470,
+    "hi|Against": 499,
+    "hi|Favour": 473,
+    "hi|None": 484
+   },
+   "by_phenomenon": {
+    "plain": 748,
+    "roman": 449,
+    "codemix": 417,
+    "emoji": 257,
+    "implicit": 240,
+    "negation": 239,
+    "sarcasm": 188,
+    "offtopic": 137,
+    "neutral_fact": 119,
+    "question": 107
+   },
+   "generator_model": "gemini-3.5-flash-lite",
+   "judge_model": "gemini-3.1-flash-lite",
+   "note": "synthetic (LLM-generated) comments; test labels not yet human-verified until apply_review.py runs"
+  }
+ },
+ "best_rule": "highest mean macro-F1 on translated Hindi, translated Bengali and pilot test sets (the synthetic test set is excluded because configuration C trains on data from the same generator)",
+ "eval_set_sizes": {
+  "english_test": 349,
+  "translated_hi_test": 349,
+  "translated_bn_test": 349,
+  "synthetic_test": 600,
+  "pilot": 150
+ },
+ "bootstrap": {
+  "resamples": 1000,
+  "seed": 42,
+  "interval": "95% percentile"
+ },
+ "synthetic_test_labels": "labels not yet human-verified",
+ "translation": {
+  "hi_train": {
+   "model": "facebook/nllb-200-distilled-600M",
+   "rows": 1750,
+   "seconds": 84.5,
+   "script_share_native": 0.949
+  },
+  "hi_val": {
+   "model": "facebook/nllb-200-distilled-600M",
+   "rows": 309,
+   "seconds": 21.6,
+   "script_share_native": 0.955
+  },
+  "hi_test": {
+   "model": "facebook/nllb-200-distilled-600M",
+   "rows": 349,
+   "seconds": 20.9,
+   "script_share_native": 0.874
+  },
+  "bn_train": {
+   "model": "facebook/nllb-200-distilled-600M",
+   "rows": 1750,
+   "seconds": 144.2,
+   "script_share_native": 0.952
+  },
+  "bn_val": {
+   "model": "facebook/nllb-200-distilled-600M",
+   "rows": 309,
+   "seconds": 18.1,
+   "script_share_native": 0.961
+  },
+  "bn_test": {
+   "model": "facebook/nllb-200-distilled-600M",
+   "rows": 349,
+   "seconds": 31.4,
+   "script_share_native": 0.885
+  }
+ },
+ "limitations": [
+  "The synthetic test set comes from the same generator as the synthetic training data, so configuration C's score on it is optimistic; configurations A and B, which never see synthetic data, are the fairer measure of transfer.",
+  "No result here is a score on real Hindi/Bengali social-media comments: Indic test sets are machine-translated English (GWSD news sentences and SemEval tweets), synthetic (LLM-generated) comments, or the 150-row synthetic pilot.",
+  "Translated test labels are the English labels carried over; translation can change stance (team review pending).",
+  "The English test set has few Against rows, so per-class Against scores on it are noisy.",
+  "The judge filter keeps only synthetic comments that a second LLM labels as intended, removing the most ambiguous ones (most of all sarcasm), so the synthetic test set is easier than real comments would be.",
+  "The 150-row pilot is also synthetic comment-style text (team-authored), so it partly favours configuration C too.",
+  "Single training seed; differences inside overlapping confidence intervals are not established.",
+  "Synthetic test labels are not yet human-verified (data/review/synthetic_test_review.csv)."
+ ]
+}
