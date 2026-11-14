@@ -126,12 +126,15 @@ def table(slide, x, y, w, col_w, rows, size=15, header_fill=NAVY, row_h=0.5):
     return heights
 
 
+FOOTER, TOTAL = "Milestone 1", 10  # rebound for the Round 2 deck at the end of this file
+
+
 def new_slide(num, tag, title, notes=""):
     s = prs.slides.add_slide(BLANK)
     text(s, 0.55, 0.28, 9.5, 0.4, [tag.upper()], size=14, color=TEAL, bold=True, pad=0)
     text(s, 0.55, 0.62, 12.2, 0.95, [title], size=30, color=NAVY, bold=True, pad=0, anchor=MSO_ANCHOR.TOP)
-    text(s, 0.55, 7.05, 10, 0.3, ["Sumukh Gupta, Neya Tripathi, Aditya Goel, Kushika Mishra  |  CSET346 NLP  |  Milestone 1"], size=11, color=MUTED, pad=0)
-    text(s, 11.6, 7.05, 1.2, 0.3, [f"{num} / 10"], size=11, color=MUTED, pad=0, align=PP_ALIGN.RIGHT)
+    text(s, 0.55, 7.05, 10, 0.3, [f"Sumukh Gupta, Neya Tripathi, Aditya Goel, Kushika Mishra  |  CSET346 NLP  |  {FOOTER}"], size=11, color=MUTED, pad=0)
+    text(s, 11.6, 7.05, 1.2, 0.3, [f"{num} / {TOTAL}"], size=11, color=MUTED, pad=0, align=PP_ALIGN.RIGHT)
     if notes:
         s.notes_slide.notes_text_frame.text = notes
     return s
@@ -347,3 +350,129 @@ print(f"saved {path} with {len(prs.slides)} slides")
 for w in WARN:
     print("WARNING", w)
 print("fit warnings:", len(WARN))
+
+
+# ================================================================== Round 2 deck (every number from round2_results.json)
+def round2_deck():
+    global prs, BLANK, FOOTER, TOTAL
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from make_report import MODEL, SETS, analysis, facts
+    R = json.load(open(OUT + "round2_results.json", encoding="utf-8"))
+    F = facts(R)
+    runs, ds, get, g = R["runs"], R["dataset"], F["get"], F["gen"]
+    prs = Presentation()
+    prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
+    BLANK = prs.slide_layouts[6]
+    FOOTER, TOTAL = "Round 2", 9
+    WARN.clear()
+    star = "" if F["verified"] else "*"
+
+    s = prs.slides.add_slide(BLANK)
+    text(s, 0, 0, 13.333, 7.5, [""], fill=NAVY)
+    text(s, 0.8, 0.7, 11, 0.5, ["CSET346  NATURAL LANGUAGE PROCESSING  |  ROUND 2 PROGRESS"], size=16, color=TEAL, bold=True, pad=0)
+    text(s, 0.8, 1.5, 11.8, 2.5, ["Transformer stance detection for Hindi and Bengali climate comments"], size=44, color=WHITE, bold=True, pad=0)
+    text(s, 0.8, 3.9, 11.5, 0.9, ["IndicBERT v2 vs MuRIL vs TF-IDF, trained on English, translated and synthetic data"], size=22,
+         color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
+    text(s, 0.8, 4.85, 4.6, 2.2, ["Sumukh Gupta  |  S24CSEU0570", "Neya Tripathi  |  S24CSEU0609", "Aditya Goel  |  S24CSEU0614",
+                                  "Kushika Mishra  |  S24CSEU0652"], size=17, color=WHITE, pad=0)
+    text(s, 5.6, 4.85, 4.0, 2.2, ["B.Tech CSE, Bennett University", "Instructor: Dr. Supriya Chanda"], size=17,
+         color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
+
+    s = new_slide(2, "1 | Dataset", "Four data families, labelled by provenance",
+                  "No official data. None of these are real Hindi/Bengali comments; say so.")
+    rows = [["Data family", "Train", "Val", "Test"]]
+    rows.append(["English (human-labelled)"] + [f"{F['eng'][k]:,}" for k in ("train", "val", "test")])
+    for lang, name in (("hi", "Hindi"), ("bn", "Bengali")):
+        if f"{lang}_train" in F["tr_sizes"]:
+            rows.append([f"{name} (machine-translated)"] + [f"{F['tr_sizes'][f'{lang}_{k}']['total']:,}" for k in ("train", "val", "test")])
+    if F["syn"]:
+        rows.append(["Hindi+Bengali (synthetic, LLM)"] + [f"{F['syn'][k]:,}" for k in ("train", "val", "test")])
+    rows.append(["Pilot (team-authored synthetic)", "-", "-", str(F["pilot"])])
+    table(s, 0.55, 1.6, 7.3, [3.6, 1.2, 1.2, 1.2], rows, size=15)
+    funnel = ["Synthetic pipeline (Gemini)"]
+    if g:
+        funnel += [f"{g['generated']:,} generated", f"-{g['removed_format_or_length']:,} length/format",
+                   f"-{g['removed_script']:,} wrong script", f"-{g['removed_exact_duplicate'] + g['removed_near_duplicate']:,} duplicates",
+                   f"judge agrees: {100 * g['judge_agreement_overall']:.1f}%", f"{g['kept_after_quota']:,} kept"]
+    else:
+        funnel.append("not yet generated")
+    text(s, 8.2, 1.6, 4.6, 4.6, funnel, size=17, fill=PANEL, pad=0.2, space=8)
+    text(s, 0.55, 6.3, 12.2, 0.6, [f"English test has only {F['eng_against_test']} Against rows."
+                                   + ("" if F["verified"] else "  *Synthetic test labels not yet human-verified.")], size=14, color=MUTED, pad=0)
+
+    s = new_slide(3, "2 | Methodology", "Pair input, three data configurations, three models",
+                  "Claim stays English. Selection on each configuration's own validation data; tests never used to select.")
+    steps = ["English splits", "Translate (NLLB)", "Gemini synthetic + judge", "Train A / B / C", "Predict 5 test sets", "evaluate.py"]
+    for k, st in enumerate(steps):
+        text(s, 0.55 + k * 2.08, 1.7, 1.9, 1.0, [st], size=15, bold=True, color=WHITE, fill=[TEAL, NAVY][k % 2],
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    table(s, 0.55, 3.1, 12.2, [1.4, 6.0, 4.8], [["Config", "Training data", "Validation used for selection"],
+          ["A", "English (human-labelled)", "English val"], ["B", "+ machine-translated Hindi/Bengali", "English + translated val"],
+          ["C", "+ synthetic Hindi/Bengali", "English + translated + synthetic val"]], size=15)
+    text(s, 0.55, 5.3, 12.2, 1.5, ["Input: (English claim, comment), max 128 tokens.  Models: IndicBERT v2 (main), MuRIL, TF-IDF + LogReg.",
+                                   "Class-weighted cross-entropy, lr 2e-5, batch 32, 5 epochs, 10% warmup, fp16, seed 42."], size=16, pad=0)
+
+    s = new_slide(4, "3 | Results", "Test macro-F1 by model and configuration",
+                  "Numbers from outputs/round2_results.json. The synthetic column favours C (same generator).")
+    order = [f"{m}_{c}" for m in ("tfidf", "muril", "indicbert") for c in ("A_english", "B_translated", "C_full")]
+    rows = [["Model", "Cfg"] + [lab + (star if sk == "synthetic_test" else "") for sk, lab in SETS]]
+    for name in order:
+        if name in runs:
+            rows.append([MODEL[runs[name]["model"]], runs[name]["config"][0]] +
+                        [f"{get(name, sk):.3f}" if get(name, sk) is not None else "-" for sk, _ in SETS])
+    floor = {sk: next(r["eval"][sk]["floor_macro_f1"] for r in runs.values() if sk in r["eval"]) for sk, _ in SETS
+             if any(sk in r["eval"] for r in runs.values())}
+    rows.append(["Majority floor", "-"] + [f"{floor[sk]:.3f}" if sk in floor else "-" for sk, _ in SETS])
+    table(s, 0.55, 1.55, 12.2, [2.6, 0.8] + [1.75] * 5, rows, size=14, row_h=0.42)
+
+    s = new_slide(5, "3 | Results", "What each data family adds, and what is lost across languages",
+                  "Bars show 95% bootstrap confidence intervals; overlapping intervals mean no clear difference.")
+    image(s, OUT + "fig_r2_macro_f1.png", 0.55, 1.5, w=7.6)
+    text(s, 8.35, 1.5, 4.45, 5.3, analysis(R, F)[:3], size=13, fill=PANEL, pad=0.15, space=8)
+
+    b = R["best_run"]
+    s = new_slide(6, "4 | Error analysis", f"Where the best run fails: {MODEL[runs[b]['model']]} {runs[b]['config'][0]}" if b else "Error analysis",
+                  "Best run chosen on translated hi/bn + pilot. Examples for discussion: outputs/error_examples.csv.")
+    if b and os.path.exists(OUT + "fig_r2_confusion_best.png"):
+        image(s, OUT + "fig_r2_confusion_best.png", 0.55, 1.5, w=12.2)
+        ph = runs[b]["eval"].get("synthetic_test", runs[b]["eval"].get("pilot", {})).get("accuracy_by_phenomenon", {})
+        worst = sorted(ph.items(), key=lambda kv: kv[1]["accuracy"])[:4]
+        text(s, 0.55, 5.0, 12.2, 1.8, ["Lowest accuracy by phenomenon: " + ", ".join(f"{k} {v['accuracy']:.2f} (n={v['n']})" for k, v in worst)],
+             size=16, pad=0)
+
+    s = new_slide(7, "5 | Challenges", "No real Indic data, so every test set is a proxy",
+                  "Be explicit: synthetic test is optimistic for C; A and B are the fairer transfer measure.")
+    items = ["No official or real Hindi/Bengali data: Indic test sets are translated, synthetic or the pilot",
+             "Synthetic test shares a generator with C's training data: C's score there is optimistic",
+             "GWStance has no licence: English/translated text rebuilt by script, never committed",
+             "IndicTrans2 gated: NLLB-200 used; Gemini HTTP 503 overload: resumable generation",
+             "Single seed; English test has few Against rows"]
+    if g:
+        items.insert(2, f"Stance is ambiguous: judge disagreed on {100 * (1 - g['judge_agreement_overall']):.1f}% of filtered synthetic comments")
+    text(s, 0.55, 1.6, 12.2, 5.2, items, size=19, space=12, pad=0)
+
+    s = new_slide(8, "6 | Contributions", "Who owns what", "Each member commits their own work from their own account.")
+    table(s, 0.55, 1.6, 12.2, [2.6, 9.6], [["Member", "Responsibility"],
+          ["Sumukh Gupta", "Models and training: splits, configurations, IndicBERT v2 / MuRIL / TF-IDF runs"],
+          ["Neya Tripathi", "Dataset generation and translation; human review of synthetic and translated labels"],
+          ["Aditya Goel", "Evaluation and error analysis: metrics, confidence intervals, misclassified examples"],
+          ["Kushika Mishra", "Progress report, deck and live demo testing"]], size=17)
+
+    s = new_slide(9, "7 | Next steps", "Before the final evaluation", "")
+    text(s, 0.55, 1.6, 12.2, 5.2, ["Finish the blind human review of the 600 synthetic test rows and the translation check",
+                                   "Annotate a small set of real public Hindi/Bengali comments as a genuine test set",
+                                   "Several seeds per run; differences checked against bootstrap intervals",
+                                   "Target weak phenomena (sarcasm, implicit, Romanised) with more varied data",
+                                   "Zero-shot LLM baseline; IndicTrans2 with an approved token"], size=20, space=14, pad=0)
+    assert len(prs.slides) <= 10
+    prs.save(OUT + "Round2_Deck.pptx")
+    print(f"saved {OUT}Round2_Deck.pptx with {len(prs.slides)} slides; fit warnings: {len(WARN)}")
+    for w in WARN:
+        print("WARNING", w)
+
+
+if os.path.exists(OUT + "round2_results.json"):
+    round2_deck()
+else:
+    print("outputs/round2_results.json not found: run src/evaluate.py to build the Round 2 deck")

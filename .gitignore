@@ -23,3 +23,6 @@ models/
 outputs/smoke/
 colab_bundle.zip
 colab_results.zip
+
+# translation review samples contain GWStance/SemEval text (no licence): share privately, commit only the stats
+data/review/translation_review_*.csv

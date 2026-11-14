@@ -4,6 +4,7 @@ Reviewers fill data/review/synthetic_test_review.csv: reviewer (name), reviewer_
 comment_is_natural (yes/no). They never see the intended label. This script reports human-vs-intended agreement,
 replaces the label with the human one where they differ, and marks reviewed rows human_verified=yes.
 Run: python src/apply_review.py          Self-check only: python src/apply_review.py --check
+Translation check: python src/apply_review.py --translation  (counts from data/review/translation_review_{hi,bn}.csv)
 """
 import json
 import os
@@ -52,6 +53,26 @@ def main():
     print(f"updated {SYNTHETIC}; stats in {STATS}")
 
 
+def translation_stats(frames):
+    """frames: {lang: filled translation_review df}. Share of reviewed rows whose stance label survives translation."""
+    out = {}
+    for lang, df in frames.items():
+        done = df[df.label_survives.str.strip() != ""]
+        yes = done.label_survives.str.strip().str.lower().isin(["yes", "y"])
+        out[lang] = {"reviewed": len(done), "label_survives_rate": round(float(yes.mean()), 3) if len(done) else None,
+                     "by_stance": {k: round(float(v), 3) for k, v in yes.groupby(done.stance).mean().items()}}
+    return out
+
+
+def main_translation():
+    # the review files hold GWStance text (no licence) and stay git-ignored; only these counts are committed
+    frames = {l: pd.read_csv(f"data/review/translation_review_{l}.csv", dtype=str, keep_default_na=False)
+              for l in ("hi", "bn") if os.path.exists(f"data/review/translation_review_{l}.csv")}
+    stats = translation_stats(frames)
+    json.dump(stats, open("data/review/translation_review_stats.json", "w"), indent=1)
+    print(json.dumps(stats, indent=1), "\nwrote data/review/translation_review_stats.json")
+
+
 def selfcheck():
     syn = pd.DataFrame({"id": ["a", "b", "c"], "stance": ["Favour", "None", "Against"], "language": ["hi", "bn", "hi"],
                         "split": "test", "human_verified": "no"})
@@ -61,10 +82,15 @@ def selfcheck():
     assert st["reviewed"] == 2 and st["labels_changed"] == 1 and st["agreement_with_intended"] == 0.5
     assert out.stance.tolist() == ["Favour", "Against", "Against"]  # b relabelled; c unreviewed and untouched
     assert out.human_verified.tolist() == ["yes", "yes", "no"]
+    tr = pd.DataFrame({"stance": ["Favour", "Against", "None"], "label_survives": ["yes", "no", ""]})
+    ts = translation_stats({"hi": tr})["hi"]
+    assert ts["reviewed"] == 2 and ts["label_survives_rate"] == 0.5
     print("apply_review.py self-check passed")
 
 
 if __name__ == "__main__":
     selfcheck()
-    if "--check" not in sys.argv:
+    if "--translation" in sys.argv:  # python src/apply_review.py --translation
+        main_translation()
+    elif "--check" not in sys.argv:
         main()
