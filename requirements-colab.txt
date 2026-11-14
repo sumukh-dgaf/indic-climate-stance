@@ -1,0 +1,6 @@
+# Colab: only what Colab does not preinstall. Colab's own torch/pandas/scikit-learn are kept (reinstalling them
+# costs minutes and can break its preinstalled packages); their versions are written into every outputs/runs/*.json.
+transformers==5.20.2
+tokenizers==0.23.3
+sentencepiece==0.2.3
+safetensors==0.8.0

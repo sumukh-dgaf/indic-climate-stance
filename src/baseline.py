@@ -5,7 +5,8 @@ Experiments
   B  English high-confidence (1,686): same config, secondary
   C  Pilot hi+bn (150, synthetic, DEV ONLY): stratified 5-fold CV
   D  Cross-lingual transfer: train on ALL English, test on the pilot (the situation of the shared task)
-Run: python src/baseline.py
+Run: python src/baseline.py                      (Milestone 1)
+     python src/baseline.py --config C_full      (Round 2: same data + prediction format as the transformers)
 """
 import json
 import os
@@ -236,6 +237,34 @@ def main():
     print("wrote outputs/baseline_results.md/.json, fig_confusion_*.png, fig_baseline_comparison.png")
 
 
+def run_config(config):
+    """Round 2: best Milestone 1 config (word+char TF-IDF + LogReg) on the SAME data/eval sets as the transformers."""
+    import joblib
+    import time
+    from data import config_data, eval_sets, write_preds
+    t0 = time.time()
+    tr, va, evs = config_data(config, "train"), config_data(config, "val"), eval_sets()
+    m = model("word+char", "LogReg").fit(tr.comment.map(clean), tr.stance)
+    order = [list(m.classes_).index(lab) for lab in LABELS]  # sklearn sorts classes alphabetically; reorder to LABELS
+    proba = lambda d: m.predict_proba(d.comment.map(clean))[:, order]  # noqa: E731
+    f1 = lambda d, p: float(f1_score(d.stance, [LABELS[i] for i in p.argmax(1)], average="macro", labels=LABELS, zero_division=0))  # noqa: E731
+    quick = {}
+    for ev, df in evs.items():
+        p = proba(df)
+        write_preds(df, p, f"outputs/preds/tfidf_{config}_{ev}.csv")
+        quick[ev] = round(f1(df, p), 4)
+    os.makedirs("models", exist_ok=True)
+    joblib.dump(m, f"models/tfidf_{config}.joblib")  # demo.py falls back to this when no transformer is present
+    run = {"name": f"tfidf_{config}", "model": "tfidf", "base_model": "TF-IDF word 1-2 + char_wb 2-5, LogisticRegression",
+           "config": config, "n_train": len(tr), "n_train_by_language": tr.language.value_counts().to_dict(), "n_val": len(va),
+           "settings": {"class_weight": "balanced", "seed": SEED}, "best_val_macro_f1": round(f1(va, proba(va)), 4),
+           "training_minutes": round((time.time() - t0) / 60, 2), "eval_sets": {k: len(v) for k, v in evs.items()},
+           "eval_macro_f1_quick": quick}
+    os.makedirs("outputs/runs", exist_ok=True)
+    json.dump(run, open(f"outputs/runs/tfidf_{config}.json", "w"), indent=1)
+    print(f"tfidf {config}: val macro-F1 {run['best_val_macro_f1']:.3f}; quick test macro-F1 {quick}")
+
+
 def selfcheck():
     # toy 3-class problem: the model must separate it, and the literal label "None" must survive end to end
     X = pd.Series(["good great fine"] * 10 + ["bad awful worse"] * 10 + ["video link sub"] * 10)
@@ -252,4 +281,7 @@ def selfcheck():
 
 if __name__ == "__main__":
     selfcheck()
-    main()
+    if "--config" in sys.argv:  # Round 2: python src/baseline.py --config {A_english,B_translated,C_full}
+        run_config(sys.argv[sys.argv.index("--config") + 1])
+    else:
+        main()  # Milestone 1 experiments, unchanged

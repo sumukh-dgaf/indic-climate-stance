@@ -110,6 +110,92 @@ def load_english(path="data/english_stance_merged.csv", ties_out="data/gwstance_
     return validate(df, os.path.basename(path))
 
 
+# ---------------- Round 2: named training configurations and fixed evaluation sets (shared by baseline + transformers)
+ENG = "data/splits/english_{}.csv"             # make_splits.py (git-ignored)
+TRANSLATED = "data/translated/{}_{}.csv"       # translate.py: (hi|bn, split) (git-ignored)
+SYNTHETIC = "data/synthetic/indic_synthetic_v1.csv"
+PILOT = "data/pilot_indic_stance.csv"
+CONFIGS = {"A_english": ["english"], "B_translated": ["english", "translated"],
+           "C_full": ["english", "translated", "synthetic"]}
+EVAL_SETS = ["english_test", "translated_hi_test", "translated_bn_test", "synthetic_test", "pilot"]
+STD_COLS = ["id", "comment", "stance", "language", "phenomenon", "source"]
+
+
+def _std(df, name, **fill):
+    df = df.copy()
+    for col, val in fill.items():
+        if col not in df.columns:
+            df[col] = val
+    bad = set(df.stance) - set(LABELS)
+    assert not bad, f"{name}: labels outside {LABELS}: {bad}"
+    return df[STD_COLS].reset_index(drop=True)
+
+
+def _read(path, **fill):
+    return _std(pd.read_csv(path, dtype=str, keep_default_na=False), path, **fill)  # "None" is a label, never NaN
+
+
+def load_part(kind, split):
+    """One data family for one split, or None if its file does not exist yet."""
+    if kind == "english":
+        paths = [(ENG.format(split), {"language": "en"})]
+    elif kind == "translated":
+        paths = [(TRANSLATED.format(lang, split), {"language": lang}) for lang in ("hi", "bn")]
+    elif kind == "synthetic":
+        if not os.path.exists(SYNTHETIC):
+            return None
+        df = pd.read_csv(SYNTHETIC, dtype=str, keep_default_na=False)
+        return _std(df[df.split == split], SYNTHETIC)
+    else:
+        raise ValueError(kind)
+    parts = [_read(p, phenomenon="", **f) for p, f in paths if os.path.exists(p)]
+    return pd.concat(parts, ignore_index=True) if len(parts) == len(paths) else None
+
+
+def config_data(config, split, strict=True):
+    """Concatenate every data family of a configuration for one split. strict=False (smoke) skips missing files."""
+    parts = []
+    for kind in CONFIGS[config]:
+        d = load_part(kind, split)
+        if d is None:
+            if strict:
+                raise FileNotFoundError(f"config {config} needs '{kind}' {split} data; run the script that builds it")
+            print(f"[data] WARNING: '{kind}' {split} data missing, skipped (smoke mode)")
+            continue
+        parts.append(d)
+    return pd.concat(parts, ignore_index=True)
+
+
+def eval_sets():
+    """Every evaluation set that exists, by name. Missing ones are reported, never silently dropped."""
+    out = {}
+    syn = load_part("synthetic", "test")
+    found = {"english_test": load_part("english", "test"), "synthetic_test": syn,
+             "pilot": _read(PILOT, source="team-authored pilot (synthetic, dev only)") if os.path.exists(PILOT) else None}
+    for lang in ("hi", "bn"):
+        p = TRANSLATED.format(lang, "test")
+        found[f"translated_{lang}_test"] = _read(p, phenomenon="", language=lang) if os.path.exists(p) else None
+    for name in EVAL_SETS:
+        if found[name] is None:
+            print(f"[data] WARNING: evaluation set {name} not found, not predicted")
+        else:
+            out[name] = found[name]
+    return out
+
+
+def write_preds(df, probs, path):
+    """Per-example predictions: id, gold, pred, p_favour, p_against, p_none, language, phenomenon, source."""
+    probs = np.asarray(probs)
+    assert probs.shape == (len(df), 3)
+    out = pd.DataFrame({"id": df["id"].values, "gold": df["stance"].values,
+                        "pred": [LABELS[i] for i in probs.argmax(1)],
+                        "p_favour": probs[:, 0].round(5), "p_against": probs[:, 1].round(5), "p_none": probs[:, 2].round(5),
+                        "language": df["language"].values, "phenomenon": df["phenomenon"].values, "source": df["source"].values})
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    out.to_csv(path, index=False)
+    return out
+
+
 if __name__ == "__main__":
     import tempfile
     d = tempfile.mkdtemp()
@@ -151,4 +237,12 @@ if __name__ == "__main__":
             raise AssertionError(f"validate accepted bad file: {why}")
         except ValueError:
             pass
+    # Round 2: prediction files keep the literal "None" label and probability column order
+    toy = pd.DataFrame({"id": ["a", "b"], "stance": ["None", "Favour"], "language": ["hi", "bn"],
+                        "phenomenon": ["plain", ""], "source": ["s", "s"]})
+    pp = os.path.join(d, "preds", "p.csv")
+    write_preds(toy, [[0.1, 0.2, 0.7], [0.8, 0.1, 0.1]], pp)
+    back = pd.read_csv(pp, dtype=str, keep_default_na=False)
+    assert back.pred.tolist() == ["None", "Favour"] and back.gold.tolist() == ["None", "Favour"]
+    assert set(CONFIGS["C_full"]) >= set(CONFIGS["B_translated"]) >= set(CONFIGS["A_english"])
     print("data.py self-check passed")
