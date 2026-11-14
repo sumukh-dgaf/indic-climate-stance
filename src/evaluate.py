@@ -229,6 +229,7 @@ def main():
         ex = error_examples(runs, best)
         ex.to_csv(OUT + "error_examples.csv", index=False)
     write_md(res)
+    update_readme(res)
     print(f"wrote outputs/round2_results.md/.json, fig_r2_*.png, error_examples.csv; best run: {best}")
 
 
@@ -317,6 +318,28 @@ def write_md(res):
                      f"{r['training_minutes']:.1f} | {r.get('gpu') or r.get('device') or 'cpu'} |")
     L.append("\nValidation scores are not comparable across configurations: each configuration selects on its own validation data.")
     open(OUT + "round2_results.md", "w", encoding="utf-8").write("\n".join(L) + "\n")
+
+
+def update_readme(res, path="README.md"):
+    """Rewrite the generated results table between the RESULTS markers of the README."""
+    R = res["runs"]
+    names, sets = ordered(R, R), list(res["eval_set_sizes"])
+    verified = res.get("synthetic_test_labels") == "yes"
+    L = ["Test macro-F1 (95% bootstrap CIs in `outputs/round2_results.md`):", "",
+         "| Model | Config | " + " | ".join(SET_NAMES[s] + ("" if s != "synthetic_test" or verified else " *") for s in sets) + " |",
+         "|---|---|" + "---|" * len(sets)]
+    for n in names:
+        L.append(f"| {MODEL_NAMES.get(R[n]['model'], R[n]['model'])} | {R[n]['config']} | " +
+                 " | ".join(f"{R[n]['eval'][s]['macro_f1']:.3f}" if s in R[n]["eval"] else "not run" for s in sets) + " |")
+    L.append("| Majority floor | - | " + " | ".join(
+        f"{next(R[n]['eval'][s]['floor_macro_f1'] for n in names if s in R[n]['eval']):.3f}" for s in sets) + " |")
+    if res["best_run"]:
+        L += ["", f"Best run (rule: {res['best_rule']}): **{res['best_run']}**."]
+    if not verified:
+        L += ["", "\\* synthetic test labels not yet human-verified."]
+    text = open(path, encoding="utf-8").read()
+    a, b = text.index("<!-- RESULTS:START -->"), text.index("<!-- RESULTS:END -->")
+    open(path, "w", encoding="utf-8").write(text[:a] + "<!-- RESULTS:START -->\n" + "\n".join(L) + "\n" + text[b:])
 
 
 def selfcheck():

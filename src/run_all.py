@@ -24,6 +24,7 @@ RUNS = [("indicbert", "C_full"), ("indicbert", "A_english"), ("indicbert", "B_tr
         ("tfidf", "A_english"), ("tfidf", "B_translated"), ("tfidf", "C_full"),
         ("muril", "C_full"), ("muril", "A_english")]
 KEEP_MODEL = "indicbert_C_full"
+KEEP = {KEEP_MODEL, "indicbert_B_translated"}  # demo model and its fallback (demo.py)
 RESULTS = ["outputs/preds/*.csv", "outputs/runs/*.json", "data/translated/*", "data/review/translation_review_*.csv",
            f"models/{KEEP_MODEL}/*"]
 
@@ -36,7 +37,7 @@ def command(model, config):
 
 def drop_checkpoint(model, name):
     # only once every eval set (incl. the synthetic test) is predicted; the demo's checkpoint is always kept
-    if model != "tfidf" and name != KEEP_MODEL and os.path.exists(f"outputs/preds/{name}_synthetic_test.csv"):
+    if model != "tfidf" and name not in KEEP and os.path.exists(f"outputs/preds/{name}_synthetic_test.csv"):
         shutil.rmtree(f"models/{name}", ignore_errors=True)
 
 

@@ -3,8 +3,8 @@
   python src/demo.py "ये सब पश्चिमी देशों का प्रोपेगेंडा है"     one comment: label + three probabilities
   python src/demo.py --examples                               ten fixed examples (Hindi, Bengali, code-mixed, Romanised, ...)
   python src/demo.py                                          interactive prompt (empty line or Ctrl+C to quit)
-Loads models/indicbert_C_full/. If that is missing or broken it falls back to TF-IDF + LogReg AND SAYS SO, so the demo
-never fails outright. Self-check: python src/demo.py --check
+Loads models/indicbert_C_full/. If missing or broken it falls back to IndicBERT v2 B, then TF-IDF + LogReg, AND SAYS SO,
+so the demo never fails outright. Self-check: python src/demo.py --check
 """
 import os
 import sys
@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from data import LABELS  # noqa: E402
 from preprocess import clean  # noqa: E402
 
-MODEL_DIR = "models/indicbert_C_full"
+MODEL_DIRS = ["models/indicbert_C_full", "models/indicbert_B_translated"]  # main model, then the B fallback
 TFIDF = ["models/tfidf_C_full.joblib", "models/tfidf_B_translated.joblib", "models/tfidf_A_english.joblib"]
 # Demo inputs written for the live demo (not part of any dataset). "written as" = the stance the author intended.
 EXAMPLES = [
@@ -49,16 +49,17 @@ def tfidf_classifier():
 
 def load_classifier():
     """Returns (description, function texts -> (n, 3) probabilities in LABELS order)."""
-    if os.path.isdir(MODEL_DIR):
+    for k, model_dir in enumerate(MODEL_DIRS):
+        if not os.path.isdir(model_dir):
+            print(f"!! {model_dir} not found")
+            continue
         try:
             from predict import load_model, predict_probs
-            tok, net, info = load_model(MODEL_DIR)
-            return f"IndicBERT v2 fine-tuned on configuration C ({MODEL_DIR})", \
-                lambda texts: predict_probs(net, tok, texts, info["max_len"], "cpu")
+            tok, net, info = load_model(model_dir)
+            desc = f"IndicBERT v2 fine-tuned on configuration {info['config']} ({model_dir})"
+            return ("FALLBACK: " if k else "") + desc, lambda texts: predict_probs(net, tok, texts, info["max_len"], "cpu")
         except Exception as e:  # broken download, missing torch...: degrade, never crash on stage
-            print(f"!! could not load {MODEL_DIR} ({type(e).__name__}: {str(e)[:120]})")
-    else:
-        print(f"!! {MODEL_DIR} not found (unzip colab_results.zip in the repo root)")
+            print(f"!! could not load {model_dir} ({type(e).__name__}: {str(e)[:120]})")
     desc, m = tfidf_classifier()
     order = [list(m.classes_).index(lab) for lab in LABELS]
     return desc, lambda texts: m.predict_proba([clean(t) for t in texts])[:, order]
@@ -76,7 +77,7 @@ def main():
     desc, clf = load_classifier()
     print(f"Model: {desc}")
     if desc.startswith("FALLBACK"):
-        print("   (the transformer is not loaded: these are the BASELINE's predictions)")
+        print("   (the main model models/indicbert_C_full is not loaded: see the messages above)")
     if args == ["--examples"]:
         probs = clf([t for t, _, _ in EXAMPLES])
         hits = 0
