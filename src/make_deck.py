@@ -353,68 +353,172 @@ print("fit warnings:", len(WARN))
 
 
 # ================================================================== Round 2 deck (every number from round2_results.json)
+def class_chart(ds, path):
+    """Stacked 100% bars: class distribution of each labelled data family (counts written on the bars)."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    fam = [("English, human-labelled", {k: sum(ds["english"][s][k] for s in ds["english"]) for k in ("Favour", "Against", "None")})]
+    for lang, name in (("hi", "Hindi, synthetic"), ("bn", "Bengali, synthetic")):
+        if lang in ds.get("synthetic_by_language", {}):
+            fam.append((name, ds["synthetic_by_language"][lang]))
+    fam.append(("Pilot (hi+bn)", ds["pilot"]))
+    fig, ax = plt.subplots(figsize=(6.4, 3.4), dpi=200)
+    for r, (name, d) in enumerate(reversed(fam)):
+        tot, left = sum(d[k] for k in ("Favour", "Against", "None")), 0
+        for k in ("Favour", "Against", "None"):
+            w = d[k] / tot
+            ax.barh(r, w, left=left, color="#" + str(LABEL_COLOR[k]), edgecolor="white", height=0.62)
+            ax.text(left + w / 2, r, f"{d[k]:,}", ha="center", va="center", color="white", fontsize=9, fontweight="bold")
+            left += w
+    ax.set_yticks(range(len(fam)), [n for n, _ in reversed(fam)], fontsize=9.5)
+    ax.set_xlim(0, 1)
+    ax.xaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0))
+    ax.tick_params(axis="x", labelsize=8.5)
+    for sp in ("top", "right", "left"):
+        ax.spines[sp].set_visible(False)
+    ax.legend(handles=[matplotlib.patches.Patch(color="#" + str(LABEL_COLOR[k]), label=k) for k in ("Favour", "Against", "None")],
+              ncol=3, loc="lower center", bbox_to_anchor=(0.5, 1.0), frameon=False, fontsize=9)
+    fig.tight_layout()
+    fig.savefig(path)
+    plt.close(fig)
+
+
 def round2_deck():
+    """Final 10-slide Round 2 deck. Every number comes from outputs/round2_results.json (written by evaluate.py)."""
     global prs, BLANK, FOOTER, TOTAL
     import sys
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from make_report import MODEL, SETS, analysis, facts
+    from make_report import MODEL, SETS, facts, overlap
     R = json.load(open(OUT + "round2_results.json", encoding="utf-8"))
     F = facts(R)
     runs, ds, get, g = R["runs"], R["dataset"], F["get"], F["gen"]
     prs = Presentation()
     prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
     BLANK = prs.slide_layouts[6]
-    FOOTER, TOTAL = "Round 2", 9
+    FOOTER, TOTAL = "Round 2", 10
     WARN.clear()
     star = "" if F["verified"] else "*"
+    unverified = "" if F["verified"] else "*Synthetic test labels not yet human-verified."
+    LIGHT = RGBColor(0xC9, 0xD3, 0xE3)
 
+    # 1 title
     s = prs.slides.add_slide(BLANK)
     text(s, 0, 0, 13.333, 7.5, [""], fill=NAVY)
-    text(s, 0.8, 0.7, 11, 0.5, ["CSET346  NATURAL LANGUAGE PROCESSING  |  ROUND 2 PROGRESS"], size=16, color=TEAL, bold=True, pad=0)
-    text(s, 0.8, 1.5, 11.8, 2.5, ["Transformer stance detection for Hindi and Bengali climate comments"], size=44, color=WHITE, bold=True, pad=0)
-    text(s, 0.8, 3.9, 11.5, 0.9, ["IndicBERT v2 vs MuRIL vs TF-IDF, trained on English, translated and synthetic data"], size=22,
-         color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
-    text(s, 0.8, 4.85, 4.6, 2.2, ["Sumukh Gupta  |  S24CSEU0570", "Neya Tripathi  |  S24CSEU0609", "Aaditya Goel  |  S24CSEU0614",
+    text(s, 0.8, 0.7, 11, 0.5, ["CSET346  NATURAL LANGUAGE PROCESSING  |  ROUND 2"], size=16, color=TEAL, bold=True, pad=0)
+    text(s, 0.8, 1.45, 11.8, 2.2, ["Stance Detection on Climate-Change Comments in Hindi and Bengali"], size=42, color=WHITE,
+         bold=True, pad=0)
+    text(s, 0.8, 3.65, 11.5, 0.9, ["Fine-tuned IndicBERT v2, cross-lingual transfer from English, and a new Hindi-Bengali dataset"],
+         size=21, color=LIGHT, pad=0)
+    text(s, 0.8, 4.75, 4.6, 2.2, ["Sumukh Gupta  |  S24CSEU0570", "Neya Tripathi  |  S24CSEU0609", "Aaditya Goel  |  S24CSEU0614",
                                   "Kushika Mishra  |  S24CSEU0652", "Eklavya Sharma  |  S24CSEU0798"], size=17, color=WHITE, pad=0)
-    text(s, 5.6, 4.85, 4.0, 2.2, ["B.Tech CSE, Bennett University", "Instructor: Dr. Supriya Chanda"], size=17,
-         color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
+    text(s, 5.8, 4.75, 6.8, 2.2, ["B.Tech CSE, Bennett University", "Instructor: Dr. Supriya Chanda",
+                                  "github.com/sumukh-dgaf/indic-climate-stance"], size=17, color=LIGHT, pad=0)
 
-    s = new_slide(2, "1 | Dataset", "Four data families, labelled by provenance",
-                  "No official data. None of these are real Hindi/Bengali comments; say so.")
+    # 2 task
+    s = new_slide(2, "The task", "Is a comment for or against the claim?",
+                  "Examples are illustrative, written in Romanised Hindi so they display on any laptop.")
+    text(s, 0.55, 1.6, 12.2, 0.8, ["Claim:  “Climate change and global warming is a serious concern.”"], size=22, bold=True,
+         color=WHITE, fill=NAVY, anchor=MSO_ANCHOR.MIDDLE, pad=0.25)
+    cards = [("Favour", "agrees it is serious", "“Is baar garmi ne saare record tod diye, ab kuch karna padega”"),
+             ("Against", "denies or dismisses it", "“Global warming sab propaganda hai, thand to har saal padti hai”"),
+             ("None", "no stance on the claim", "“Video ka link bhejo bhai”")]
+    for k, (lab, mean, ex) in enumerate(cards):
+        x = 0.55 + k * 4.12
+        text(s, x, 2.65, 3.95, 0.55, [lab], size=20, bold=True, color=WHITE, fill=LABEL_COLOR[lab], anchor=MSO_ANCHOR.MIDDLE, pad=0.15)
+        text(s, x, 3.2, 3.95, 1.55, [[(mean, {"bold": True})], [(ex, {"italic": True})]], size=16, fill=PANEL, pad=0.15, space=4)
+    text(s, 0.55, 4.95, 7.6, 1.9, [[("Why it is hard", {"bold": True, "color": NAVY})], "Stance is often implicit, sarcastic or negated",
+                                   "Code-mixed and Romanised spelling varies freely",
+                                   "No labelled Hindi/Bengali data for this claim exists"], size=18, pad=0, space=5)
+    text(s, 8.45, 4.95, 4.3, 1.9, [[("Metric: macro-F1", {"bold": True})],
+                                   "F1 of the three classes averaged equally, so the rare Against class counts as much as the others"],
+         size=16, fill=PANEL, pad=0.18, space=6)
+
+    # 3 dataset
+    s = new_slide(3, "1 | Dataset", "Four data families, each labelled by provenance",
+                  "No official data was provided. None of these are real Hindi/Bengali YouTube comments; say so.")
     rows = [["Data family", "Train", "Val", "Test"]]
-    rows.append(["English (human-labelled)"] + [f"{F['eng'][k]:,}" for k in ("train", "val", "test")])
+    rows.append(["English, human-labelled (GWStance + SemEval-2016)"] + [f"{F['eng'][k]:,}" for k in ("train", "val", "test")])
     for lang, name in (("hi", "Hindi"), ("bn", "Bengali")):
         if f"{lang}_train" in F["tr_sizes"]:
-            rows.append([f"{name} (machine-translated)"] + [f"{F['tr_sizes'][f'{lang}_{k}']['total']:,}" for k in ("train", "val", "test")])
+            rows.append([f"{name}, machine-translated (NLLB-200)"] + [f"{F['tr_sizes'][f'{lang}_{k}']['total']:,}" for k in ("train", "val", "test")])
     if F["syn"]:
-        rows.append(["Hindi+Bengali (synthetic, LLM)"] + [f"{F['syn'][k]:,}" for k in ("train", "val", "test")])
-    rows.append(["Pilot (team-authored synthetic)", "-", "-", str(F["pilot"])])
-    table(s, 0.55, 1.6, 7.3, [3.6, 1.2, 1.2, 1.2], rows, size=15)
-    funnel = ["Synthetic pipeline (Gemini)"]
-    if g:
-        funnel += [f"{g['generated']:,} generated", f"-{g['removed_format_or_length']:,} length/format",
-                   f"-{g['removed_script']:,} wrong script", f"-{g['removed_exact_duplicate'] + g['removed_near_duplicate']:,} duplicates",
-                   f"judge agrees: {100 * g['judge_agreement_overall']:.1f}%", f"{g['kept_after_quota']:,} kept"]
-    else:
-        funnel.append("not yet generated")
-    text(s, 8.2, 1.6, 4.6, 4.6, funnel, size=17, fill=PANEL, pad=0.2, space=8)
-    text(s, 0.55, 6.3, 12.2, 0.6, [f"English test has only {F['eng_against_test']} Against rows."
-                                   + ("" if F["verified"] else "  *Synthetic test labels not yet human-verified.")], size=14, color=MUTED, pad=0)
+        rows.append(["Hindi + Bengali, synthetic (Gemini)"] + [f"{F['syn'][k]:,}" for k in ("train", "val", "test")])
+    rows.append(["Pilot, team-authored synthetic", "-", "-", str(F["pilot"])])
+    table(s, 0.55, 1.65, 6.3, [3.6, 0.9, 0.9, 0.9], rows, size=13, row_h=0.55)
+    chart = OUT + "fig_r2_class_distribution.png"
+    class_chart(ds, chart)
+    image(s, chart, 7.05, 1.55, w=5.75)
+    text(s, 0.55, 5.35, 12.2, 1.5, [f"Class distribution: Against is the rare class in English ({F['eng_against_test']} of "
+                                    f"{F['eng']['test']} test rows); the synthetic data was generated balanced by design.",
+                                    "Translated sets copy the English labels and class distribution." + ("  " + unverified if unverified else "")],
+         size=15, color=MUTED, pad=0, space=4)
 
-    s = new_slide(3, "2 | Methodology", "Pair input, three data configurations, three models",
-                  "Claim stays English. Selection on each configuration's own validation data; tests never used to select.")
-    steps = ["English splits", "Translate (NLLB)", "Gemini synthetic + judge", "Train A / B / C", "Predict 5 test sets", "evaluate.py"]
-    for k, st in enumerate(steps):
-        text(s, 0.55 + k * 2.08, 1.7, 1.9, 1.0, [st], size=15, bold=True, color=WHITE, fill=[TEAL, NAVY][k % 2],
+    # 4 data building
+    s = new_slide(4, "1 | Dataset", "How the Hindi and Bengali data was built and checked",
+                  "Split first, then translate: a sentence and its translation never sit in different splits.")
+    flow = [f"{g['generated']:,} generated" if g else "generated", f"-{g['removed_script']:,} wrong script" if g else "script check",
+            f"-{g['removed_exact_duplicate'] + g['removed_near_duplicate']:,} duplicates" if g else "duplicates",
+            f"-{g['removed_judge_disagrees']:,} judge disagrees" if g else "judge", f"{g['kept_after_quota']:,} kept" if g else "kept"]
+    for k, st in enumerate(flow):
+        text(s, 0.55 + k * 2.47, 1.65, 2.3, 0.9, [st], size=16, bold=True, color=WHITE, fill=[TEAL, NAVY][k % 2],
              align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-    table(s, 0.55, 3.1, 12.2, [1.4, 6.0, 4.8], [["Config", "Training data", "Validation used for selection"],
-          ["A", "English (human-labelled)", "English val"], ["B", "+ machine-translated Hindi/Bengali", "English + translated val"],
-          ["C", "+ synthetic Hindi/Bengali", "English + translated + synthetic val"]], size=15)
-    text(s, 0.55, 5.3, 12.2, 1.5, ["Input: (English claim, comment), max 128 tokens.  Models: IndicBERT v2 (main), MuRIL, TF-IDF + LogReg.",
-                                   "Class-weighted cross-entropy, lr 2e-5, batch 32, 5 epochs, 10% warmup, fp16, seed 42."], size=16, pad=0)
+    left = [[("Synthetic comments (Gemini)", {"bold": True, "color": NAVY})], "Generated per language, label and phenomenon: code-mixed, Romanised, sarcasm, negation, "
+            "implicit, emoji, off-topic", "A second Gemini model judges each comment without seeing the intended label"]
+    if g:
+        left.append(f"Judge agreement {100 * g['judge_agreement_overall']:.1f}% overall, only "
+                    f"{100 * g['judge_agreement_by_phenomenon']['sarcasm']:.1f}% on sarcasm")
+    text(s, 0.55, 2.85, 6.0, 3.9, left, size=17, pad=0, space=8)
+    rv, tr = ds.get("synthetic_review"), ds.get("translation_review")
+    right = [[("Human checks by the team", {"bold": True, "color": NAVY})]]
+    right.append(f"Blind review of the {rv['reviewed']} synthetic test comments: agreed with the intended label "
+                 f"{100 * rv['agreement_with_intended']:.1f}%, {rv['labels_changed']} labels corrected" if rv else
+                 "Blind review of all 600 synthetic test comments: in progress (labels not yet human-verified)")
+    right.append("Translation check, 100 rows per language: stance kept in " + ", ".join(
+        f"{100 * tr[l]['label_survives_rate']:.0f}% ({'Hindi' if l == 'hi' else 'Bengali'})" for l in ("hi", "bn")
+        if tr.get(l, {}).get("label_survives_rate") is not None) if tr else "Translation check, 100 rows per language: in progress")
+    right.append("English and translated text is rebuilt by script, never committed (GWStance has no licence)")
+    text(s, 6.85, 2.85, 5.9, 3.9, right, size=17, fill=PANEL, pad=0.2, space=8)
 
-    s = new_slide(4, "3 | Results", "Test macro-F1 by model and configuration",
-                  "Numbers from outputs/round2_results.json. The synthetic column favours C (same generator).")
+    # 5 methodology
+    s = new_slide(5, "2 | Methodology", "Pair input, three data configurations, three models",
+                  "Claim stays English. Each configuration selects its best epoch on its own validation data; tests never used to select.")
+    steps = ["English splits", "Translate (NLLB)", "Synthetic + judge", "Train A / B / C", "Predict 5 test sets", "Evaluate"]
+    for k, st in enumerate(steps):
+        text(s, 0.55 + k * 2.08, 1.65, 1.9, 0.9, [st], size=15, bold=True, color=WHITE, fill=[TEAL, NAVY][k % 2],
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    table(s, 0.55, 2.85, 7.4, [0.9, 3.6, 2.9], [["Config", "Training data", "Selection data"],
+          ["A", "English, human-labelled", "English val"], ["B", "+ translated Hindi/Bengali", "+ translated val"],
+          ["C", "+ synthetic Hindi/Bengali", "+ synthetic val"]], size=16, row_h=0.6)
+    text(s, 8.2, 2.85, 4.55, 3.95, [[("Models", {"bold": True})], "IndicBERT v2 (main), MuRIL, TF-IDF + LogReg baseline",
+                                    [("Input", {"bold": True})], "(English claim, comment) pair, max 128 tokens",
+                                    [("Training", {"bold": True})], "Class-weighted cross-entropy, lr 2e-5, batch 32, up to 5 epochs, "
+                                    "10% warmup, mixed precision, seed 42"], size=16, fill=PANEL, pad=0.18, space=5)
+    text(s, 0.55, 5.25, 7.4, 1.5, ["Class weights: Against is rare, so its errors count more.",
+                                   "The claim in every input makes the model judge stance toward it, not just the topic."],
+         size=17, color=MUTED, pad=0, space=6)
+
+    # 6 implementation
+    s = new_slide(6, "3 | Implementation", "Running code: one script per step, all on a laptop GPU",
+                  "Demo live: python src/demo.py --examples, and python src/train_transformer.py --smoke (about 75 s).")
+    table(s, 0.55, 1.6, 7.6, [2.6, 3.0, 2.0], [["Step", "Script", "Ran on"],
+          ["Data splits", "make_splits.py", "laptop"], ["Synthetic data + judge", "generate_synthetic.py", "Gemini API"],
+          ["Translation", "translate.py (NLLB-200)", "GPU"], ["Training A/B/C", "run_all.py, train_transformer.py", "GPU"],
+          ["Evaluation", "evaluate.py", "laptop"], ["Human review", "apply_review.py", "team"],
+          ["Live demo", "demo.py", "laptop"]], size=15, row_h=0.6)
+    rinfo = [r["run"] for r in runs.values() if r.get("run", {}).get("device") == "cuda"]
+    mins = [r["training_minutes"] for r in rinfo if "training_minutes" in r]
+    gpu = next((r["gpu"] for r in rinfo if r.get("gpu")), "GPU")
+    facts_panel = [[("Facts", {"bold": True, "color": NAVY})], f"{len(runs)} training runs on {gpu}"]
+    if mins:
+        facts_panel.append(f"Transformer runs took {min(mins):.1f} to {max(mins):.1f} minutes each")
+    facts_panel += ["Every script ends with a built-in self-check", "Each run writes its predictions; every number in this deck "
+                    "and the report is generated from them, never typed", "Demo shows the label and class probabilities for any comment"]
+    text(s, 8.4, 1.6, 4.35, 5.2, facts_panel, size=16, fill=PANEL, pad=0.2, space=8)
+
+    # 7 results table
+    s = new_slide(7, "4 | Results", "Test macro-F1 for every model and configuration",
+                  "Majority floor = always predicting the most common class. The synthetic column favours C (same generator).")
     order = [f"{m}_{c}" for m in ("tfidf", "muril", "indicbert") for c in ("A_english", "B_translated", "C_full")]
     rows = [["Model", "Cfg"] + [lab + (star if sk == "synthetic_test" else "") for sk, lab in SETS]]
     for name in order:
@@ -425,53 +529,88 @@ def round2_deck():
              if any(sk in r["eval"] for r in runs.values())}
     rows.append(["Majority floor", "-"] + [f"{floor[sk]:.3f}" if sk in floor else "-" for sk, _ in SETS])
     table(s, 0.55, 1.55, 12.2, [2.6, 0.8] + [1.75] * 5, rows, size=14, row_h=0.42)
-
-    s = new_slide(5, "3 | Results", "What each data family adds, and what is lost across languages",
-                  "Bars show 95% bootstrap confidence intervals; overlapping intervals mean no clear difference.")
-    image(s, OUT + "fig_r2_macro_f1.png", 0.55, 1.5, w=7.6)
-    text(s, 8.35, 1.5, 4.45, 5.3, analysis(R, F)[:3], size=13, fill=PANEL, pad=0.15, space=8)
-
     b = R["best_run"]
-    s = new_slide(6, "4 | Error analysis", f"Where the best run fails: {MODEL[runs[b]['model']]} {runs[b]['config'][0]}" if b else "Error analysis",
-                  "Best run chosen on translated hi/bn + pilot. Examples for discussion: outputs/error_examples.csv.")
-    if b and os.path.exists(OUT + "fig_r2_confusion_best.png"):
+    text(s, 0.55, 6.15, 12.2, 0.7, [f"Best run (mean over translated Hindi, translated Bengali and pilot): "
+                                    f"{MODEL[runs[b]['model']]} {runs[b]['config'][0]}." + ("  " + unverified if unverified else "")],
+         size=14, color=MUTED, pad=0)
+
+    # 8 findings
+    s = new_slide(8, "4 | Results", "Three findings",
+                  "Bars show 95% bootstrap confidence intervals; overlapping intervals mean no clear difference.")
+    image(s, OUT + "fig_r2_macro_f1.png", 0.55, 1.6, w=7.3)
+    tr_sets = ("translated_hi_test", "translated_bn_test")
+    mean2 = lambda n: sum(get(n, x) for x in tr_sets) / 2  # noqa: E731
+    finds = []
+    if all(n in runs for n in ("tfidf_A_english", "indicbert_A_english")):
+        finds.append(("Multilingual pre-training transfers", f"Trained on English only: TF-IDF {mean2('tfidf_A_english'):.2f} vs "
+                      f"IndicBERT v2 {mean2('indicbert_A_english'):.2f} on translated Hindi/Bengali"))
+    if all(n in runs for n in ("indicbert_A_english", "indicbert_B_translated")):
+        finds.append(("Translated data is the big gain", "IndicBERT v2 B vs A: Hindi "
+                      f"{get('indicbert_B_translated', tr_sets[0]) - get('indicbert_A_english', tr_sets[0]):+.3f}, Bengali "
+                      f"{get('indicbert_B_translated', tr_sets[1]) - get('indicbert_A_english', tr_sets[1]):+.3f}"))
+    if all(n in runs for n in ("indicbert_B_translated", "indicbert_C_full")):
+        same = all(overlap(runs["indicbert_B_translated"]["eval"][x]["ci95"], runs["indicbert_C_full"]["eval"][x]["ci95"]) for x in tr_sets)
+        finds.append(("Synthetic data: no clear gain on fair tests", "C vs B: Hindi "
+                      f"{get('indicbert_C_full', tr_sets[0]) - get('indicbert_B_translated', tr_sets[0]):+.3f}, Bengali "
+                      f"{get('indicbert_C_full', tr_sets[1]) - get('indicbert_B_translated', tr_sets[1]):+.3f}"
+                      + ("; intervals overlap" if same else "")))
+    for k, (head, body) in enumerate(finds):
+        text(s, 8.1, 1.6 + k * 1.75, 4.65, 1.6, [[(head, {"bold": True, "color": NAVY})], body], size=16, fill=PANEL, pad=0.15, space=5)
+
+    # 9 error analysis
+    s = new_slide(9, "5 | Error analysis", f"Where the best run fails: {MODEL[runs[b]['model']]} {runs[b]['config'][0]}",
+                  "Examples and notes from outputs/error_examples.csv (annotated by Aaditya).")
+    if os.path.exists(OUT + "fig_r2_confusion_best.png"):
         image(s, OUT + "fig_r2_confusion_best.png", 0.55, 1.5, w=12.2)
-        ph = runs[b]["eval"].get("synthetic_test", runs[b]["eval"].get("pilot", {})).get("accuracy_by_phenomenon", {})
-        worst = sorted(ph.items(), key=lambda kv: kv[1]["accuracy"])[:4]
-        text(s, 0.55, 5.0, 12.2, 1.8, ["Lowest accuracy by phenomenon: " + ", ".join(f"{k} {v['accuracy']:.2f} (n={v['n']})" for k, v in worst)],
-             size=16, pad=0)
+    ev = runs[b]["eval"]
+    ph = ev.get("synthetic_test", ev.get("pilot", {})).get("accuracy_by_phenomenon", {})
+    worst = sorted(ph.items(), key=lambda kv: kv[1]["accuracy"])[:3]
+    lang = {x: ev[x].get("macro_f1_by_language", {}) for x in ("synthetic_test", "pilot") if x in ev}
+    left = [[("Weakest phenomena (accuracy)", {"bold": True, "color": NAVY})], ", ".join(f"{k.replace('_', ' ')} {v['accuracy']:.2f}" for k, v in worst)]
+    if lang:
+        left += [[("Hindi vs Bengali (macro-F1)", {"bold": True, "color": NAVY})],
+                 "; ".join(f"{SET_LABEL.get(x, x)}: hi {d['hi']:.2f}, bn {d['bn']:.2f}" for x, d in lang.items() if "hi" in d and "bn" in d)]
+    text(s, 0.55, 4.3, 5.4, 2.55, left, size=16, fill=PANEL, pad=0.15, space=5)
+    ex_path = OUT + "error_examples.csv"
+    if os.path.exists(ex_path):
+        ex = pd.read_csv(ex_path, dtype=str, keep_default_na=False)
+        ex = ex[ex.get("team_notes", pd.Series("", index=ex.index)).str.strip() != ""]
+        ex = ex.assign(L=ex.comment.str.len()).sort_values("L").head(2)
+        paras = []
+        for _, r in ex.iterrows():
+            paras += [[(f"{r['comment']}", {"italic": True})],
+                      [(f"true {r['gold']}, predicted {r['pred']}: ", {"bold": True}), (r["team_notes"].split(". ")[0].rstrip(".") + ".", {})]]
+        if paras:
+            text(s, 6.15, 4.3, 6.6, 2.55, paras, size=14, fill=PANEL, pad=0.15, space=4)
 
-    s = new_slide(7, "5 | Challenges", "No real Indic data, so every test set is a proxy",
-                  "Be explicit: synthetic test is optimistic for C; A and B are the fairer transfer measure.")
-    items = ["No official or real Hindi/Bengali data: Indic test sets are translated, synthetic or the pilot",
-             "Synthetic test shares a generator with C's training data: C's score there is optimistic",
-             "The judge filter keeps only clear-cut comments, so the synthetic test is easier than real comments",
-             "GWStance has no licence: English/translated text rebuilt by script, never committed",
-             "IndicTrans2 gated: NLLB-200 used; Gemini HTTP 503 overload: resumable generation",
-             "Single seed; English test has few Against rows"]
-    if g:
-        items.insert(2, f"Stance is ambiguous: judge disagreed on {100 * (1 - g['judge_agreement_overall']):.1f}% of filtered synthetic comments")
-    text(s, 0.55, 1.6, 12.2, 5.2, items, size=19, space=12, pad=0)
-
-    s = new_slide(8, "6 | Contributions", "Who owns what", "Each member commits their own work from their own account.")
-    table(s, 0.55, 1.6, 12.2, [2.6, 9.6], [["Member", "Responsibility"],
-          ["Sumukh Gupta", "Models and training: splits, configurations, IndicBERT v2 / MuRIL / TF-IDF runs"],
+    # 10 contributions, challenges, next steps
+    s = new_slide(10, "6 | Team and next steps", "Who did what, what was hard, what comes next",
+                  "Each member commits their own work from their own account and explains their part.")
+    table(s, 0.55, 1.5, 12.2, [2.3, 9.9], [["Member", "Responsibility"],
+          ["Sumukh Gupta", "Models and training: splits, configurations, IndicBERT v2 / MuRIL / TF-IDF runs, demo pipeline"],
           ["Neya Tripathi", "Dataset generation and translation; Hindi review of synthetic and translated labels"],
-          ["Aaditya Goel", "Evaluation and error analysis: metrics, confidence intervals, misclassified examples"],
+          ["Aaditya Goel", "Evaluation and error analysis: metrics, confidence intervals, annotated misclassifications"],
           ["Kushika Mishra", "Progress report, deck and live demo testing"],
-          ["Eklavya Sharma", "Bengali review of synthetic and translated labels; Hindi-vs-Bengali analysis"]], size=17)
+          ["Eklavya Sharma", "Bengali review of synthetic and translated labels; Hindi-vs-Bengali analysis"]], size=15, row_h=0.42)
+    text(s, 0.55, 4.25, 5.95, 2.6, [[("Challenges", {"bold": True, "color": CORAL})],
+                                    "No real labelled Hindi/Bengali comments: every Indic test set is a proxy",
+                                    "Synthetic test shares a generator with C's training data",
+                                    "Sarcasm and indirect stance are ambiguous even for the judge model"], size=16, fill=PANEL, pad=0.15, space=5)
+    nxt = [[("Next steps", {"bold": True, "color": TEAL})]]
+    if not F["verified"]:
+        nxt.append("Finish the blind review of the 600 synthetic test comments")
+    nxt += ["Label a small set of real public comments as a true test set",
+            f"Target the weakest cases ({F['weak']}) with more varied data", "Several seeds per run; zero-shot LLM baseline"]
+    text(s, 6.8, 4.25, 5.95, 2.6, nxt, size=16, fill=PANEL, pad=0.15, space=5)
 
-    s = new_slide(9, "7 | Next steps", "Before the final evaluation", "")
-    text(s, 0.55, 1.6, 12.2, 5.2, ["Finish the blind human review of the 600 synthetic test rows and the translation check",
-                                   "Annotate a small set of real public Hindi/Bengali comments as a genuine test set",
-                                   "Several seeds per run; differences checked against bootstrap intervals",
-                                   f"Target the weakest phenomena of the best run ({F['weak']}) with more varied data",
-                                   "Zero-shot LLM baseline; IndicTrans2 with an approved token"], size=20, space=14, pad=0)
-    assert len(prs.slides) <= 10
+    assert len(prs.slides) == TOTAL
     prs.save(OUT + "Round2_Deck.pptx")
     print(f"saved {OUT}Round2_Deck.pptx with {len(prs.slides)} slides; fit warnings: {len(WARN)}")
     for w in WARN:
         print("WARNING", w)
+
+
+SET_LABEL = {"synthetic_test": "synthetic", "pilot": "pilot"}
 
 
 if os.path.exists(OUT + "round2_results.json"):
