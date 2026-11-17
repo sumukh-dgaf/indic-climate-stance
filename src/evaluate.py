@@ -15,7 +15,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_recall_fscore_support
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from data import CONFIGS, EVAL_SETS, LABELS, synthetic_verified  # noqa: E402
+from data import CONFIGS, EVAL_SETS, LABELS, SYNTHETIC, synthetic_verified  # noqa: E402
 
 PREDS, OUT = "outputs/preds", "outputs/"
 NAME = re.compile(r"^(?P<model>.+?)_(?P<config>" + "|".join(CONFIGS) + r")_(?P<evalset>" + "|".join(EVAL_SETS) + r")\.csv$")
@@ -59,14 +59,27 @@ def score(df):
     return out
 
 
+def current_gold(df, stance_by_id):
+    """Score synthetic-test predictions against the CURRENT labels: the team review (apply_review.py) may have
+    corrected them after the prediction files were written, and those files keep the labels from prediction time."""
+    df = df.copy()
+    df["gold"] = df.id.map(stance_by_id)
+    assert df.gold.notna().all(), "synthetic test prediction ids missing from the synthetic CSV"
+    return df
+
+
 def load_preds(folder=PREDS):
     runs = {}
+    syn = pd.read_csv(SYNTHETIC, dtype=str, keep_default_na=False) if os.path.exists(SYNTHETIC) else None
+    stance_by_id = dict(zip(syn.id, syn.stance)) if syn is not None else None
     for path in sorted(glob.glob(f"{folder}/*.csv")):
         m = NAME.match(os.path.basename(path))
         if not m:
             print(f"skipping unrecognised file {path}")
             continue
         df = pd.read_csv(path, dtype=str, keep_default_na=False)  # "None" is a label, never NaN
+        if m["evalset"] == "synthetic_test" and stance_by_id is not None:
+            df = current_gold(df, stance_by_id)
         assert set(df.gold) <= set(LABELS) and set(df.pred) <= set(LABELS), path
         runs.setdefault(f"{m['model']}_{m['config']}", {"model": m["model"], "config": m["config"], "preds": {}})
         runs[f"{m['model']}_{m['config']}"]["preds"][m["evalset"]] = df
@@ -360,6 +373,9 @@ def selfcheck():
     assert s["floor_macro_f1"] == round(macro(gold, [s["majority_class"]] * 60), 4) and "macro_f1_by_language" in s
     assert NAME.match("indicbert_C_full_translated_hi_test.csv")["evalset"] == "translated_hi_test"
     assert NAME.match("xlm-r_A_english_pilot.csv")["model"] == "xlm-r"
+    # reviewed labels must win over the labels stored in a prediction file
+    p = pd.DataFrame({"id": ["a", "b"], "gold": ["Favour", "None"], "pred": ["Favour", "Against"]})
+    assert current_gold(p, {"a": "Favour", "b": "Against"}).gold.tolist() == ["Favour", "Against"]
     print("evaluate.py self-check passed")
 
 
