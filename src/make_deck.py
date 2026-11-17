@@ -127,13 +127,14 @@ def table(slide, x, y, w, col_w, rows, size=15, header_fill=NAVY, row_h=0.5):
 
 
 FOOTER, TOTAL = "Milestone 1", 10  # rebound for the Round 2 deck at the end of this file
+TEAM_EXTRA = ""  # Eklavya joined in Round 2; the Milestone 1 deck keeps its original team
 
 
 def new_slide(num, tag, title, notes=""):
     s = prs.slides.add_slide(BLANK)
     text(s, 0.55, 0.28, 9.5, 0.4, [tag.upper()], size=14, color=TEAL, bold=True, pad=0)
     text(s, 0.55, 0.62, 12.2, 0.95, [title], size=30, color=NAVY, bold=True, pad=0, anchor=MSO_ANCHOR.TOP)
-    text(s, 0.55, 7.05, 10, 0.3, [f"Sumukh Gupta, Neya Tripathi, Aditya Goel, Kushika Mishra  |  CSET346 NLP  |  {FOOTER}"], size=11, color=MUTED, pad=0)
+    text(s, 0.55, 7.05, 10, 0.3, [f"Sumukh Gupta, Neya Tripathi, Aditya Goel, Kushika Mishra{TEAM_EXTRA}  |  CSET346 NLP  |  {FOOTER}"], size=11, color=MUTED, pad=0)
     text(s, 11.6, 7.05, 1.2, 0.3, [f"{num} / {TOTAL}"], size=11, color=MUTED, pad=0, align=PP_ALIGN.RIGHT)
     if notes:
         s.notes_slide.notes_text_frame.text = notes
@@ -354,7 +355,7 @@ print("fit warnings:", len(WARN))
 
 # ================================================================== Round 2 deck (every number from round2_results.json)
 def round2_deck():
-    global prs, BLANK, FOOTER, TOTAL
+    global prs, BLANK, FOOTER, TOTAL, TEAM_EXTRA
     import sys
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from make_report import MODEL, SETS, analysis, facts
@@ -364,7 +365,7 @@ def round2_deck():
     prs = Presentation()
     prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
     BLANK = prs.slide_layouts[6]
-    FOOTER, TOTAL = "Round 2", 9
+    FOOTER, TOTAL, TEAM_EXTRA = "Round 2", 9, ", Eklavya Sharma"
     WARN.clear()
     star = "" if F["verified"] else "*"
 
@@ -375,7 +376,7 @@ def round2_deck():
     text(s, 0.8, 3.9, 11.5, 0.9, ["IndicBERT v2 vs MuRIL vs TF-IDF, trained on English, translated and synthetic data"], size=22,
          color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
     text(s, 0.8, 4.85, 4.6, 2.2, ["Sumukh Gupta  |  S24CSEU0570", "Neya Tripathi  |  S24CSEU0609", "Aditya Goel  |  S24CSEU0614",
-                                  "Kushika Mishra  |  S24CSEU0652"], size=17, color=WHITE, pad=0)
+                                  "Kushika Mishra  |  S24CSEU0652", "Eklavya Sharma  |  S24CSEU0798"], size=17, color=WHITE, pad=0)
     text(s, 5.6, 4.85, 4.0, 2.2, ["B.Tech CSE, Bennett University", "Instructor: Dr. Supriya Chanda"], size=17,
          color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
 
@@ -456,9 +457,10 @@ def round2_deck():
     s = new_slide(8, "6 | Contributions", "Who owns what", "Each member commits their own work from their own account.")
     table(s, 0.55, 1.6, 12.2, [2.6, 9.6], [["Member", "Responsibility"],
           ["Sumukh Gupta", "Models and training: splits, configurations, IndicBERT v2 / MuRIL / TF-IDF runs"],
-          ["Neya Tripathi", "Dataset generation and translation; human review of synthetic and translated labels"],
+          ["Neya Tripathi", "Dataset generation and translation; Hindi review of synthetic and translated labels"],
           ["Aditya Goel", "Evaluation and error analysis: metrics, confidence intervals, misclassified examples"],
-          ["Kushika Mishra", "Progress report, deck and live demo testing"]], size=17)
+          ["Kushika Mishra", "Progress report, deck and live demo testing"],
+          ["Eklavya Sharma", "Bengali review of synthetic and translated labels; Hindi-vs-Bengali analysis"]], size=17)
 
     s = new_slide(9, "7 | Next steps", "Before the final evaluation", "")
     text(s, 0.55, 1.6, 12.2, 5.2, ["Finish the blind human review of the 600 synthetic test rows and the translation check",

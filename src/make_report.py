@@ -117,7 +117,7 @@ def build(R, size):
     t = doc.add_paragraph()
     t.alignment = WD_ALIGN_PARAGRAPH.CENTER
     t.add_run("Sumukh Gupta (S24CSEU0570), Neya Tripathi (S24CSEU0609), Aditya Goel (S24CSEU0614), Kushika Mishra "
-              "(S24CSEU0652) | CSET346 NLP, Bennett University | github.com/sumukh-dgaf/indic-climate-stance").font.size = Pt(size - 1)
+              "(S24CSEU0652), Eklavya Sharma (S24CSEU0798) | github.com/sumukh-dgaf/indic-climate-stance").font.size = Pt(size - 1)
 
     # ---------------- 1. Dataset
     heading("1. Dataset description and statistics")
