@@ -4,6 +4,7 @@ Reviewers fill data/review/synthetic_test_review.csv: reviewer (name), reviewer_
 comment_is_natural (yes/no). They never see the intended label. This script reports human-vs-intended agreement,
 replaces the label with the human one where they differ, and marks reviewed rows human_verified=yes.
 Run: python src/apply_review.py          Self-check only: python src/apply_review.py --check
+Progress only (changes nothing): python src/apply_review.py --status
 Translation check: python src/apply_review.py --translation  (counts from data/review/translation_review_{hi,bn}.csv)
 """
 import json
@@ -39,6 +40,12 @@ def apply(syn, rev):
     syn.loc[hit, "stance"] = syn.loc[hit, "id"].map(new)
     syn.loc[hit, "human_verified"] = "yes"
     return syn, stats
+
+
+def status(rev):
+    """Labelled rows per language, so the final run only starts once all 600 are done."""
+    done = rev.reviewer_label.str.strip() != ""
+    return {lang: f"{int(done[g.index].sum())} of {len(g)}" for lang, g in rev.groupby("language")}, int(done.sum())
 
 
 def main():
@@ -85,12 +92,16 @@ def selfcheck():
     tr = pd.DataFrame({"stance": ["Favour", "Against", "None"], "label_survives": ["yes", "no", ""]})
     ts = translation_stats({"hi": tr})["hi"]
     assert ts["reviewed"] == 2 and ts["label_survives_rate"] == 0.5
+    assert status(rev.assign(language=["hi", "hi", "bn"])) == ({"bn": "0 of 1", "hi": "2 of 2"}, 2)
     print("apply_review.py self-check passed")
 
 
 if __name__ == "__main__":
     selfcheck()
-    if "--translation" in sys.argv:  # python src/apply_review.py --translation
+    if "--status" in sys.argv:  # python src/apply_review.py --status
+        by_lang, n = status(pd.read_csv(REVIEW, dtype=str, keep_default_na=False))
+        print("labelled:", by_lang, f"| total {n} of 600", "| READY" if n == 600 else "| NOT READY: wait for the team")
+    elif "--translation" in sys.argv:  # python src/apply_review.py --translation
         main_translation()
     elif "--check" not in sys.argv:
         main()
