@@ -133,7 +133,7 @@ def new_slide(num, tag, title, notes=""):
     s = prs.slides.add_slide(BLANK)
     text(s, 0.55, 0.28, 9.5, 0.4, [tag.upper()], size=14, color=TEAL, bold=True, pad=0)
     text(s, 0.55, 0.62, 12.2, 0.95, [title], size=30, color=NAVY, bold=True, pad=0, anchor=MSO_ANCHOR.TOP)
-    text(s, 0.55, 7.05, 10, 0.3, [f"Sumukh Gupta, Neya Tripathi, Aditya Goel, Kushika Mishra, Eklavya Sharma  |  CSET346 NLP  |  {FOOTER}"], size=11, color=MUTED, pad=0)
+    text(s, 0.55, 7.05, 10, 0.3, [f"Sumukh Gupta, Neya Tripathi, Aaditya Goel, Kushika Mishra, Eklavya Sharma  |  CSET346 NLP  |  {FOOTER}"], size=11, color=MUTED, pad=0)
     text(s, 11.6, 7.05, 1.2, 0.3, [f"{num} / {TOTAL}"], size=11, color=MUTED, pad=0, align=PP_ALIGN.RIGHT)
     if notes:
         s.notes_slide.notes_text_frame.text = notes
@@ -162,7 +162,7 @@ text(s, 0, 0, 13.333, 7.5, [""], fill=NAVY)
 text(s, 0.8, 0.7, 11, 0.5, ["CSET346  NATURAL LANGUAGE PROCESSING  |  MILESTONE 1"], size=16, color=TEAL, bold=True, pad=0)
 text(s, 0.8, 1.5, 11.8, 2.5, ["Detecting Stance in Media on Global Warming for Indic Languages"], size=46, color=WHITE, bold=True, pad=0)
 text(s, 0.8, 3.9, 11.5, 0.9, ["Favour / Against / None toward one claim, in Hindi and Bengali comments"], size=24, color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
-text(s, 0.8, 4.85, 3.6, 2.2, ["Sumukh Gupta  |  S24CSEU0570", "Neya Tripathi  |  S24CSEU0609", "Aditya Goel  |  S24CSEU0614", "Kushika Mishra  |  S24CSEU0652", "Eklavya Sharma  |  S24CSEU0798"], size=17, color=WHITE, pad=0)
+text(s, 0.8, 4.85, 3.6, 2.2, ["Sumukh Gupta  |  S24CSEU0570", "Neya Tripathi  |  S24CSEU0609", "Aaditya Goel  |  S24CSEU0614", "Kushika Mishra  |  S24CSEU0652", "Eklavya Sharma  |  S24CSEU0798"], size=17, color=WHITE, pad=0)
 text(s, 4.7, 4.85, 3.7, 2.2, ["B.Tech CSE, Bennett University", "Instructor: Dr. Supriya Chanda"], size=17, color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
 text(s, 8.6, 5.2, 4.2, 1.4, ["Derived from the AISoMe 2026 shared task at FIRE 2026"], size=16, color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
 s.notes_slide.notes_text_frame.text = "Introduce: project, claim, that the task comes from AISoMe 2026 (English train, Hindi/Bengali test)."
@@ -374,7 +374,7 @@ def round2_deck():
     text(s, 0.8, 1.5, 11.8, 2.5, ["Transformer stance detection for Hindi and Bengali climate comments"], size=44, color=WHITE, bold=True, pad=0)
     text(s, 0.8, 3.9, 11.5, 0.9, ["IndicBERT v2 vs MuRIL vs TF-IDF, trained on English, translated and synthetic data"], size=22,
          color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
-    text(s, 0.8, 4.85, 4.6, 2.2, ["Sumukh Gupta  |  S24CSEU0570", "Neya Tripathi  |  S24CSEU0609", "Aditya Goel  |  S24CSEU0614",
+    text(s, 0.8, 4.85, 4.6, 2.2, ["Sumukh Gupta  |  S24CSEU0570", "Neya Tripathi  |  S24CSEU0609", "Aaditya Goel  |  S24CSEU0614",
                                   "Kushika Mishra  |  S24CSEU0652", "Eklavya Sharma  |  S24CSEU0798"], size=17, color=WHITE, pad=0)
     text(s, 5.6, 4.85, 4.0, 2.2, ["B.Tech CSE, Bennett University", "Instructor: Dr. Supriya Chanda"], size=17,
          color=RGBColor(0xC9, 0xD3, 0xE3), pad=0)
@@ -457,7 +457,7 @@ def round2_deck():
     table(s, 0.55, 1.6, 12.2, [2.6, 9.6], [["Member", "Responsibility"],
           ["Sumukh Gupta", "Models and training: splits, configurations, IndicBERT v2 / MuRIL / TF-IDF runs"],
           ["Neya Tripathi", "Dataset generation and translation; Hindi review of synthetic and translated labels"],
-          ["Aditya Goel", "Evaluation and error analysis: metrics, confidence intervals, misclassified examples"],
+          ["Aaditya Goel", "Evaluation and error analysis: metrics, confidence intervals, misclassified examples"],
           ["Kushika Mishra", "Progress report, deck and live demo testing"],
           ["Eklavya Sharma", "Bengali review of synthetic and translated labels; Hindi-vs-Bengali analysis"]], size=17)
 

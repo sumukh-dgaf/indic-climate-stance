@@ -116,7 +116,7 @@ def build(R, size):
     r.bold, r.font.size, r.font.color.rgb = True, Pt(size + 4), NAVY
     t = doc.add_paragraph()
     t.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    t.add_run("Sumukh Gupta (S24CSEU0570), Neya Tripathi (S24CSEU0609), Aditya Goel (S24CSEU0614), Kushika Mishra "
+    t.add_run("Sumukh Gupta (S24CSEU0570), Neya Tripathi (S24CSEU0609), Aaditya Goel (S24CSEU0614), Kushika Mishra "
               "(S24CSEU0652), Eklavya Sharma (S24CSEU0798) | github.com/sumukh-dgaf/indic-climate-stance").font.size = Pt(size - 1)
 
     # ---------------- 1. Dataset

@@ -1,4 +1,4 @@
-# Aditya Goel: evaluation and error analysis
+# Aaditya Goel: evaluation and error analysis
 
 You own the numbers. In the evaluation you explain what macro-F1 is, why we report confidence intervals, and what the
 model gets wrong.

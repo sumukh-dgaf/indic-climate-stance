@@ -12,7 +12,7 @@ examples); two-page report `docs/Round2_Progress_Report.docx` (+ .pdf; exactly 2
 
 **What you need to do next (in order):**
 1. Open `docs/Round2_Progress_Report.pdf` and `outputs/Round2_Deck.pptx` and read them once.
-2. GitHub > Settings > Collaborators: add Neya, Aditya and Kushika so they can push from their own accounts.
+2. GitHub > Settings > Collaborators: add Neya, Aaditya and Kushika so they can push from their own accounts.
 3. Share privately (not via git): `data/review/translation_review_hi.csv` and `_bn.csv` (GWStance text) with Neya and
    the Bengali reader; `models/indicbert_C_full/` (~1 GB) with Kushika for the demo.
 4. Send each teammate their file in `docs/tasks/`. The review must be done before the synthetic test numbers can be

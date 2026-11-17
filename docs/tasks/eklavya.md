@@ -30,7 +30,7 @@ why the models do worse on Bengali than on Hindi. Everything here works in a bro
    * one or two possible reasons for the gap (for example less Bengali pre-training data, translation quality, script
      and spelling variation).
 
-   Use only numbers from `outputs/round2_results.md` and your own review. Aditya owns editing
+   Use only numbers from `outputs/round2_results.md` and your own review. Aaditya owns editing
    `outputs/error_examples.csv`; you only read it.
 
 ## Be ready to explain

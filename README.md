@@ -2,7 +2,7 @@
 
 CSET346 Natural Language Processing, Bennett University. **Round 2** (transformer models, larger Hindi/Bengali data),
 building on **Milestone 1** (problem analysis, literature review, dataset exploration, TF-IDF baseline).
-Team: Sumukh Gupta, Neya Tripathi, Aditya Goel, Kushika Mishra, Eklavya Sharma. Instructor: Dr. Supriya Chanda.
+Team: Sumukh Gupta, Neya Tripathi, Aaditya Goel, Kushika Mishra, Eklavya Sharma. Instructor: Dr. Supriya Chanda.
 
 ## Problem
 
@@ -104,7 +104,7 @@ batch 32, up to 5 epochs, 10% warmup, weight decay 0.01, fp16, seed 42. Test set
 |---|---|---|
 | Sumukh Gupta (repository owner) | S24CSEU0570 | Models and training |
 | Neya Tripathi | S24CSEU0609 | Dataset generation and translation |
-| Aditya Goel | S24CSEU0614 | Evaluation and error analysis |
+| Aaditya Goel | S24CSEU0614 | Evaluation and error analysis |
 | Kushika Mishra | S24CSEU0652 | Report, deck and demo |
 | Eklavya Sharma | S24CSEU0798 | Bengali review and Hindi-vs-Bengali analysis |
 
