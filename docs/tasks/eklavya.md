@@ -9,7 +9,7 @@ why the models do worse on Bengali than on Hindi. Everything here works in a bro
    edit the file at the same time). Then download `data/review/synthetic_test_review.csv` from GitHub and open it in
    Google Sheets (not Excel, which garbles Bengali). For every row with `language = bn` (300 rows):
    * `reviewer`: your name;
-   * `reviewer_label`: `Favour`, `Against` or `None`, i.e. the stance toward *"Climate change and global warming is a
+   * `reviewer_label`: `Favour`, `Against` or `None` (rules: `docs/LABELLING_GUIDE.md`), i.e. the stance toward *"Climate change and global warming is a
      serious concern."* as you read it. The intended label is deliberately hidden: do not look it up;
    * `comment_is_natural`: `yes` if a real person could plausibly have written it, else `no`.
 

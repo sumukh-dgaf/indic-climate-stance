@@ -50,7 +50,7 @@ def status(rev):
 
 def main():
     syn = pd.read_csv(SYNTHETIC, dtype=str, keep_default_na=False)
-    rev = pd.read_csv(REVIEW, dtype=str, keep_default_na=False)
+    rev = pd.read_csv(REVIEW, dtype=str, keep_default_na=False, encoding="utf-8-sig")  # Excel "CSV UTF-8" adds a BOM
     syn, stats = apply(syn, rev)
     n_test = (syn.split == "test").sum()
     stats["test_rows_verified"] = f"{(syn[syn.split == 'test'].human_verified == 'yes').sum()} of {n_test}"
@@ -73,7 +73,7 @@ def translation_stats(frames):
 
 def main_translation():
     # the review files hold GWStance text (no licence) and stay git-ignored; only these counts are committed
-    frames = {l: pd.read_csv(f"data/review/translation_review_{l}.csv", dtype=str, keep_default_na=False)
+    frames = {l: pd.read_csv(f"data/review/translation_review_{l}.csv", dtype=str, keep_default_na=False, encoding="utf-8-sig")
               for l in ("hi", "bn") if os.path.exists(f"data/review/translation_review_{l}.csv")}
     stats = translation_stats(frames)
     json.dump(stats, open("data/review/translation_review_stats.json", "w"), indent=1)
@@ -99,7 +99,7 @@ def selfcheck():
 if __name__ == "__main__":
     selfcheck()
     if "--status" in sys.argv:  # python src/apply_review.py --status
-        by_lang, n = status(pd.read_csv(REVIEW, dtype=str, keep_default_na=False))
+        by_lang, n = status(pd.read_csv(REVIEW, dtype=str, keep_default_na=False, encoding="utf-8-sig"))
         print("labelled:", by_lang, f"| total {n} of 600", "| READY" if n == 600 else "| NOT READY: wait for the team")
     elif "--translation" in sys.argv:  # python src/apply_review.py --translation
         main_translation()

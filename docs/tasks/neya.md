@@ -9,7 +9,7 @@ good the labels are. Label honestly everywhere: human-labelled English, machine-
 1. **Review the synthetic test set (Hindi rows).** Open `data/review/synthetic_test_review.csv` in Excel or LibreOffice
    (save as CSV, UTF-8). For every row with `language = hi`:
    * `reviewer`: your name;
-   * `reviewer_label`: `Favour`, `Against` or `None`, i.e. the stance toward *"Climate change and global warming is a
+   * `reviewer_label`: `Favour`, `Against` or `None` (rules: `docs/LABELLING_GUIDE.md`), i.e. the stance toward *"Climate change and global warming is a
      serious concern."* as you read it. The intended label is deliberately hidden: do not look it up;
    * `comment_is_natural`: `yes` if a real person could plausibly have written it, else `no`.
 
