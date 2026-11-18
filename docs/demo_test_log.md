@@ -1,4 +1,3 @@
-
 # Demo Testing Log – Kushika Mishra
 
 ## Model Information
@@ -9,6 +8,8 @@
 
 ## Testing Results
 
+| # | Comment | Type | My label | Model label | Probabilities (Favour, Against, None) | Correct? |
+|---|---|---|---|---|---|---|
 | 5 | Climate change ki wajah se garmi har saal badh rahi hai. | Code-mixed Hindi | Favour | Favour | 0.98, 0.01, 0.00 | Yes |
 | 6 | Climate change is just fake news, is par believe mat karo. | Code-mixed Hindi | Against | Against | 0.07, 0.92, 0.01 | Yes |
 | 7 | Yaar aaj weather bahut amazing hai! | Code-mixed Hindi | None | None | 0.02, 0.01, 0.97 | Yes |
@@ -33,3 +34,27 @@
 2. Sarcastic statements and indirect expressions can be difficult to interpret correctly.
 3. The model may sometimes confuse criticism of climate-related policies with opposition to climate change itself.
 
+## Analysis of Manual Demo Testing
+
+A total of 20 comments were tested using the fine-tuned IndicBERT model across Bengali, code-mixed Hindi and English inputs.
+
+The model demonstrated good performance on clearly expressed stance comments and off-topic questions.
+
+### Observed Errors
+
+1. Indirect stance: The model predicted None for "I don't think climate change is a serious problem" instead of Against.
+2. Contextual understanding: The model predicted None for a comment supporting solar energy as an alternative to fossil fuels instead of Favour.
+
+### Key Observations
+
+- The model performs well on clear Favour and Against statements.
+- Off-topic questions are generally classified as None.
+- Indirect opinions and implicit climate-related support remain challenging.
+- Code-mixed language testing helps evaluate multilingual robustness.
+
+### Recommendations
+
+- Add more examples of indirect opinions to the training dataset.
+- Include climate-related renewable energy statements.
+- Improve representation of code-mixed and multilingual comments.
+- Evaluate performance using a larger and more balanced test dataset.
