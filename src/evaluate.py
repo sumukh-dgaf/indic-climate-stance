@@ -181,6 +181,27 @@ def error_examples(runs, best, k=15, seed=SEED):
                 "team_notes"]].sort_values(["phenomenon", "evalset"])
 
 
+def keep_annotated(new, runs, best, path):
+    """If the team has written team_notes, keep those same rows and notes; refresh gold (the review may have changed it)
+    and report rows whose gold changed so the notes can be rechecked."""
+    if not os.path.exists(path):
+        return new
+    old = pd.read_csv(path, dtype=str, keep_default_na=False, encoding="utf-8-sig")  # Excel adds a BOM
+    if "team_notes" not in old or not (old.team_notes.str.strip() != "").any():
+        return new
+    out = old.copy()
+    for s, df in runs[best]["preds"].items():  # predictions never change; only the reviewed gold label can
+        hit = (out.evalset == s) & out.id.isin(df.id)
+        out.loc[hit, "gold"] = out.loc[hit, "id"].map(dict(zip(df.id, df.gold)))
+    changed = out[out.gold != old.gold]
+    if len(changed):
+        print(f"!! kept the team's annotated error_examples.csv; gold label changed by the review for {len(changed)} rows "
+              f"(recheck their team_notes): " + ", ".join(f"{r.id} {o}->{r.gold}" for (_, r), o in zip(changed.iterrows(), old.gold[changed.index])))
+    if (out.gold == out.pred).any():
+        print("!! now predicted correctly after the review: " + ", ".join(out[out.gold == out.pred].id))
+    return out
+
+
 def dataset_stats():
     """Sizes and class distributions of every data family, read from the data files the runs used."""
     from data import ENG, PILOT, SYN_STATS, SYNTHETIC, TRANSLATED, synthetic_complete
@@ -243,7 +264,7 @@ def main():
     bars(R, OUT + "fig_r2_macro_f1.png")
     if best:
         conf_grid(R, best, OUT + "fig_r2_confusion_best.png")
-        ex = error_examples(runs, best)
+        ex = keep_annotated(error_examples(runs, best), runs, best, OUT + "error_examples.csv")
         ex.to_csv(OUT + "error_examples.csv", index=False)
     write_md(res)
     update_readme(res)
@@ -372,6 +393,12 @@ def selfcheck():
     s = score(df)
     assert s["floor_macro_f1"] == round(macro(gold, [s["majority_class"]] * 60), 4) and "macro_f1_by_language" in s
     assert NAME.match("indicbert_C_full_translated_hi_test.csv")["evalset"] == "translated_hi_test"
+    import tempfile
+    with tempfile.TemporaryDirectory() as t:  # annotated examples keep their notes; gold follows the reviewed labels
+        f = os.path.join(t, "ex.csv")
+        pd.DataFrame({"evalset": ["pilot"], "id": ["a"], "gold": ["Favour"], "pred": ["None"], "team_notes": ["sarcasm"]}).to_csv(f, index=False)
+        k = keep_annotated(None, {"r": {"preds": {"pilot": pd.DataFrame({"id": ["a"], "gold": ["Against"]})}}}, "r", f)
+        assert k.team_notes.tolist() == ["sarcasm"] and k.gold.tolist() == ["Against"]
     assert NAME.match("xlm-r_A_english_pilot.csv")["model"] == "xlm-r"
     # reviewed labels must win over the labels stored in a prediction file
     p = pd.DataFrame({"id": ["a", "b"], "gold": ["Favour", "None"], "pred": ["Favour", "Against"]})
