@@ -1,0 +1,33 @@
+{
+ "reviewed": 600,
+ "agreement_with_intended": 0.91,
+ "labels_changed": 54,
+ "agreement_by_language": {
+  "bn": 0.907,
+  "hi": 0.913
+ },
+ "agreement_by_intended_label": {
+  "Against": 0.905,
+  "Favour": 0.925,
+  "None": 0.9
+ },
+ "changes_intended_to_human": {
+  "Against": {
+   "Against": 181,
+   "Favour": 6,
+   "None": 10
+  },
+  "Favour": {
+   "Against": 15,
+   "Favour": 185,
+   "None": 10
+  },
+  "None": {
+   "Against": 4,
+   "Favour": 9,
+   "None": 180
+  }
+ },
+ "comment_is_natural_yes": 0.988,
+ "test_rows_verified": "600 of 600"
+}

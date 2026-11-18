@@ -32,21 +32,19 @@ scores: [`outputs/round2_results.md`](outputs/round2_results.md); two-page repor
 <!-- RESULTS:START -->
 Test macro-F1 (95% bootstrap CIs in `outputs/round2_results.md`):
 
-| Model | Config | English test | Translated Hindi test | Translated Bengali test | Synthetic hi+bn test * | Pilot |
+| Model | Config | English test | Translated Hindi test | Translated Bengali test | Synthetic hi+bn test | Pilot |
 |---|---|---|---|---|---|---|
-| TF-IDF + LogReg | A_english | 0.602 | 0.335 | 0.341 | 0.285 | 0.341 |
-| TF-IDF + LogReg | B_translated | 0.592 | 0.580 | 0.600 | 0.435 | 0.537 |
-| TF-IDF + LogReg | C_full | 0.631 | 0.600 | 0.600 | 0.832 | 0.781 |
-| MuRIL | A_english | 0.646 | 0.586 | 0.552 | 0.592 | 0.647 |
-| MuRIL | C_full | 0.704 | 0.655 | 0.641 | 0.864 | 0.824 |
-| IndicBERT v2 | A_english | 0.717 | 0.581 | 0.566 | 0.414 | 0.643 |
-| IndicBERT v2 | B_translated | 0.732 | 0.700 | 0.678 | 0.577 | 0.715 |
-| IndicBERT v2 | C_full | 0.705 | 0.703 | 0.693 | 0.875 | 0.858 |
-| Majority floor | - | 0.238 | 0.238 | 0.238 | 0.167 | 0.167 |
+| TF-IDF + LogReg | A_english | 0.602 | 0.335 | 0.341 | 0.277 | 0.341 |
+| TF-IDF + LogReg | B_translated | 0.592 | 0.580 | 0.600 | 0.414 | 0.537 |
+| TF-IDF + LogReg | C_full | 0.631 | 0.600 | 0.600 | 0.788 | 0.781 |
+| MuRIL | A_english | 0.646 | 0.586 | 0.552 | 0.566 | 0.647 |
+| MuRIL | C_full | 0.704 | 0.655 | 0.641 | 0.825 | 0.824 |
+| IndicBERT v2 | A_english | 0.717 | 0.581 | 0.566 | 0.415 | 0.643 |
+| IndicBERT v2 | B_translated | 0.732 | 0.700 | 0.678 | 0.570 | 0.715 |
+| IndicBERT v2 | C_full | 0.705 | 0.703 | 0.693 | 0.821 | 0.858 |
+| Majority floor | - | 0.238 | 0.238 | 0.238 | 0.173 | 0.167 |
 
 Best run (rule: highest mean macro-F1 on translated Hindi, translated Bengali and pilot test sets (the synthetic test set is excluded because configuration C trains on data from the same generator)): **indicbert_C_full**.
-
-\* synthetic test labels not yet human-verified.
 <!-- RESULTS:END -->
 
 **Read with these caveats.** No number here is a score on real Hindi/Bengali comments: the Indic test sets are
