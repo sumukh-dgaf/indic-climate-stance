@@ -103,7 +103,7 @@ batch 32, up to 5 epochs, 10% warmup, weight decay 0.01, fp16, seed 42. Test set
 | Sumukh Gupta (repository owner) | S24CSEU0570 | Models and training |
 | Neya Tripathi | S24CSEU0609 | Dataset generation and translation |
 | Aaditya Goel | S24CSEU0614 | Evaluation and error analysis |
-| Kushika Mishra | S24CSEU0652 | Report, deck and demo |
+| Kushika Mishra | S24CSEU0652 | Live demo testing |
 | Eklavya Sharma | S24CSEU0798 | Bengali review and Hindi-vs-Bengali analysis |
 
 Details and each member's own tasks: [`docs/CONTRIBUTIONS.md`](docs/CONTRIBUTIONS.md), [`docs/tasks/`](docs/tasks/).

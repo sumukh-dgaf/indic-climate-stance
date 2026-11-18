@@ -1,6 +1,6 @@
 # Error Analysis – IndicBERT v2 C_full
 
-The error analysis shows that indirect, sarcastic and Romanised comments are difficult for the model. On the synthetic Hindi+Bengali test, Roman comments had the lowest phenomenon accuracy (0.796), followed by sarcasm (0.816) and negation (0.840). On the pilot set, sarcasm accuracy fell to 0.500 and implicit comments reached only 0.571; Roman comments scored 0.727. These results suggest that the model is more reliable on direct wording than on implied meaning, informal spelling and tone.
+The error analysis shows that indirect, sarcastic and Romanised comments are difficult for the model. On the synthetic Hindi+Bengali test, sarcastic comments had the lowest phenomenon accuracy (0.763), followed by Roman (0.796) and negation (0.800). On the pilot set, sarcasm accuracy fell to 0.500 and implicit comments reached only 0.571; Roman comments scored 0.727. These results suggest that the model is more reliable on direct wording than on implied meaning, informal spelling and tone.
 
 The confusion matrices show two recurring problems. First, Favour and Against can be confused when comments mention warming, cold weather or climate action but express the opposite stance through sarcasm or rhetorical wording. Second, some Favour comments in the translated Hindi and Bengali sets are predicted as None, while some None weather observations are predicted as Favour. In the pilot matrix, many Against comments are classified as None.
 

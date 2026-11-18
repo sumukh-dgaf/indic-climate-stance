@@ -591,7 +591,7 @@ def round2_deck():
           ["Sumukh Gupta", "Models and training: splits, configurations, IndicBERT v2 / MuRIL / TF-IDF runs, demo pipeline"],
           ["Neya Tripathi", "Dataset generation and translation; Hindi review of the synthetic test labels" + (" and translations" if tr else "")],
           ["Aaditya Goel", "Evaluation and error analysis: metrics, confidence intervals, annotated misclassifications"],
-          ["Kushika Mishra", "Progress report, deck and live demo testing"],
+          ["Kushika Mishra", "Live demo testing on 20 new comments"],
           ["Eklavya Sharma", "Bengali review of the synthetic test labels" + (" and translations" if tr else "") + "; Hindi-vs-Bengali analysis"]], size=15, row_h=0.42)
     text(s, 0.55, 4.25, 5.95, 2.6, [[("Challenges", {"bold": True, "color": CORAL})],
                                     "No real labelled Hindi/Bengali comments: every Indic test set is a proxy",
