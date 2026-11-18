@@ -186,7 +186,7 @@ python src/baseline.py              # outputs/baseline_results.md/.json, confusi
 
 ## Next steps before the final evaluation
 
-1. Finish the blind human review of the synthetic test set and the translation check; re-score with verified labels.
+1. Check by hand, on 100 rows per language, that the stance label survives machine translation.
 2. Annotate a small set of real public Hindi/Bengali comments as a genuine test set.
 3. Several seeds per run; compare differences against the bootstrap intervals.
 4. Target weak phenomena (sarcasm, implicit stance, Romanised text); add a zero-shot LLM baseline.

@@ -15,7 +15,7 @@ why the models do worse on Bengali than on Hindi. Everything here works in a bro
 
    Do not change Neya's `hi` rows. Download as CSV with the same name and upload it to `data/review/` on GitHub
    (Add file > Upload files > Commit changes).
-2. **Check the Bengali translations.** Sumukh sends you `translation_review_bn.csv` privately. Compare `english` with
+2. **(Skipped for Round 2, moved to future work.) Check the Bengali translations.** Sumukh sends you `translation_review_bn.csv` privately. Compare `english` with
    `translation` and fill `reviewer`, `label_survives` (`yes` if the `stance` label is still correct for the Bengali
    translation, `no` if translation changed or lost it) and `notes` (why, for every `no`). Send the file back to Sumukh.
    It contains GWStance/SemEval text with no redistribution licence: **do not upload it to GitHub**.

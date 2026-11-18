@@ -14,7 +14,7 @@ good the labels are. Label honestly everywhere: human-labelled English, machine-
    * `comment_is_natural`: `yes` if a real person could plausibly have written it, else `no`.
 
    The `bn` rows are labelled by Eklavya in the same file, after you upload yours.
-2. **Check the translations.** In `data/review/translation_review_hi.csv` (Eklavya: `_bn.csv`), compare `english`
+2. **(Skipped for Round 2, moved to future work.) Check the translations.** In `data/review/translation_review_hi.csv` (Eklavya: `_bn.csv`), compare `english`
    with `translation` and fill `label_survives` = `yes` if the `stance` label is still correct for the translation,
    `no` if translation changed or lost the stance; use `notes` for why. These two files contain GWStance/SemEval text
    with no redistribution licence: **do not commit them**.

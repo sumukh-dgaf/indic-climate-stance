@@ -37,7 +37,7 @@ def n(x):
 def facts(R):
     """Every number the prose uses, pulled from the results JSON in one place."""
     runs, ds = R["runs"], R["dataset"]
-    F = {"best": R["best_run"], "verified": R.get("synthetic_test_labels") == "yes"}
+    F = {"best": R["best_run"], "verified": R.get("synthetic_test_labels") == "yes", "tr_checked": bool(ds.get("translation_review"))}
     get = lambda run, s: runs.get(run, {}).get("eval", {}).get(s, {}).get("macro_f1")  # noqa: E731
     F["get"] = get
     eng = ds["english"]
@@ -220,8 +220,10 @@ def build(R, size):
 
     # ---------------- 5. Future work
     heading("5. Future work and planned improvements before the final evaluation")
-    para("(1) Finish the blind human review of the 600 synthetic test rows and the 200-row translation check, report "
-         "human-vs-intended agreement and re-score with verified labels. (2) Collect and annotate a small set of real public "
+    todo = ([] if F["verified"] else ["finish the blind human review of the 600 synthetic test rows and re-score with verified labels"]) + \
+           ([] if F["tr_checked"] else ["check by hand, on 100 rows per language, whether the stance label survives machine translation"])
+    para("(1) " + ("; ".join(todo).capitalize() if todo else "Extend the human review to the synthetic training data")
+         + ". (2) Collect and annotate a small set of real public "
          "Hindi/Bengali comments as a genuine test set. (3) Repeat the main runs over several seeds to measure variance, and "
          "test whether differences exceed the bootstrap intervals. (4) Use the per-phenomenon error analysis to target "
          f"the best run's weakest phenomena ({F['weak']}) with more varied data. (5) Add a zero-shot "

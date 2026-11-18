@@ -474,9 +474,10 @@ def round2_deck():
     right.append(f"Blind review of the {rv['reviewed']} synthetic test comments: agreed with the intended label "
                  f"{100 * rv['agreement_with_intended']:.1f}%, {rv['labels_changed']} labels corrected" if rv else
                  "Blind review of all 600 synthetic test comments: in progress (labels not yet human-verified)")
-    right.append("Translation check, 100 rows per language: stance kept in " + ", ".join(
-        f"{100 * tr[l]['label_survives_rate']:.0f}% ({'Hindi' if l == 'hi' else 'Bengali'})" for l in ("hi", "bn")
-        if tr.get(l, {}).get("label_survives_rate") is not None) if tr else "Translation check, 100 rows per language: in progress")
+    if tr:
+        right.append("Translation check, 100 rows per language: stance kept in " + ", ".join(
+            f"{100 * tr[l]['label_survives_rate']:.0f}% ({'Hindi' if l == 'hi' else 'Bengali'})" for l in ("hi", "bn")
+            if tr.get(l, {}).get("label_survives_rate") is not None))
     right.append("English and translated text is rebuilt by script, never committed (GWStance has no licence)")
     text(s, 6.85, 2.85, 5.9, 3.9, right, size=17, fill=PANEL, pad=0.2, space=8)
 
@@ -588,10 +589,10 @@ def round2_deck():
                   "Each member commits their own work from their own account and explains their part.")
     table(s, 0.55, 1.5, 12.2, [2.3, 9.9], [["Member", "Responsibility"],
           ["Sumukh Gupta", "Models and training: splits, configurations, IndicBERT v2 / MuRIL / TF-IDF runs, demo pipeline"],
-          ["Neya Tripathi", "Dataset generation and translation; Hindi review of synthetic and translated labels"],
+          ["Neya Tripathi", "Dataset generation and translation; Hindi review of the synthetic test labels" + (" and translations" if tr else "")],
           ["Aaditya Goel", "Evaluation and error analysis: metrics, confidence intervals, annotated misclassifications"],
           ["Kushika Mishra", "Progress report, deck and live demo testing"],
-          ["Eklavya Sharma", "Bengali review of synthetic and translated labels; Hindi-vs-Bengali analysis"]], size=15, row_h=0.42)
+          ["Eklavya Sharma", "Bengali review of the synthetic test labels" + (" and translations" if tr else "") + "; Hindi-vs-Bengali analysis"]], size=15, row_h=0.42)
     text(s, 0.55, 4.25, 5.95, 2.6, [[("Challenges", {"bold": True, "color": CORAL})],
                                     "No real labelled Hindi/Bengali comments: every Indic test set is a proxy",
                                     "Synthetic test shares a generator with C's training data",
@@ -599,6 +600,8 @@ def round2_deck():
     nxt = [[("Next steps", {"bold": True, "color": TEAL})]]
     if not F["verified"]:
         nxt.append("Finish the blind review of the 600 synthetic test comments")
+    if not tr:
+        nxt.append("Hand-check that the stance survives machine translation")
     nxt += ["Label a small set of real public comments as a true test set",
             f"Target the weakest cases ({F['weak']}) with more varied data", "Several seeds per run; zero-shot LLM baseline"]
     text(s, 6.8, 4.25, 5.95, 2.6, nxt, size=16, fill=PANEL, pad=0.15, space=5)
